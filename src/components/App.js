@@ -5,6 +5,7 @@ import React, { useState, useEffect } from "react";
 const App = () => {
   const pages = ["front", "companies", "offerRequest", "info", "gdpr"];
   const [currentPage, setCurrentPage] = useState(pages[0]);
+  const [products, setProducts] = useState([])
 
   const onChangePage = (nav) => {
     if (nav === "/palveluntarjoajat") {
@@ -29,30 +30,54 @@ const App = () => {
     console.log("Changed page now!");
   }, [currentPage]);
 
+  // Get products
+  useEffect(() => {
+    fetch("https://clean-buddy.herokuapp.com/api/products")
+      .then(res => res.json())
+      .then(data => setProducts(data))
+  }, [])
+
+  const getUI = () => {
+    if (products.length !== 0) {
+      let ui = products.map((prod) => (
+        <li key={prod.product_id}>
+          {prod.name} - {prod.product_name} - {prod.product_description} - {prod.product_price}€
+        </li>
+      ))
+      return ui
+    }
+  }
+
   return (
     <div className="App">
       <HeaderComponent onChangePage={onChangePage} />
       {/* <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+          <img src={logo} className="App-logo" alt="logo" />
+  
+          <p>
+            Edit <code>src/App.js</code> and save to reload.
+          </p>
+          <a
+            className="App-link"
+            href="https://reactjs.org"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Learn React
+          </a>
       </header> */}
       <div className="pageContent">
         <h1>Current page: {currentPage}</h1>
         <p>Sisältöä ja muuta härpäkettä jne lorem ipsum yms..</p>
+        <ui>{getUI()}</ui>
       </div>
     </div>
   );
 };
 
 export default App;
+/*
+let ui = products.map((prod) => (
+  <li key={prod.product_id}>
+    {prod.name} - {prod.product_name} - {prod.product_description} - {prod.product_price}€
+  </li>*/
