@@ -41,8 +41,8 @@ const HeaderComponent = ({ onChangePage }) => {
   const handleClose = (nav) => {
     setAnchorEl(null);
     console.log("nav is" + nav);
-    onChangePage(nav);
-    //window.location.href = nav;
+    //onChangePage(nav);
+    window.location.href = nav;
   };
 
   const clickedLogin = () => {
@@ -90,16 +90,14 @@ const HeaderComponent = ({ onChangePage }) => {
             <MenuItem onClick={() => handleClose("/info")}>
               Tietoa palvelusta
             </MenuItem>
-            <MenuItem onClick={() => handleClose("/pikatarjoukset")}>
-              Pikatarjoukset
-            </MenuItem>
-            <MenuItem onClick={() => handleClose("/palveluntarjoajat")}>
+            <MenuItem onClick={() => handleClose("/")}>Pikatarjoukset</MenuItem>
+            <MenuItem onClick={() => handleClose("/companies")}>
               Palveluntarjoajat
             </MenuItem>
             <MenuItem onClick={() => handleClose("/tarjouspyynto")}>
               Pyydä tarjous
             </MenuItem>
-            <MenuItem onClick={() => handleClose("/tietosuojaseloste")}>
+            <MenuItem onClick={() => handleClose("/privacy")}>
               Tietosuojaseloste
             </MenuItem>
           </Menu>
