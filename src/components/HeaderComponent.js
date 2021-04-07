@@ -42,6 +42,7 @@ const HeaderComponent = ({ onChangePage }) => {
     setAnchorEl(null);
     console.log("nav is" + nav);
     //onChangePage(nav);
+    //<Redirect to={nav.toString()} />;
     window.location.href = nav;
   };
 
@@ -94,7 +95,7 @@ const HeaderComponent = ({ onChangePage }) => {
             <MenuItem onClick={() => handleClose("/companies")}>
               Palveluntarjoajat
             </MenuItem>
-            <MenuItem onClick={() => handleClose("/tarjouspyynto")}>
+            <MenuItem onClick={() => handleClose("/offerRequest")}>
               Pyydä tarjous
             </MenuItem>
             <MenuItem onClick={() => handleClose("/privacy")}>
