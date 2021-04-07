@@ -7,10 +7,10 @@ const CompaniesPage = () => {
     <div>
       <HeaderComponent />
       <div>
-        <h1>Palveluntarjoajat</h1>
-        <Company />
-        <Company />
-        <Company />
+        <h1>Palveluntarjoajat:</h1>
+        <Company name="Yritys Oy" />
+        <Company name="Siivouspojat Ab" />
+        <Company name="DuuniaPukkaa Ky" />
       </div>
     </div>
   );
