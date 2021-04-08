@@ -2,6 +2,7 @@ import "./styles/App.css";
 import MainPage from "./MainPage";
 import CompaniesPage from "./CompaniesPage";
 import InfoPage from "./InfoPage";
+import CustomerFront from "./CustomerFront";
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import PrivacyPolicy from "./PrivacyPolicy.js";
@@ -43,6 +44,9 @@ const App = () => {
             </Route>
             <Route path="/privacy">
               <PrivacyPolicy />
+            </Route>
+            <Route path="/myPages">
+              <CustomerFront />
             </Route>
             <Route path="/">
               <MainPage />
