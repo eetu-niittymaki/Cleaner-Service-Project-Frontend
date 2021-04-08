@@ -175,9 +175,9 @@ const OfferRequest = () => {
                   label="DuuniaPukkaa"
                 />
               </FormGroup>
-              <FormHelperText error="true">
+              {/* <FormHelperText display={error}>
                 Valitse vähintään yksi palveluntarjoaja
-              </FormHelperText>
+              </FormHelperText> */}
             </FormControl>
             <TextField
               className={styles.formControl}
