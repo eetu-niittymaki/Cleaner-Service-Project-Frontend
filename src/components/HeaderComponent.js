@@ -7,6 +7,12 @@ import Typography from "@material-ui/core/Typography";
 import MenuIcon from "@material-ui/icons/Menu";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
+import TextField from "@material-ui/core/TextField";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogTitle from "@material-ui/core/DialogTitle";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -28,10 +34,14 @@ const useStyles = makeStyles((theme) => ({
     display: "block",
     margin: 10,
   },
+  login: {
+    margin: 50,
+  },
 }));
 
-const HeaderComponent = ({ onChangePage }) => {
+const HeaderComponent = () => {
   const [anchorEl, setAnchorEl] = useState(null);
+  const [open, setOpen] = useState(false);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -45,9 +55,23 @@ const HeaderComponent = ({ onChangePage }) => {
     //<Redirect to={nav.toString()} />;
     window.location.href = nav;
   };
+  const handleModalOpen = () => {
+    setOpen(true);
+  };
+
+  const handleModalClose = () => {
+    setOpen(false);
+  };
+
+  const handleLogin = () => {
+    handleModalClose();
+    window.location.href = "/myPages";
+    //return <Redirect to="/companies/" />;
+  };
 
   const clickedLogin = () => {
     console.log("clicked login button");
+    handleModalOpen();
   };
 
   const classes = useStyles();
@@ -68,6 +92,63 @@ const HeaderComponent = ({ onChangePage }) => {
           >
             Login
           </Button>
+          <div>
+            {/* <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+        Open form dialog
+      </Button> */}
+            <Dialog
+              open={open}
+              maxWidth="sm"
+              onClose={handleModalClose}
+              aria-labelledby="form-dialog-title"
+            >
+              <DialogTitle id="form-dialog-title">
+                Sisäänkirjautuminen:
+              </DialogTitle>
+              <DialogContent>
+                <DialogContentText>
+                  Kirjaudu omille sivuillesi kirjoittamalla sähköpostiosoite ja
+                  salasana.
+                </DialogContentText>
+                <TextField
+                  required
+                  autoFocus
+                  variant="outlined"
+                  margin="normal"
+                  id="email"
+                  label="Sähköpostiosoite"
+                  type="email"
+                  fullWidth
+                />
+                <TextField
+                  required
+                  autoFocus
+                  variant="outlined"
+                  margin="normal"
+                  id="password"
+                  label="Salasana"
+                  type="password"
+                  fullWidth
+                />
+              </DialogContent>
+              <DialogActions>
+                <Button
+                  variant="outlined"
+                  onClick={handleModalClose}
+                  color="primary"
+                >
+                  Peruuta
+                </Button>
+                <Button
+                  variant="outlined"
+                  onClick={handleLogin}
+                  color="primary"
+                >
+                  Kirjaudu sisään
+                </Button>
+              </DialogActions>
+            </Dialog>
+          </div>
           <Button
             className={classes.button}
             size="large"
