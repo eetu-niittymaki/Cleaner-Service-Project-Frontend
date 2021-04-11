@@ -7,8 +7,24 @@ import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import PrivacyPolicy from "./PrivacyPolicy.js";
 import OfferRequest from "./OfferRequest";
+import HeaderComponent from "./HeaderComponent"
 
 const App = () => {
+
+  const getToken = () => {
+    const tokenToString = sessionStorage.getItem('token')
+    const userToken = JSON.parse(tokenToString)
+    return userToken?.token     // Note to self, ? is the optional chaining operator, won't throw error if token is undefined.
+  }
+
+  // Set session token from storage if exists. 
+  function setToken(userToken) {
+    sessionStorage.setItem('token', JSON.stringify(userToken));
+  }
+
+  if (!getToken) {
+    return <HeaderComponent setToken={setToken} />
+  }
   return (
     <div className="App">
       <Router>

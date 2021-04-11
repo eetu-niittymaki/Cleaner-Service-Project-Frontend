@@ -13,6 +13,7 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
+import axios from 'axios'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -42,6 +43,14 @@ const useStyles = makeStyles((theme) => ({
 const HeaderComponent = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [open, setOpen] = useState(false);
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+
+  const PORT = (8080 || process.env.PORT)
+
+  const setToken = (userToken) => {
+    sessionStorage.setItem('token', JSON.stringify(userToken))
+  }
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -63,9 +72,19 @@ const HeaderComponent = () => {
     setOpen(false);
   };
 
-  const handleLogin = () => {
-    handleModalClose();
-    window.location.href = "/myPages";
+  // Posts email and password to backend 
+  // TODO: if Promise returns status code 200 redirects to users homepage.
+  // TODO: save and use session token
+  const handleLogin = async () => {
+    const login = await axios.post(`http://localhost:${PORT}/api/auth/signin`, {
+      email: email,
+      password: password
+    })
+    if (login.status === 200) {
+      setToken(login.token)
+      window.location.href = "/myPages";
+      handleModalClose()
+    }
     //return <Redirect to="/companies/" />;
   };
 
@@ -73,6 +92,14 @@ const HeaderComponent = () => {
     console.log("clicked login button");
     handleModalOpen();
   };
+
+  const handleEmailChange = event => {
+    setEmail(event.target.value)
+  }
+
+  const handlePasswordChange = event => {
+    setPassword(event.target.value)
+  }
 
   const classes = useStyles();
   return (
@@ -118,6 +145,8 @@ const HeaderComponent = () => {
                   id="email"
                   label="Sähköpostiosoite"
                   type="email"
+                  value={email}
+                  onChange={handleEmailChange}
                   fullWidth
                 />
                 <TextField
@@ -128,6 +157,8 @@ const HeaderComponent = () => {
                   id="password"
                   label="Salasana"
                   type="password"
+                  value={password}
+                  onChange={handlePasswordChange}
                   fullWidth
                 />
               </DialogContent>
