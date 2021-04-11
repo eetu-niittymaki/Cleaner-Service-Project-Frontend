@@ -32,6 +32,7 @@ const useStyles = makeStyles((theme) => ({
 
 const HeaderComponent = ({ onChangePage }) => {
   const [anchorEl, setAnchorEl] = useState(null);
+  const [adminRights, setAdminRights] = useState(false);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -47,6 +48,11 @@ const HeaderComponent = ({ onChangePage }) => {
 
   const clickedLogin = () => {
     console.log("clicked login button");
+  };
+
+  // if user is admin, dropdown menu will have an Admin button
+  const checkIfAdmin = () => {
+    setAdminRights(true);
   };
 
   const classes = useStyles();
@@ -102,6 +108,9 @@ const HeaderComponent = ({ onChangePage }) => {
             <MenuItem onClick={() => handleClose("/tietosuojaseloste")}>
               Tietosuojaseloste
             </MenuItem>
+            {adminRights ? (
+              <MenuItem onClick={() => handleClose("/admin")}>Admin</MenuItem>
+            ) : null}
           </Menu>
         </div>
       </Toolbar>
