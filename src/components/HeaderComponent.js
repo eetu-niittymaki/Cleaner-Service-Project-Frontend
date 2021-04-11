@@ -41,11 +41,8 @@ const useStyles = makeStyles((theme) => ({
 
 const HeaderComponent = () => {
   const [anchorEl, setAnchorEl] = useState(null);
-<<<<<<< HEAD
-  const [adminRights, setAdminRights] = useState(false);
-=======
   const [open, setOpen] = useState(false);
->>>>>>> devel
+  const [adminRights, setAdminRights] = useState(false);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -197,6 +194,7 @@ const HeaderComponent = () => {
             <MenuItem onClick={() => handleClose("/privacy")}>
               Tietosuojaseloste
             </MenuItem>
+
             {adminRights ? (
               <MenuItem onClick={() => handleClose("/admin")}>Admin</MenuItem>
             ) : null}
