@@ -1,11 +1,12 @@
 import HeaderComponent from "./HeaderComponent.js";
+import Admin from "./Admin.js";
 import "./styles/App.css";
 import React, { useState, useEffect } from "react";
 
 const App = () => {
-  const pages = ["front", "companies", "offerRequest", "info", "gdpr"];
+  const pages = ["front", "companies", "offerRequest", "info", "gdpr", "admin"];
   const [currentPage, setCurrentPage] = useState(pages[0]);
-  const [products, setProducts] = useState([])
+  const [products, setProducts] = useState([]);
 
   const onChangePage = (nav) => {
     if (nav === "/palveluntarjoajat") {
@@ -23,6 +24,8 @@ const App = () => {
     } else if (nav === "/tietosuojaseloste") {
       console.log("Getting additional info");
       setCurrentPage(pages[4]);
+    } else if (nav === "/admin") {
+      setCurrentPage(pages[5]);
     }
   };
 
@@ -33,20 +36,21 @@ const App = () => {
   // Get products
   useEffect(() => {
     fetch("https://clean-buddy.herokuapp.com/api/products")
-      .then(res => res.json())
-      .then(data => setProducts(data))
-  }, [])
+      .then((res) => res.json())
+      .then((data) => setProducts(data));
+  }, []);
 
   const getUI = () => {
     if (products.length !== 0) {
       let ui = products.map((prod) => (
         <li key={prod.product_id}>
-          {prod.name} - {prod.product_name} - {prod.product_description} - {prod.product_price}€
+          {prod.name} - {prod.product_name} - {prod.product_description} -{" "}
+          {prod.product_price}€
         </li>
-      ))
-      return ui
+      ));
+      return ui;
     }
-  }
+  };
 
   return (
     <div className="App">
@@ -66,11 +70,21 @@ const App = () => {
             Learn React
           </a>
       </header> */}
+
       <div className="pageContent">
         <h1>Current page: {currentPage}</h1>
+        {/*
         <p>Sisältöä ja muuta härpäkettä jne lorem ipsum yms..</p>
         <ui>{getUI()}</ui>
+        */}
       </div>
+      {currentPage == "admin" ? (
+        <Admin
+          products={products}
+          setProducts={setProducts}
+          getUI={() => getUI()}
+        />
+      ) : null}
     </div>
   );
 };

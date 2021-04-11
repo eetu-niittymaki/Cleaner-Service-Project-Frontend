@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
@@ -52,10 +52,16 @@ const HeaderComponent = ({ onChangePage }) => {
 
   // if user is admin, dropdown menu will have an Admin button
   const checkIfAdmin = () => {
+    //TODO
+    //check from backend if current user has admin rights
     setAdminRights(true);
   };
+  useEffect(() => {
+    checkIfAdmin();
+  }, []);
 
   const classes = useStyles();
+
   return (
     <AppBar position="static">
       <Toolbar>
