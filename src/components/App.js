@@ -4,6 +4,7 @@ import AdminPage from "./AdminPage";
 import CompaniesPage from "./CompaniesPage";
 import InfoPage from "./InfoPage";
 import CustomerFront from "./CustomerFront";
+import CompanyFront from "./CompanyFront";
 import OrderForm from "./OrderForm";
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
@@ -50,8 +51,11 @@ const App = () => {
             <Route path="/privacy">
               <PrivacyPolicy />
             </Route>
-            <Route path="/myPages">
+            <Route path="/mypage/customer">
               <CustomerFront />
+            </Route>
+            <Route path="/mypage/company">
+              <CompanyFront />
             </Route>
             <Route path="/admin">
               <AdminPage />
