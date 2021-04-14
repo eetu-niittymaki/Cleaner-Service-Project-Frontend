@@ -262,7 +262,12 @@ const OfferRequest = () => {
         </div>
       </div>
       <div className="bottomButtons">
-        <Button variant="outlined" size="large" color="primary">
+        <Button
+          variant="outlined"
+          size="large"
+          color="primary"
+          onClick={() => (window.location.href = "/")}
+        >
           Lähetä
         </Button>
       </div>
