@@ -4,6 +4,7 @@ import AdminPage from "./AdminPage";
 import CompaniesPage from "./CompaniesPage";
 import InfoPage from "./InfoPage";
 import CustomerFront from "./CustomerFront";
+import OrderForm from "./OrderForm";
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import PrivacyPolicy from "./PrivacyPolicy.js";
@@ -42,6 +43,9 @@ const App = () => {
             </Route>
             <Route path="/offerRequest">
               <OfferRequest />
+            </Route>
+            <Route path="/orderform">
+              <OrderForm />
             </Route>
             <Route path="/privacy">
               <PrivacyPolicy />
