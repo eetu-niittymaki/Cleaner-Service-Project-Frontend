@@ -56,140 +56,13 @@ const OrderForm = () => {
     <div>
       <HeaderComponent />
       <div>
-        <h1>Pyydä tarjous:</h1>
+        <h1>Tilauksen tiedot:</h1>
         <div className="TextContainer">
           <form
             style={{ textAlign: "left", marginBottom: 30 }}
             autoComplete="false"
           >
-            <h3>Siivottavan kohteen tiedot</h3>
-            <FormControl variant="outlined" className={styles.formControl}>
-              <InputLabel id="demo-simple-select-outlined-label">
-                Asuntotyyppi
-              </InputLabel>
-              <Select
-                labelId="demo-simple-select-outlined-label"
-                id="demo-simple-select-outlined"
-                value={apartmentType}
-                onChange={(event) => setApartmentType(event.target.value)}
-                //onChange={handleChange}
-                label="Asuntotyyppi"
-              >
-                <MenuItem value="" disabled>
-                  Valitse asuntotyyppi
-                </MenuItem>
-                <MenuItem value={"kerrostalo"}>Kerrostalo</MenuItem>
-                <MenuItem value={"omakotitalo"}>Omakotitalo</MenuItem>
-                <MenuItem value={"rivitalo"}>Rivitalo</MenuItem>
-                <MenuItem value={"muu asunto"}>Muu asuntotyyppi</MenuItem>
-              </Select>
-            </FormControl>
-            <FormControl variant="outlined" className={styles.formControl}>
-              <InputLabel id="demo-simple-select-outlined-label">
-                Asuinpinta-ala
-              </InputLabel>
-              <OutlinedInput
-                id="outlined-adornment-weight"
-                value={apartmentArea}
-                onChange={(event) => setApartmentArea(event.target.value)}
-                endAdornment={
-                  <InputAdornment position="end">m2</InputAdornment>
-                }
-                label="Asuinpinta-ala"
-              />
-            </FormControl>
-            <FormControl variant="outlined" className={styles.formControl}>
-              <InputLabel id="demo-simple-select-outlined-label">
-                Siivoustiheys
-              </InputLabel>
-              <Select
-                labelId="demo-simple-select-outlined-label"
-                id="demo-simple-select-outlined"
-                value={frequency}
-                onChange={(event) => setFrequency(event.target.value)}
-                //onChange={handleChange}
-                label="Siivoustiheys"
-              >
-                <MenuItem value="" disabled>
-                  Valitse siivoustiheys
-                </MenuItem>
-                <MenuItem value={"kerran"}>Kertasiivous</MenuItem>
-                <MenuItem value={"1 / vko"}>1 kerran viikossa</MenuItem>
-                <MenuItem value={"2 / kk"}>2 kertaa kuukaudessa</MenuItem>
-                <MenuItem value={"1 /kk"}>1 kerran kuukaudessa</MenuItem>
-              </Select>
-            </FormControl>
-            <FormControl
-              required
-              error={error}
-              component="fieldset"
-              className={styles.formControl}
-            >
-              <FormLabel component="legend">
-                Valitse palveluntarjoajat, joilta tahdot tarjouksen
-              </FormLabel>
-              <FormGroup>
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      checked={siivouspojat}
-                      onChange={(event) =>
-                        setCompanies({
-                          ...companies,
-                          [event.target.name]: event.target.checked,
-                        })
-                      }
-                      name="siivouspojat"
-                    />
-                  }
-                  label="Siivouspojat"
-                />
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      checked={yritys}
-                      onChange={(event) =>
-                        setCompanies({
-                          ...companies,
-                          [event.target.name]: event.target.checked,
-                        })
-                      }
-                      name="yritys"
-                    />
-                  }
-                  label="Yritys Oy"
-                />
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      checked={duuniapukkaa}
-                      onChange={(event) =>
-                        setCompanies({
-                          ...companies,
-                          [event.target.name]: event.target.checked,
-                        })
-                      }
-                      name="duuniapukkaa"
-                    />
-                  }
-                  label="DuuniaPukkaa"
-                />
-              </FormGroup>
-              {/* <FormHelperText display={error}>
-                Valitse vähintään yksi palveluntarjoaja
-              </FormHelperText> */}
-            </FormControl>
-            <TextField
-              className={styles.formControl}
-              id="standard-required"
-              label="Lisätietoa"
-              fullWidth
-              multiline
-              rows={4}
-              rowsMax={7}
-              placeholder="Tähän voit antaa lisätietoa, esimerkiksi onko asunnossa lemmikkejä."
-              variant="outlined"
-            />
+            <h3>Siivoustarjouksen tiedot:</h3>
           </form>
           <form style={{ textAlign: "left" }}>
             <h3>Asiakkaan tiedot:</h3>
@@ -253,11 +126,23 @@ const OrderForm = () => {
                 className={styles.formControl}
                 required
                 id="standard-required"
+                type="email"
                 label="Sähköpostiosoite"
                 placeholder="Sähköpostiosoite"
                 variant="outlined"
               />
             </div>
+            <TextField
+              className={styles.formControl}
+              id="standard-required"
+              label="Lisätietoa"
+              fullWidth
+              multiline
+              rows={4}
+              rowsMax={7}
+              placeholder="Tähän voit antaa lisätietoa, esimerkiksi onko asunnossa lemmikkejä."
+              variant="outlined"
+            />
           </form>
         </div>
       </div>
