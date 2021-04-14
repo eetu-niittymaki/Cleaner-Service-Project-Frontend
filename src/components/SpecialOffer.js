@@ -21,7 +21,12 @@ const SpecialOffer = ({
           <p>Yritys: {companyName}</p>
         </div>
         <div className="FlexIt2">
-          <Button color="secondary" size="large" variant="outlined">
+          <Button
+            color="secondary"
+            size="large"
+            variant="outlined"
+            onClick={() => (window.location.href = "/orderform")}
+          >
             Osta diili!
           </Button>
         </div>
