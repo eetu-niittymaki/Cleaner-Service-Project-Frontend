@@ -5,31 +5,15 @@ import CompaniesPage from "./CompaniesPage";
 import InfoPage from "./InfoPage";
 import CustomerFront from "./CustomerFront";
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
 import PrivacyPolicy from "./PrivacyPolicy.js";
 import OfferRequest from "./OfferRequest";
 
 const App = () => {
   return (
     <div className="App">
-      <Router>
+      <BrowserRouter>
         <div>
-          {/* <nav>
-            <ul>
-              <li>
-                <Link to="/">Main Page</Link>
-              </li>
-              <li>
-                <Link to="/info">About</Link>
-              </li>
-              <li>
-                <Link to="/companies">List of Cleaning companies</Link>
-              </li>
-              <li>
-                <Link to="/privacy">Privacy Policy</Link>
-              </li>
-            </ul>
-          </nav> */}
 
           {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
@@ -57,7 +41,7 @@ const App = () => {
             </Route>
           </Switch>
         </div>
-      </Router>
+      </BrowserRouter>
     </div>
   );
 };
