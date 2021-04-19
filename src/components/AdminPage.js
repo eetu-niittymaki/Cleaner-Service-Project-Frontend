@@ -4,6 +4,7 @@ import "./styles/TextPage.css";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
+import axios from "axios"
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -19,13 +20,22 @@ const useStyles = makeStyles((theme) => ({
 const AdminPage = () => {
   const styles = useStyles();
   const [adminRights, setAdminRights] = useState(false);
+  const [customers, setCustomers] = useState([]);
+  const [companies, setCompanies] = useState([]);
   const checkIfAdmin = () => {
     //TODO
     //check from backend if current user has admin rights
     setAdminRights(true);
   };
+  const fetchData = async () => {
+    const url = "https://clean-buddy.herokuapp.com/api/customers/"
+    const response = await axios.get(url);
+    console.log("test")
+    console.log(response.data);
+  }
   const getCompanies = () => {
     //TODO get company (etc ) lists from backend
+    fetchData()
     const data = [
       {
         id: "0",
@@ -54,6 +64,7 @@ const AdminPage = () => {
   };
   useEffect(() => {
     checkIfAdmin();
+
   }, []);
   return (
     <div>

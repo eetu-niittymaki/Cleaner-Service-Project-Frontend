@@ -11,9 +11,8 @@ import OfferRequest from "./OfferRequest";
 
 const App = () => {
   return (
-    <div className="App">
       <BrowserRouter>
-        <div>
+        
 
           {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
@@ -40,9 +39,9 @@ const App = () => {
               <MainPage />
             </Route>
           </Switch>
-        </div>
+        
       </BrowserRouter>
-    </div>
+    
   );
 };
 

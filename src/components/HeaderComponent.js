@@ -176,7 +176,10 @@ const HeaderComponent = () => {
             anchorEl={anchorEl}
             open={Boolean(anchorEl)}
             onClose={handleClose}
-            anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+
+              //this line caused an error
+            //anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+            
             transformOrigin={{ vertical: -65, horizontal: "center" }}
             //aria-label="menu"
             //aria-haspopup="true"
