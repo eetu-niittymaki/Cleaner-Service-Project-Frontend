@@ -76,15 +76,23 @@ const HeaderComponent = () => {
   // TODO: if Promise returns status code 200 redirects to users homepage.
   // TODO: save and use session token
   const handleLogin = async () => {
-    const login = await axios.post(`http://localhost:${PORT}/api/auth/signin`, {
+    if (email && password) {
+      const login = await axios.post(`http://localhost:${PORT}/api/auth/signin`, {
       email: email,
       password: password
-    })
-    if (login.status === 200) {
-      setToken(login.token)
-      window.location.href = "/myPages";
-      handleModalClose()
+      })
+      if (login.status === 200) {
+        setToken(login.token)
+        window.location.href = "/myPages";
+        handleModalClose()
+        console.log(login.token)
+      } else {
+        alert("Wrong email/password!")
+      }
+    } else {
+      alert("Give email/password")
     }
+    
     //return <Redirect to="/companies/" />;
   };
 
