@@ -15,16 +15,20 @@ import React, { useState, useEffect } from "react";
 import HeaderComponent from "./HeaderComponent";
 import "./styles/TextPage.css";
 import Connection from "./BackendConnection";
-import Box from "@material-ui/core/Box";
+//import Box from "@material-ui/core/Box";
+//import Grid from "@material-ui/core/Grid";
+import { Paper, Grid, Box } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
-  formControl: {
-    //margin: theme.spacing(1),
-    minWidth: "100%",
-    marginBottom: theme.spacing(2),
+  info: {
+    paddingTop: theme.spacing(2),
+    paddingBottom: theme.spacing(2),
   },
-  selectEmpty: {
-    marginTop: theme.spacing(2),
+  leftColumn: {
+    textAlign: "right",
+  },
+  rightColumn: {
+    textAlign: "left",
   },
 }));
 
@@ -35,7 +39,7 @@ const CompanyFront = () => {
     id: 1,
     name: "Siivouspojat Ab",
     contactPerson: "Jussi Mäkinen",
-    phonenumber: "040 5544671",
+    phone: "040 5544671",
     address: "Mäkitie 3",
     postnumber: "36100",
     city: "Tampere",
@@ -84,23 +88,71 @@ const CompanyFront = () => {
       <h1>Tervetuloa yrityksen omille sivuille!</h1>
 
       <h3>Tässä on yrityksen yhteystiedot.</h3>
-      <Box border={1} mb={2} p={1}>
-        <div>Yrityksen nimi: {company.name}</div>
-        <div>Yhteyshenkilö: {company.contactPerson}</div>
-        <div>Puhelinnumero: {company.phone}</div>
-        <div>Osoite: {company.address}</div>
-        <div>Postinumero: {company.postnumber}</div>
-        <div>Postitoimipaikka: {company.city}</div>
-        <div>Sähköpostiosoite: {company.email}</div>
-        <Button
-          variant="outlined"
-          size="large"
-          color="primary"
-          //onClick={() => (window.location.href = "/")}
-        >
-          Muokkaa tietoja
-        </Button>
+      {/* <Paper variant="outlined" elevation={3} p={2}> */}
+      <Box border={1} m={2} p={1}>
+        <Grid className={styles.info} container spacing={1} p={2} mb={2}>
+          <Grid className={styles.leftColumn} item xs={4} sm={5}>
+            Yrityksen nimi:
+          </Grid>
+          <Grid item xs={1} />
+          <Grid className={styles.rightColumn} item xs={7} sm={6}>
+            {company.name}
+          </Grid>
+          <Grid className={styles.leftColumn} item xs={4} sm={5}>
+            Yhteyshenkilö:
+          </Grid>
+          <Grid item xs={1} />
+          <Grid className={styles.rightColumn} item xs={7} sm={6}>
+            {company.contactPerson}
+          </Grid>
+          <Grid className={styles.leftColumn} item xs={4} sm={5}>
+            Puhelinnumero:
+          </Grid>
+          <Grid item xs={1} />
+          <Grid className={styles.rightColumn} item xs={7} sm={6}>
+            {company.phone}
+          </Grid>
+          <Grid className={styles.leftColumn} item xs={4} sm={5}>
+            Osoite:
+          </Grid>
+          <Grid item xs={1} />
+          <Grid className={styles.rightColumn} item xs={7} sm={6}>
+            {company.address}
+          </Grid>
+          <Grid className={styles.leftColumn} item xs={4} sm={5}>
+            Postinumero:
+          </Grid>
+          <Grid item xs={1} />
+          <Grid className={styles.rightColumn} item xs={7} sm={6}>
+            {company.postnumber}
+          </Grid>
+          <Grid className={styles.leftColumn} item xs={4} sm={5}>
+            Postitoimipaikka:
+          </Grid>
+          <Grid item xs={1} />
+          <Grid className={styles.rightColumn} item xs={7} sm={6}>
+            {company.city}
+          </Grid>
+          <Grid className={styles.leftColumn} item xs={4} sm={5}>
+            Sähköpostiosoite:
+          </Grid>
+          <Grid item xs={1} />
+          <Grid className={styles.rightColumn} item xs={7} sm={6}>
+            {company.email}
+          </Grid>
+        </Grid>
+        <div className={styles.info}>
+          <Button
+            variant="outlined"
+            size="large"
+            color="primary"
+            //onClick={() => (window.location.href = "/")}
+          >
+            Muokkaa tietoja
+          </Button>
+        </div>
       </Box>
+      {/* </Paper> */}
     </div>
   );
 };
