@@ -100,7 +100,7 @@ const OrderForm = () => {
                 required
                 id="standard-required"
                 label="Postinumero"
-                placeholder="Postinumer"
+                placeholder="Postinumero"
                 variant="outlined"
               />
               <TextField
