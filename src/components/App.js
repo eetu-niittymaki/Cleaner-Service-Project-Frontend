@@ -17,25 +17,25 @@ const App = () => {
           {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
           <Switch>
-            <Route path="/info">
+            <Route exact path="/info">
               <InfoPage />
             </Route>
-            <Route path="/companies">
+            <Route exact path="/companies">
               <CompaniesPage />
             </Route>
-            <Route path="/offerRequest">
+            <Route exact path="/offerRequest">
               <OfferRequest />
             </Route>
-            <Route path="/privacy">
+            <Route exact path="/privacy">
               <PrivacyPolicy />
             </Route>
-            <Route path="/myPages">
+            <Route exact path="/myPages">
               <CustomerFront />
             </Route>
-            <Route path="/admin">
+            <Route exact path="/admin">
               <AdminPage />
             </Route>
-            <Route path="/">
+            <Route exact path="/">
               <MainPage />
             </Route>
           </Switch>
