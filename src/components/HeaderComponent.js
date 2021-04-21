@@ -66,7 +66,7 @@ const HeaderComponent = () => {
 
   const handleLogin = () => {
     handleModalClose();
-    window.location.href = "/myPages";
+    window.location.href = "/mypage/company";
     //return <Redirect to="/companies/" />;
   };
 
