@@ -81,20 +81,19 @@ const HeaderComponent = () => {
       email: email,
       password: password
       })
-      if (login.status === 200) {
+      if (login.status === 204) {
+        alert('Väärä sähköposti/salasana!')
+      } else if (login.status === 200) {
         setToken(login.token)
-        window.location.href = "/myPages";
+        window.location.href = "/myPages"
         handleModalClose()
-        console.log(login.token)
-      } else {
-        alert("Wrong email/password!")
       }
     } else {
-      alert("Give email/password")
+      alert("Give email and password")
     }
     
     //return <Redirect to="/companies/" />;
-  };
+  }
 
   const clickedLogin = () => {
     console.log("clicked login button");
