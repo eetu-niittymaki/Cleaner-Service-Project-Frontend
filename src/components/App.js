@@ -18,8 +18,8 @@ const App = () => {
   }
 
   // Set session token from storage if exists. 
-  function setToken(userToken) {
-    sessionStorage.setItem('token', JSON.stringify(userToken));
+  const setToken = (userToken) => {
+    sessionStorage.setItem('token', JSON.stringify(userToken))
   }
 
   if (!getToken) {
