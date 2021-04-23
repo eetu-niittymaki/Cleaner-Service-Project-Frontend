@@ -32,8 +32,8 @@ POST https://clean-buddy.herokuapp.com/api/suppliers/
 Content-Type: application/json
 
 {
-    "name": "Siivouspojat Oy", "supplierDescription": "Siivotaan joo",
-    "streetAddress": "Mäkikatu 3", "city": "Tampere", "postcode": "33100",
+    "name": "Siivouspojat Oy", "supplier_description": "Siivotaan joo",
+    "street_address": "Mäkikatu 3", "city": "Tampere", "postcode": "33100",
     "phone": "0504433112", "email": "asiakaspalvelu@siivouspojat.fi",
     "password": "salasana123"
 }
