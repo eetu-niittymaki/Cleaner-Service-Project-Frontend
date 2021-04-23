@@ -1,17 +1,5 @@
-import TextField from "@material-ui/core/TextField";
-import FormControl from "@material-ui/core/FormControl";
-import InputLabel from "@material-ui/core/InputLabel";
-import MenuItem from "@material-ui/core/MenuItem";
-import Select from "@material-ui/core/Select";
+import { TextField, Button, Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import OutlinedInput from "@material-ui/core/OutlinedInput";
-import InputAdornment from "@material-ui/core/InputAdornment";
-import Button from "@material-ui/core/Button";
-import FormLabel from "@material-ui/core/FormLabel";
-import FormGroup from "@material-ui/core/FormGroup";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import FormHelperText from "@material-ui/core/FormHelperText";
-import Checkbox from "@material-ui/core/Checkbox";
 import React, { useState, useEffect } from "react";
 import HeaderComponent from "./HeaderComponent";
 import "./styles/TextPage.css";
@@ -82,17 +70,31 @@ const CreateSpecialOffer = () => {
               variant="outlined"
             />
           </form>
+          <Grid className={styles.info} container spacing={1} p={2} m={2}>
+            <Grid item xs={6} ml={2}>
+              <Button
+                variant="outlined"
+                size="large"
+                color="primary"
+                fullWidth
+                onClick={() => (window.location.href = "/mypage/company")}
+              >
+                Takaisin
+              </Button>
+            </Grid>
+            <Grid item xs={6}>
+              <Button
+                variant="outlined"
+                size="large"
+                color="primary"
+                fullWidth
+                onClick={handleClick}
+              >
+                Luo pikatarjous
+              </Button>
+            </Grid>
+          </Grid>
         </div>
-      </div>
-      <div className="bottomButtons">
-        <Button
-          variant="outlined"
-          size="large"
-          color="primary"
-          onClick={handleClick}
-        >
-          Luo pikatarjous
-        </Button>
       </div>
     </div>
   );
