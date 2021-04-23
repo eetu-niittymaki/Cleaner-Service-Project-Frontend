@@ -3,8 +3,6 @@ import React, { useState, useEffect } from "react";
 import HeaderComponent from "./HeaderComponent";
 import "./styles/TextPage.css";
 import Connection from "./BackendConnection";
-//import Box from "@material-ui/core/Box";
-//import Grid from "@material-ui/core/Grid";
 import { Paper, Grid, Box, Button } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
@@ -20,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const CompanyFront = () => {
+const CompanyFront = ({ companyId }) => {
   const styles = useStyles();
 
   const exampleData = {
@@ -36,47 +34,52 @@ const CompanyFront = () => {
   };
   const [company, setCompany] = useState(exampleData);
 
-  const handleChange = (event) => {};
-
-  const readCompanies = async () => {
-    try {
-      const companies = Connection.getAllCompanies();
-      setCompany(companies);
-    } catch (e) {
-      alert("Problem with getting companies");
-    }
-  };
-
-  // Get companies
   useEffect(() => {
-    //console.log("fetching company data");
-    //readCompanies();
-    /*fetch("https://clean-buddy.herokuapp.com/api/suppliers")
-      .then((res) => res.json())
-      .then((data) => setCompany(data));
-      */
-    //companies();
-  }, []);
-
-  const companies = () => {
-    if (company.length !== 0) {
-      let ui = company.map((company) => (
-        <li key={company.supplier_id}>
-          {company.name} - {company.phone} - {company.email} -{" "}
-        </li>
-      ));
-      return ui;
-    }
-  };
+    // Load all companies from database and search with given props companyId
+    const loadCompanyData = async () => {
+      const temp = await Connection.getAllCompanies();
+      if (temp.length > 0) {
+        temp.filter((comp) => comp.supplier_id === companyId);
+        setCompany(temp[0]);
+      }
+    };
+    loadCompanyData();
+  }, [companyId]);
 
   return (
     <div>
       <HeaderComponent />
 
       <h1>Tervetuloa yrityksen omille sivuille!</h1>
-
+      <Box m={2} p={3}>
+        <Grid className={styles.info} container spacing={1} p={2} mb={2}>
+          <Grid item xs={6}>
+            <Button
+              variant="outlined"
+              size="large"
+              color="primary"
+              fullWidth
+              //onClick={() => (window.location.href = "/")}
+            >
+              Luo pikatarjous
+            </Button>
+          </Grid>
+          <Grid item xs={6}>
+            <Button
+              variant="outlined"
+              size="large"
+              color="primary"
+              fullWidth
+              //onClick={() => (window.location.href = "/")}
+            >
+              Katso tarjouspyynnöt
+            </Button>
+          </Grid>
+        </Grid>
+        <div></div>
+        <div></div>
+      </Box>
       <h3>Tässä on yrityksen yhteystiedot.</h3>
-      {/* <Paper variant="outlined" elevation={3} p={2}> */}
       <Box border={1} m={2} p={1}>
         <Grid className={styles.info} container spacing={1} p={2} mb={2}>
           <Grid className={styles.leftColumn} item xs={4} sm={5}>
@@ -105,14 +108,14 @@ const CompanyFront = () => {
           </Grid>
           <Grid item xs={1} />
           <Grid className={styles.rightColumn} item xs={7} sm={6}>
-            {company.address}
+            {company.street_address}
           </Grid>
           <Grid className={styles.leftColumn} item xs={4} sm={5}>
             Postinumero:
           </Grid>
           <Grid item xs={1} />
           <Grid className={styles.rightColumn} item xs={7} sm={6}>
-            {company.postnumber}
+            {company.postcode}
           </Grid>
           <Grid className={styles.leftColumn} item xs={4} sm={5}>
             Postitoimipaikka:
@@ -140,7 +143,9 @@ const CompanyFront = () => {
           </Button>
         </div>
       </Box>
-      {/* </Paper> */}
+      <Box border={1} m={2} p={3}>
+        <div>Data from database is now: {JSON.stringify(company)}</div>
+      </Box>
     </div>
   );
 };
