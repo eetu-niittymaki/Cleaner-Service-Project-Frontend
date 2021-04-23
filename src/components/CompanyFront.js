@@ -77,6 +77,17 @@ const CompanyFront = ({ companyId }) => {
               Katso tarjouspyynnöt
             </Button>
           </Grid>
+          <Grid item xs={6}>
+            <Button
+              variant="outlined"
+              size="large"
+              color="primary"
+              fullWidth
+              //onClick={() => (window.location.href = "/")}
+            >
+              Omat pikatarjoukset
+            </Button>
+          </Grid>
         </Grid>
       </Box>
       <h3>Tässä on yrityksen yhteystiedot.</h3>
