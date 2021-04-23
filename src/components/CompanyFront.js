@@ -51,7 +51,7 @@ const CompanyFront = ({ companyId }) => {
       <HeaderComponent />
 
       <h1>Tervetuloa yrityksen omille sivuille!</h1>
-      <Box m={2} p={3}>
+      <Box m={1} p={2}>
         <Grid className={styles.info} container spacing={1} p={2} mb={2}>
           <Grid item xs={6}>
             <Button
