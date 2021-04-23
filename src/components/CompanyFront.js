@@ -72,7 +72,9 @@ const CompanyFront = ({ companyId }) => {
               size="large"
               color="primary"
               fullWidth
-              //onClick={() => (window.location.href = "/")}
+              onClick={() =>
+                (window.location.href = "/mypage/company/myofferrequests")
+              }
             >
               Katso tarjouspyynnöt
             </Button>
@@ -83,7 +85,9 @@ const CompanyFront = ({ companyId }) => {
               size="large"
               color="primary"
               fullWidth
-              //onClick={() => (window.location.href = "/")}
+              onClick={() =>
+                (window.location.href = "/mypage/company/myspecialoffers")
+              }
             >
               Omat pikatarjoukset
             </Button>
