@@ -61,36 +61,52 @@ const App = () => {
       {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
       <Switch>
-        <div className="App">
-          <Route exact path="/info">
+        <Route exact path="/info">
+          <div className="App">
             <InfoPage />
-          </Route>
-          <Route exact path="/companies">
+          </div>
+        </Route>
+        <Route exact path="/companies">
+          <div className="App">
             {/*<CompaniesPage  allCompanies={companies} />*/}
             <CompaniesPage />
-          </Route>
-          <Route exact path="/offerRequest">
+          </div>
+        </Route>
+        <Route exact path="/offerRequest">
+          <div className="App">
             <OfferRequest />
-          </Route>
-          <Route exact path="/orderform">
+          </div>
+        </Route>
+        <Route exact path="/orderform">
+          <div className="App">
             <OrderForm />
-          </Route>
-          <Route exact path="/privacy">
+          </div>
+        </Route>
+        <Route exact path="/privacy">
+          <div className="App">
             <PrivacyPolicy />
-          </Route>
-          <Route exact path="/mypage/customer">
+          </div>
+        </Route>
+        <Route exact path="/mypage/customer">
+          <div className="App">
             <CustomerFront />
-          </Route>
-          <Route exact path="/mypage/company">
+          </div>
+        </Route>
+        <Route exact path="/mypage/company">
+          <div className="App">
             <CompanyFront />
-          </Route>
-          <Route exact path="/admin">
+          </div>
+        </Route>
+        <Route exact path="/admin">
+          <div className="App">
             <AdminPage />
-          </Route>
-          <Route exact path="/">
+          </div>
+        </Route>
+        <Route exact path="/">
+          <div className="App">
             <MainPage />
-          </Route>
-        </div>
+          </div>
+        </Route>
       </Switch>
     </BrowserRouter>
   );
