@@ -43,7 +43,7 @@ const App = () => {
         </Route>
         <Route exact path="/mypage/customer">
           <div className="App">
-            <CustomerFront />
+            <CustomerFront customerId={1} />
           </div>
         </Route>
         <Route exact path="/mypage/company">
