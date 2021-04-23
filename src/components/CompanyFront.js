@@ -76,8 +76,6 @@ const CompanyFront = ({ companyId }) => {
             </Button>
           </Grid>
         </Grid>
-        <div></div>
-        <div></div>
       </Box>
       <h3>Tässä on yrityksen yhteystiedot.</h3>
       <Box border={1} m={2} p={1}>
