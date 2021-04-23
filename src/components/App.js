@@ -11,51 +11,6 @@ import PrivacyPolicy from "./PrivacyPolicy.js";
 import OfferRequest from "./OfferRequest";
 
 const App = () => {
-  // const [companies, setCompanies] = useState([]);
-
-  // useEffect(() => {
-  //   const exampleData = [
-  //     {
-  //       id: 1,
-  //       name: "Siivouspojat Ab",
-  //       contactPerson: "Jussi Mäkinen",
-  //       phone: "040 5544671",
-  //       streetAddress: "Mäkitie 3",
-  //       postcode: "36100",
-  //       city: "Tampere",
-  //       email: "asiakaspalvelu@siivouspojat.fi",
-  //       supplierDescription: "Tehdään loistavaa jälkeä",
-  //     },
-  //     {
-  //       id: 2,
-  //       name: "Duunia Pukkaa Ky",
-  //       contactPerson: "Reiska Taipale",
-  //       phone: "040 5544671",
-  //       streetAddress: "Koivukuja 155",
-  //       postcode: "13340",
-  //       city: "Salo",
-  //       email: "reiskahoitaa@yahoo.com",
-  //       supplierDescription: "Siivotaan kun ehditään",
-  //     },
-  //   ];
-  //   const loadCompanyList = async () => {
-  //     try {
-  //       const companiesListed = await BackendConnection.getAllCompanies();
-  //       if (companiesListed.length === 0) {
-  //         console.log(
-  //           "Got empty list from backend, using example data instead"
-  //         );
-  //         setCompanies(exampleData);
-  //       } else {
-  //         setCompanies(companiesListed);
-  //       }
-  //     } catch (err) {
-  //       alert("Problem with loading supplier data from database");
-  //     }
-  //   };
-  //   loadCompanyList();
-  // }, []);
-
   return (
     <BrowserRouter>
       {/* A <Switch> looks through its children <Route>s and
@@ -68,7 +23,6 @@ const App = () => {
         </Route>
         <Route exact path="/companies">
           <div className="App">
-            {/*<CompaniesPage  allCompanies={companies} />*/}
             <CompaniesPage />
           </div>
         </Route>
@@ -113,8 +67,3 @@ const App = () => {
 };
 
 export default App;
-/*
-let ui = products.map((prod) => (
-  <li key={prod.product_id}>
-    {prod.name} - {prod.product_name} - {prod.product_description} - {prod.product_price}€
-  </li>*/
