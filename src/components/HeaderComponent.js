@@ -176,10 +176,9 @@ const HeaderComponent = () => {
             anchorEl={anchorEl}
             open={Boolean(anchorEl)}
             onClose={handleClose}
-
-              //this line caused an error
+            //this line caused an error
             //anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
-            
+
             transformOrigin={{ vertical: -65, horizontal: "center" }}
             //aria-label="menu"
             //aria-haspopup="true"
@@ -201,6 +200,9 @@ const HeaderComponent = () => {
             {adminRights ? (
               <MenuItem onClick={() => handleClose("/admin")}>Admin</MenuItem>
             ) : null}
+            <MenuItem onClick={() => handleClose("/mypage/customer/")}>
+              Customer myPages
+            </MenuItem>
           </Menu>
         </div>
       </Toolbar>
