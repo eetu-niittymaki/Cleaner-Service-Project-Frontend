@@ -59,7 +59,9 @@ const CompanyFront = ({ companyId }) => {
               size="large"
               color="primary"
               fullWidth
-              //onClick={() => (window.location.href = "/")}
+              onClick={() =>
+                (window.location.href = "/mypage/company/createspecialoffer")
+              }
             >
               Luo pikatarjous
             </Button>
