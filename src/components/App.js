@@ -61,6 +61,11 @@ const App = () => {
             <MainPage />
           </div>
         </Route>
+        <Route path="*">
+          <div className="App">
+            <MainPage />
+          </div>
+        </Route>
       </Switch>
     </BrowserRouter>
   );
