@@ -10,6 +10,8 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import PrivacyPolicy from "./PrivacyPolicy.js";
 import OfferRequest from "./OfferRequest";
 import CreateSpecialOffer from "./CreateSpecialOffer";
+import MySpecialOffers from "./MySpecialOffers";
+import CompanyOfferRequests from "./CompanyOfferRequests";
 
 const App = () => {
   return (
@@ -50,6 +52,16 @@ const App = () => {
         <Route exact path="/mypage/company/createspecialoffer">
           <div className="App">
             <CreateSpecialOffer />
+          </div>
+        </Route>
+        <Route exact path="/mypage/company/myspecialoffers">
+          <div className="App">
+            <MySpecialOffers />
+          </div>
+        </Route>
+        <Route exact path="/mypage/company/myofferrequests">
+          <div className="App">
+            <CompanyOfferRequests />
           </div>
         </Route>
         <Route exact path="/mypage/company">
