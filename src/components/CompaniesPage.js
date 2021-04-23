@@ -17,7 +17,7 @@ const CompaniesPage = (props) => {
         postcode: "36100",
         city: "Tampere",
         email: "asiakaspalvelu@siivouspojat.fi",
-        supplierDescription: "Tehdään loistavaa jälkeä",
+        supplier_description: "Tehdään loistavaa jälkeä",
       },
       {
         id: 2,
@@ -28,7 +28,7 @@ const CompaniesPage = (props) => {
         postcode: "13340",
         city: "Salo",
         email: "reiskahoitaa@yahoo.com",
-        supplierDescription: "Siivotaan kun ehditään",
+        supplier_description: "Siivotaan kun ehditään",
       },
     ];
     const loadCompanyList = async () => {
@@ -51,13 +51,14 @@ const CompaniesPage = (props) => {
   const companyList = /*props.allCompanies.*/ companies.map((company) => {
     return (
       <Company
+        key={company.name}
         name={company.name}
-        address={company.streetAddress}
+        address={company.street_address}
         postnumber={company.postcode}
         city={company.city}
         phonenumber={company.phone}
         email={company.email}
-        description={company.supplierDescription}
+        description={company.supplier_description}
       />
     );
   });
