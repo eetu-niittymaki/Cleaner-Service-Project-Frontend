@@ -9,6 +9,7 @@ import OrderForm from "./OrderForm";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import PrivacyPolicy from "./PrivacyPolicy.js";
 import OfferRequest from "./OfferRequest";
+import CreateSpecialOffer from "./CreateSpecialOffer";
 
 const App = () => {
   return (
@@ -46,11 +47,17 @@ const App = () => {
             <CustomerFront customerId={1} />
           </div>
         </Route>
+        <Route exact path="/mypage/company/createspecialoffer">
+          <div className="App">
+            <CreateSpecialOffer />
+          </div>
+        </Route>
         <Route exact path="/mypage/company">
           <div className="App">
             <CompanyFront companyId={1} />
           </div>
         </Route>
+
         <Route exact path="/admin">
           <div className="App">
             <AdminPage />
