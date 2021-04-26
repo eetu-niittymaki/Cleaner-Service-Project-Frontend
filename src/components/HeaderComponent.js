@@ -13,7 +13,7 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
-import axios from 'axios'
+import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -44,14 +44,14 @@ const HeaderComponent = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [open, setOpen] = useState(false);
   const [adminRights, setAdminRights] = useState(false);
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   // const PORT = (8080 || process.env.PORT)
 
   const setToken = (userToken) => {
-    sessionStorage.setItem('token', JSON.stringify(userToken))
-  }
+    sessionStorage.setItem("token", JSON.stringify(userToken));
+  };
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -75,36 +75,39 @@ const HeaderComponent = () => {
 
   const handleLogin = async () => {
     if (email && password) {
-      const login = await axios.post(`https://clean-buddy.herokuapp.com/api/auth/signin`, {
-      email: email,
-      password: password
-      })
+      const login = await axios.post(
+        `https://clean-buddy.herokuapp.com/api/auth/signin`,
+        {
+          email: email,
+          password: password,
+        }
+      );
       if (login.status === 204) {
-        alert('Väärä sähköposti/salasana!')
+        alert("Väärä sähköposti/salasana!");
       } else if (login.status === 200) {
-        setToken(login.token)
-        window.location.href = "/myPages"
-        handleModalClose()
+        setToken(login.token);
+        window.location.href = "/mypage/customer";
+        handleModalClose();
       }
     } else {
-      alert("Give email and password")
+      alert("Give email and password");
     }
-    
+
     //return <Redirect to="/companies/" />;
-  }
+  };
 
   const clickedLogin = () => {
     console.log("clicked login button");
     handleModalOpen();
   };
 
-  const handleEmailChange = event => {
-    setEmail(event.target.value)
-  }
+  const handleEmailChange = (event) => {
+    setEmail(event.target.value);
+  };
 
-  const handlePasswordChange = event => {
-    setPassword(event.target.value)
-  }
+  const handlePasswordChange = (event) => {
+    setPassword(event.target.value);
+  };
 
   // if user is admin, dropdown menu will have an Admin button
   const checkIfAdmin = () => {
