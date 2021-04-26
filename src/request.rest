@@ -37,3 +37,13 @@ Content-Type: application/json
     "phone": "0504433112", "email": "asiakaspalvelu@siivouspojat.fi",
     "password": "salasana123"
 }
+
+###
+POST https://clean-buddy.herokuapp.com/api/products/
+Content-Type: application/json
+
+{
+"product_name": "Perusteellinen kotisiivous",
+"product_description": "Me siivotaan myös sängyn alta huolella",
+"product_price": 100
+}
