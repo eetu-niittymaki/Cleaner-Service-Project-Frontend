@@ -23,5 +23,23 @@ const getAllSpecialOffers = async () => {
   return result.data;
 };
 
-const obj = { getAllCompanies, getAllCustomers, getAllSpecialOffers };
+const postSpecialOffer = async ({
+  product_name,
+  product_description,
+  product_price,
+}) => {
+  const result = await axios.post(`${baseUrl}products/`, {
+    product_name: product_name,
+    product_description: product_description,
+    product_price: product_price,
+  });
+  return result.data;
+};
+
+const obj = {
+  getAllCompanies,
+  getAllCustomers,
+  getAllSpecialOffers,
+  postSpecialOffer,
+};
 export default obj;
