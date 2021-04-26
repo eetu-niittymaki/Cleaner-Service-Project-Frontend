@@ -21,18 +21,19 @@ const useStyles = makeStyles((theme) => ({
 const CompanyFront = ({ companyId }) => {
   const styles = useStyles();
 
-  const exampleData = {
-    id: 1,
-    name: "Siivouspojat Ab",
-    contactPerson: "Jussi Mäkinen",
-    phone: "040 5544671",
-    street_address: "Mäkitie 3",
-    postcode: "36100",
-    city: "Tampere",
-    email: "asiakaspalvelu@siivouspojat.fi",
-    description: "Tehdään loistavaa jälkeä",
-  };
-  const [company, setCompany] = useState(exampleData);
+  // const exampleData = {
+  //   id: 1,
+  //   name: "Siivouspojat Ab",
+  //   contactPerson: "Jussi Mäkinen",
+  //   phone: "040 5544671",
+  //   street_address: "Mäkitie 3",
+  //   postcode: "36100",
+  //   city: "Tampere",
+  //   email: "asiakaspalvelu@siivouspojat.fi",
+  //   description: "Tehdään loistavaa jälkeä",
+  // };
+
+  const [company, setCompany] = useState(null);
 
   useEffect(() => {
     // Load all companies from database and search with given props companyId
@@ -46,125 +47,134 @@ const CompanyFront = ({ companyId }) => {
     loadCompanyData();
   }, [companyId]);
 
-  return (
-    <div>
-      <HeaderComponent />
+  if (company === null) {
+    return (
+      <div>
+        <HeaderComponent />
+        <h2>Loading data</h2>
+      </div>
+    );
+  } else {
+    return (
+      <div>
+        <HeaderComponent />
 
-      <h1>Tervetuloa yrityksen omille sivuille!</h1>
-      <Box m={1} p={2}>
-        <Grid className={styles.info} container spacing={1} p={2} mb={2}>
-          <Grid item xs={6}>
+        <h1>Tervetuloa yrityksen omille sivuille!</h1>
+        <Box m={1} p={2}>
+          <Grid className={styles.info} container spacing={1} p={2} mb={2}>
+            <Grid item xs={6}>
+              <Button
+                variant="outlined"
+                size="large"
+                color="primary"
+                fullWidth
+                onClick={() =>
+                  (window.location.href = "/mypage/company/createspecialoffer")
+                }
+              >
+                Luo pikatarjous
+              </Button>
+            </Grid>
+            <Grid item xs={6}>
+              <Button
+                variant="outlined"
+                size="large"
+                color="primary"
+                fullWidth
+                onClick={() =>
+                  (window.location.href = "/mypage/company/myofferrequests")
+                }
+              >
+                Katso tarjouspyynnöt
+              </Button>
+            </Grid>
+            <Grid item xs={6}>
+              <Button
+                variant="outlined"
+                size="large"
+                color="primary"
+                fullWidth
+                onClick={() =>
+                  (window.location.href = "/mypage/company/myspecialoffers")
+                }
+              >
+                Omat pikatarjoukset
+              </Button>
+            </Grid>
+          </Grid>
+        </Box>
+        <h3>Tässä on yrityksen yhteystiedot.</h3>
+        <Box border={1} m={2} p={1}>
+          <Grid className={styles.info} container spacing={1} p={2} mb={2}>
+            <Grid className={styles.leftColumn} item xs={4} sm={5}>
+              Yrityksen nimi:
+            </Grid>
+            <Grid item xs={1} />
+            <Grid className={styles.rightColumn} item xs={7} sm={6}>
+              {company.name}
+            </Grid>
+            <Grid className={styles.leftColumn} item xs={4} sm={5}>
+              Yhteyshenkilö:
+            </Grid>
+            <Grid item xs={1} />
+            <Grid className={styles.rightColumn} item xs={7} sm={6}>
+              {company.contactPerson}
+            </Grid>
+            <Grid className={styles.leftColumn} item xs={4} sm={5}>
+              Puhelinnumero:
+            </Grid>
+            <Grid item xs={1} />
+            <Grid className={styles.rightColumn} item xs={7} sm={6}>
+              {company.phone}
+            </Grid>
+            <Grid className={styles.leftColumn} item xs={4} sm={5}>
+              Osoite:
+            </Grid>
+            <Grid item xs={1} />
+            <Grid className={styles.rightColumn} item xs={7} sm={6}>
+              {company.street_address}
+            </Grid>
+            <Grid className={styles.leftColumn} item xs={4} sm={5}>
+              Postinumero:
+            </Grid>
+            <Grid item xs={1} />
+            <Grid className={styles.rightColumn} item xs={7} sm={6}>
+              {company.postcode}
+            </Grid>
+            <Grid className={styles.leftColumn} item xs={4} sm={5}>
+              Postitoimipaikka:
+            </Grid>
+            <Grid item xs={1} />
+            <Grid className={styles.rightColumn} item xs={7} sm={6}>
+              {company.city}
+            </Grid>
+            <Grid className={styles.leftColumn} item xs={4} sm={5}>
+              Sähköpostiosoite:
+            </Grid>
+            <Grid item xs={1} />
+            <Grid className={styles.rightColumn} item xs={7} sm={6}>
+              {company.email}
+            </Grid>
+          </Grid>
+          <div className={styles.info}>
             <Button
               variant="outlined"
               size="large"
               color="primary"
-              fullWidth
               onClick={() =>
-                (window.location.href = "/mypage/company/createspecialoffer")
+                (window.location.href = "/mypage/company/modifydata")
               }
             >
-              Luo pikatarjous
+              Muokkaa tietoja
             </Button>
-          </Grid>
-          <Grid item xs={6}>
-            <Button
-              variant="outlined"
-              size="large"
-              color="primary"
-              fullWidth
-              onClick={() =>
-                (window.location.href = "/mypage/company/myofferrequests")
-              }
-            >
-              Katso tarjouspyynnöt
-            </Button>
-          </Grid>
-          <Grid item xs={6}>
-            <Button
-              variant="outlined"
-              size="large"
-              color="primary"
-              fullWidth
-              onClick={() =>
-                (window.location.href = "/mypage/company/myspecialoffers")
-              }
-            >
-              Omat pikatarjoukset
-            </Button>
-          </Grid>
-        </Grid>
-      </Box>
-      <h3>Tässä on yrityksen yhteystiedot.</h3>
-      <Box border={1} m={2} p={1}>
-        <Grid className={styles.info} container spacing={1} p={2} mb={2}>
-          <Grid className={styles.leftColumn} item xs={4} sm={5}>
-            Yrityksen nimi:
-          </Grid>
-          <Grid item xs={1} />
-          <Grid className={styles.rightColumn} item xs={7} sm={6}>
-            {company.name}
-          </Grid>
-          <Grid className={styles.leftColumn} item xs={4} sm={5}>
-            Yhteyshenkilö:
-          </Grid>
-          <Grid item xs={1} />
-          <Grid className={styles.rightColumn} item xs={7} sm={6}>
-            {company.contactPerson}
-          </Grid>
-          <Grid className={styles.leftColumn} item xs={4} sm={5}>
-            Puhelinnumero:
-          </Grid>
-          <Grid item xs={1} />
-          <Grid className={styles.rightColumn} item xs={7} sm={6}>
-            {company.phone}
-          </Grid>
-          <Grid className={styles.leftColumn} item xs={4} sm={5}>
-            Osoite:
-          </Grid>
-          <Grid item xs={1} />
-          <Grid className={styles.rightColumn} item xs={7} sm={6}>
-            {company.street_address}
-          </Grid>
-          <Grid className={styles.leftColumn} item xs={4} sm={5}>
-            Postinumero:
-          </Grid>
-          <Grid item xs={1} />
-          <Grid className={styles.rightColumn} item xs={7} sm={6}>
-            {company.postcode}
-          </Grid>
-          <Grid className={styles.leftColumn} item xs={4} sm={5}>
-            Postitoimipaikka:
-          </Grid>
-          <Grid item xs={1} />
-          <Grid className={styles.rightColumn} item xs={7} sm={6}>
-            {company.city}
-          </Grid>
-          <Grid className={styles.leftColumn} item xs={4} sm={5}>
-            Sähköpostiosoite:
-          </Grid>
-          <Grid item xs={1} />
-          <Grid className={styles.rightColumn} item xs={7} sm={6}>
-            {company.email}
-          </Grid>
-        </Grid>
-        <div className={styles.info}>
-          <Button
-            variant="outlined"
-            size="large"
-            color="primary"
-            onClick={() =>
-              (window.location.href = "/mypage/company/modifydata")
-            }
-          >
-            Muokkaa tietoja
-          </Button>
-        </div>
-      </Box>
-      <Box border={1} m={2} p={3}>
-        <div>Data from database is now: {JSON.stringify(company)}</div>
-      </Box>
-    </div>
-  );
+          </div>
+        </Box>
+        <Box border={1} m={2} p={3}>
+          <div>Data from database is now: {JSON.stringify(company)}</div>
+        </Box>
+      </div>
+    );
+  }
 };
 
 export default CompanyFront;
