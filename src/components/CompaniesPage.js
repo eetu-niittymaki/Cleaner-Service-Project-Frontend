@@ -43,6 +43,8 @@ const CompaniesPage = (props) => {
           setCompanies(companiesListed);
         }
       } catch (err) {
+        console.log("Error situation, using example data now.");
+        setCompanies(exampleData);
         alert("Problem with loading supplier data from database");
       }
     };
