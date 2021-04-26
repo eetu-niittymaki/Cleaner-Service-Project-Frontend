@@ -1,4 +1,5 @@
 import "./styles/App.css";
+import React, { useState, useEffect } from "react";
 import MainPage from "./MainPage";
 import AdminPage from "./AdminPage";
 import CompaniesPage from "./CompaniesPage";
@@ -14,8 +15,48 @@ import MySpecialOffers from "./MySpecialOffers";
 import CompanyOfferRequests from "./CompanyOfferRequests";
 import HeaderComponent from "./HeaderComponent";
 import ModifyCompanyData from "./ModifyCompanyData";
+import BackendConnection from "./BackendConnection";
 
 const App = () => {
+  // const exampleCompanyData = {
+  //   id: 1,
+  //   name: "Yrityksen nimi",
+  //   contactPerson: "Yhteyshenkilö",
+  //   phone: "040 5544671",
+  //   street_address: "Katuosoite 3",
+  //   postcode: "36100",
+  //   city: "Tampere",
+  //   email: "example@email.com",
+  //   description: "Tehdään loistavaa jälkeä",
+  //};
+  const [loggedInCompanyId, setLoggedInCompanyId] = useState(1);
+  //const [loggedInCompany, setLoggedInCompany] = useState(exampleCompanyData);
+
+  // useEffect(() => {
+  //   const exampleCompanyData = {
+  //     id: 1,
+  //     name: "Yrityksen nimi",
+  //     contactPerson: "Yhteyshenkilö",
+  //     phone: "040 5544671",
+  //     street_address: "Katuosoite 3",
+  //     postcode: "36100",
+  //     city: "Tampere",
+  //     email: "example@email.com",
+  //     description: "Tehdään loistavaa jälkeä",
+  //   };
+  //   // Load all companies from database and search with given props companyId
+  //   const loadCompanyData = async () => {
+  //     const temp = await BackendConnection.getAllCompanies();
+  //     if (temp.length > 0) {
+  //       temp.filter((comp) => comp.supplier_id === loggedInCompanyId);
+  //       setLoggedInCompany(temp[0]);
+  //     } else {
+  //       setLoggedInCompany(exampleCompanyData);
+  //     }
+  //   };
+  //   loadCompanyData();
+  // }, [loggedInCompany, loggedInCompanyId]);
+
   const getToken = () => {
     const tokenToString = sessionStorage.getItem("token");
     const userToken = JSON.parse(tokenToString);
@@ -82,12 +123,12 @@ const App = () => {
         </Route>
         <Route exact path="/mypage/company/modifydata">
           <div className="App">
-            <ModifyCompanyData />
+            <ModifyCompanyData companyId={loggedInCompanyId} />
           </div>
         </Route>
         <Route exact path="/mypage/company">
           <div className="App">
-            <CompanyFront companyId={1} />
+            <CompanyFront companyId={loggedInCompanyId} />
           </div>
         </Route>
 
