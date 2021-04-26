@@ -16,5 +16,12 @@ const getAllCustomers = async () => {
   return result.data;
 };
 
-const obj = { getAllCompanies, getAllCustomers };
+const getAllSpecialOffers = async () => {
+  const result = await axios.get(`${baseUrl}products/`);
+  console.log("BackendConnection: Getting all specialoffers.");
+  console.log(result.data);
+  return result.data;
+};
+
+const obj = { getAllCompanies, getAllCustomers, getAllSpecialOffers };
 export default obj;
