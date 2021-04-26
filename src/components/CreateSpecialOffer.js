@@ -28,13 +28,13 @@ const CreateSpecialOffer = () => {
     //TODO: send special order data and create new special offer
     console.log(`Sending values: ${title}
     ${description}\n ${price}`);
-    const priceToDouble = parseFloat(price).toFixed(2);
+    //const priceToDouble = parseFloat(price).toFixed(2);
     if (checkValues()) {
       console.log("create new special offer and go to companyfront");
       BackendConnection.postSpecialOffer({
         product_name: title,
         product_description: description,
-        product_price: priceToDouble,
+        product_price: 100,
       });
       window.location.href = "/mypage/company";
     } else {
@@ -42,6 +42,7 @@ const CreateSpecialOffer = () => {
     }
   };
 
+  // Checking that title and description have content and price is positive
   const checkValues = () => {
     return title !== "" && description !== "" && price >= 0;
   };
