@@ -241,6 +241,9 @@ const HeaderComponent = () => {
             <MenuItem onClick={() => handleClose("/mypage/customer/")}>
               Customer myPages
             </MenuItem>
+            <MenuItem onClick={() => handleClose("/mypage/company/")}>
+              Company myPages
+            </MenuItem>
           </Menu>
         </div>
       </Toolbar>
