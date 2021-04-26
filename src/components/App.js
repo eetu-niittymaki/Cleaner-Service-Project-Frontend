@@ -12,22 +12,23 @@ import OfferRequest from "./OfferRequest";
 import CreateSpecialOffer from "./CreateSpecialOffer";
 import MySpecialOffers from "./MySpecialOffers";
 import CompanyOfferRequests from "./CompanyOfferRequests";
-import HeaderComponent from "./HeaderComponent"
+import HeaderComponent from "./HeaderComponent";
+import ModifyCompanyData from "./ModifyCompanyData";
 
 const App = () => {
   const getToken = () => {
-    const tokenToString = sessionStorage.getItem('token')
-    const userToken = JSON.parse(tokenToString)
-    return userToken?.token     // Note to self, ? is the optional chaining operator, won't throw error if token is undefined.
-  }
+    const tokenToString = sessionStorage.getItem("token");
+    const userToken = JSON.parse(tokenToString);
+    return userToken?.token; // Note to self, ? is the optional chaining operator, won't throw error if token is undefined.
+  };
 
-  // Set session token from storage if exists. 
+  // Set session token from storage if exists.
   const setToken = (userToken) => {
-    sessionStorage.setItem('token', JSON.stringify(userToken))
-  }
+    sessionStorage.setItem("token", JSON.stringify(userToken));
+  };
 
   if (!getToken) {
-    return <HeaderComponent setToken={setToken} />
+    return <HeaderComponent setToken={setToken} />;
   }
   return (
     <BrowserRouter>
@@ -77,6 +78,11 @@ const App = () => {
         <Route exact path="/mypage/company/myofferrequests">
           <div className="App">
             <CompanyOfferRequests />
+          </div>
+        </Route>
+        <Route exact path="/mypage/company/modifyData">
+          <div className="App">
+            <ModifyCompanyData />
           </div>
         </Route>
         <Route exact path="/mypage/company">
