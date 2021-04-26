@@ -152,7 +152,9 @@ const CompanyFront = ({ companyId }) => {
             variant="outlined"
             size="large"
             color="primary"
-            //onClick={() => (window.location.href = "/")}
+            onClick={() =>
+              (window.location.href = "/mypage/company/modifydata")
+            }
           >
             Muokkaa tietoja
           </Button>
