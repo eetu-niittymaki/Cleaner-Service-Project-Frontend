@@ -16,6 +16,7 @@ import CompanyOfferRequests from "./CompanyOfferRequests";
 import HeaderComponent from "./HeaderComponent";
 import ModifyCompanyData from "./ModifyCompanyData";
 import BackendConnection from "./BackendConnection";
+import ModifyCustomerData from "./ModifyCustomerData";
 
 const App = () => {
   // const exampleCompanyData = {
@@ -30,6 +31,7 @@ const App = () => {
   //   description: "Tehdään loistavaa jälkeä",
   //};
   const [loggedInCompanyId, setLoggedInCompanyId] = useState(1);
+  const [loggedInCustomerId, setLoggedInCustomerId] = useState(1);
   //const [loggedInCompany, setLoggedInCompany] = useState(exampleCompanyData);
 
   // useEffect(() => {
@@ -101,9 +103,14 @@ const App = () => {
             <PrivacyPolicy />
           </div>
         </Route>
+        <Route exact path="/mypage/customer/modifydata">
+          <div className="App">
+            <ModifyCustomerData customerId={loggedInCustomerId} />
+          </div>
+        </Route>
         <Route exact path="/mypage/customer">
           <div className="App">
-            <CustomerFront customerId={1} />
+            <CustomerFront customerId={loggedInCustomerId} />
           </div>
         </Route>
         <Route exact path="/mypage/company/createspecialoffer">
