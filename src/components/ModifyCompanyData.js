@@ -16,30 +16,53 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ModifyCompanyData = ({ company }) => {
-  const styles = useStyles();
-  if (!company) {
-    company = exampledata;
-  }
-  const [name, setName] = useState(company.name);
-  const [phone, setPhone] = useState(company.phone);
-  const [address, setAddress] = useState(company.street_address);
-  const [postcode, setPostcode] = useState(company.postcode);
-  const [city, setCity] = useState(company.city);
-  const [email, setEmail] = useState(company.email);
-  const [description, setDescription] = useState(company.supplier_description);
+const ModifyCompanyData = ({ companyId }) => {
+  // const exampledata = {
+  //   id: 1,
+  //   name: "Siivouspojat Ab",
+  //   contactPerson: "Jussi Mäkinen",
+  //   phone: "040 5544671",
+  //   street_address: "Mäkitie 3",
+  //   postcode: "36100",
+  //   city: "Tampere",
+  //   email: "asiakaspalvelu@siivouspojat.fi",
+  //   supplier_description: "Tehdään loistavaa jälkeä",
+  // };
 
-  const exampledata = {
-    id: 1,
-    name: "Siivouspojat Ab",
-    contactPerson: "Jussi Mäkinen",
-    phone: "040 5544671",
-    streetAddress: "Mäkitie 3",
-    postcode: "36100",
-    city: "Tampere",
-    email: "asiakaspalvelu@siivouspojat.fi",
-    supplier_description: "Tehdään loistavaa jälkeä",
+  const [company, setCompany] = useState(null);
+
+  const styles = useStyles();
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [address, setAddress] = useState("");
+  const [postcode, setPostcode] = useState("");
+  const [city, setCity] = useState("");
+  const [email, setEmail] = useState("");
+  const [description, setDescription] = useState("");
+
+  const fillValues = (comp) => {
+    setName(comp.name);
+    setPhone(comp.phone);
+    setAddress(comp.street_address);
+    setPostcode(comp.postcode);
+    setCity(comp.city);
+    setEmail(comp.email);
+    setDescription(comp.supplier_description);
   };
+
+  useEffect(() => {
+    // Load all companies from database and search with given props companyId
+    const loadCompanyData = async () => {
+      const temp = await BackendConnection.getAllCompanies();
+      if (temp.length > 0) {
+        temp.filter((comp) => comp.supplier_id === companyId);
+        setCompany(temp[0]);
+        fillValues(temp[0]);
+      }
+    };
+    loadCompanyData();
+  }, [companyId]);
+
   const handleClick = () => {
     //TODO: send modified data to db
 
@@ -68,72 +91,85 @@ const ModifyCompanyData = ({ company }) => {
       email !== ""
     );
   };
-
-  return (
-    <div>
-      <HeaderComponent />
+  if (company === null) {
+    return (
       <div>
-        <h1>Muokkaa yrityksen tietoja:</h1>
-        <div className="TextContainer">
-          <form
-            style={{ textAlign: "left", marginBottom: 30 }}
-            autoComplete="false"
-          >
-            <TextField
-              className={styles.formControl}
-              required
-              id="modify-name"
-              label="Yrityksen nimi"
-              placeholder="Yrityksen nimi"
-              variant="outlined"
-              onChange={(event) => setName(event.target.value)}
-            />
-            <TextField
-              className={styles.formControl}
-              required
-              id="modify-phone"
-              label="Puhelinnumero"
-              placeholder="Puhelinnumero"
-              variant="outlined"
-              onChange={(event) => setPhone(event.target.value)}
-            />
-            <TextField
-              className={styles.formControl}
-              required
-              id="modify-address"
-              label="Osoite"
-              placeholder="Osoite"
-              variant="outlined"
-              onChange={(event) => setAddress(event.target.value)}
-            />
-            <TextField
-              className={styles.formControl}
-              required
-              id="modify-postcode"
-              label="Postinumero"
-              placeholder="Postinumero"
-              variant="outlined"
-              onChange={(event) => setPostcode(event.target.value)}
-            />
-            <TextField
-              className={styles.formControl}
-              required
-              id="modify-city"
-              label="Postitoimipaikka"
-              placeholder="Postitoimipaikka"
-              variant="outlined"
-              onChange={(event) => setCity(event.target.value)}
-            />
-            <TextField
-              className={styles.formControl}
-              required
-              id="modify-email"
-              label="Sähköpostiosoite"
-              placeholder="Sähköpostiosoite"
-              variant="outlined"
-              onChange={(event) => setEmail(event.target.value)}
-            />
-            {/* <TextField
+        <HeaderComponent />
+        <h2>Loading data</h2>
+      </div>
+    );
+  } else {
+    return (
+      <div>
+        <HeaderComponent />
+        <div>
+          <h1>Muokkaa yrityksen tietoja:</h1>
+          <div className="TextContainer">
+            <form
+              style={{ textAlign: "left", marginBottom: 30 }}
+              autoComplete="false"
+            >
+              <TextField
+                className={styles.formControl}
+                required
+                id="modify-name"
+                label="Yrityksen nimi"
+                //placeholder="Yrityksen nimi"
+                value={name}
+                variant="outlined"
+                onChange={(event) => setName(event.target.value)}
+              />
+              <TextField
+                className={styles.formControl}
+                required
+                id="modify-phone"
+                label="Puhelinnumero"
+                //placeholder="Puhelinnumero"
+                value={phone}
+                variant="outlined"
+                onChange={(event) => setPhone(event.target.value)}
+              />
+              <TextField
+                className={styles.formControl}
+                required
+                id="modify-address"
+                label="Osoite"
+                //placeholder="Osoite"
+                value={address}
+                variant="outlined"
+                onChange={(event) => setAddress(event.target.value)}
+              />
+              <TextField
+                className={styles.formControl}
+                required
+                id="modify-postcode"
+                label="Postinumero"
+                //placeholder="Postinumero"
+                value={postcode}
+                variant="outlined"
+                onChange={(event) => setPostcode(event.target.value)}
+              />
+              <TextField
+                className={styles.formControl}
+                required
+                id="modify-city"
+                label="Postitoimipaikka"
+                //placeholder="Postitoimipaikka"
+                value={city}
+                variant="outlined"
+                onChange={(event) => setCity(event.target.value)}
+              />
+              <TextField
+                className={styles.formControl}
+                required
+                id="modify-email"
+                label="Sähköpostiosoite"
+                //placeholder="Sähköpostiosoite"
+                value={email}
+                variant="outlined"
+                onChange={(event) => setEmail(event.target.value)}
+              />
+              {/* <TextField
               className={styles.formControl}
               required
               id="modify-description"
@@ -146,35 +182,36 @@ const ModifyCompanyData = ({ company }) => {
               variant="outlined"
               onChange={(event) => setDescription(event.target.value)}
             /> */}
-          </form>
-          <Grid className={styles.info} container spacing={1} p={2} m={2}>
-            <Grid item xs={6} ml={2}>
-              <Button
-                variant="outlined"
-                size="large"
-                color="primary"
-                fullWidth
-                onClick={() => (window.location.href = "/mypage/company")}
-              >
-                Takaisin
-              </Button>
+            </form>
+            <Grid className={styles.info} container spacing={1} p={2} m={2}>
+              <Grid item xs={6} ml={2}>
+                <Button
+                  variant="outlined"
+                  size="large"
+                  color="primary"
+                  fullWidth
+                  onClick={() => (window.location.href = "/mypage/company")}
+                >
+                  Takaisin
+                </Button>
+              </Grid>
+              <Grid item xs={6}>
+                <Button
+                  variant="outlined"
+                  size="large"
+                  color="primary"
+                  fullWidth
+                  onClick={handleClick}
+                >
+                  Tallenna muutokset
+                </Button>
+              </Grid>
             </Grid>
-            <Grid item xs={6}>
-              <Button
-                variant="outlined"
-                size="large"
-                color="primary"
-                fullWidth
-                onClick={handleClick}
-              >
-                Tallenna muutokset
-              </Button>
-            </Grid>
-          </Grid>
+          </div>
         </div>
       </div>
-    </div>
-  );
+    );
+  }
 };
 
 export default ModifyCompanyData;
