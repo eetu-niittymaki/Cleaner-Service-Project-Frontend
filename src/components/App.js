@@ -80,7 +80,7 @@ const App = () => {
             <CompanyOfferRequests />
           </div>
         </Route>
-        <Route exact path="/mypage/company/modifyData">
+        <Route exact path="/mypage/company/modifydata">
           <div className="App">
             <ModifyCompanyData />
           </div>
