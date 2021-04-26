@@ -2,6 +2,7 @@ import { TextField, Button, Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import React, { useState, useEffect } from "react";
 import HeaderComponent from "./HeaderComponent";
+import BackendConnection from "./BackendConnection.js";
 import "./styles/TextPage.css";
 
 const useStyles = makeStyles((theme) => ({
@@ -15,14 +16,35 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const handleClick = () => {
-  //TODO: send special order data and create new special offer
-  console.log("create new special offer and go to companyfront");
-  window.location.href = "/mypage/company";
-};
-
 const CreateSpecialOffer = () => {
   const styles = useStyles();
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [price, setPrice] = useState(100);
+  //TODO: Change duration to real duration
+  const [duration, setDuration] = useState(3);
+
+  const handleClick = () => {
+    //TODO: send special order data and create new special offer
+    console.log(`Sending values: ${title}
+    ${description}\n ${price}`);
+    const priceToDouble = parseFloat(price).toFixed(2);
+    if (checkValues()) {
+      console.log("create new special offer and go to companyfront");
+      BackendConnection.postSpecialOffer({
+        product_name: title,
+        product_description: description,
+        product_price: priceToDouble,
+      });
+      window.location.href = "/mypage/company";
+    } else {
+      alert("Tarkista pikatarjouksen tiedot");
+    }
+  };
+
+  const checkValues = () => {
+    return title !== "" && description !== "" && price >= 0;
+  };
 
   return (
     <div>
@@ -41,6 +63,7 @@ const CreateSpecialOffer = () => {
               label="Otsikko"
               placeholder="Otsikko"
               variant="outlined"
+              onChange={(event) => setTitle(event.target.value)}
             />
             <TextField
               className={styles.formControl}
@@ -49,6 +72,7 @@ const CreateSpecialOffer = () => {
               label="Kesto"
               placeholder="Kesto"
               variant="outlined"
+              onChange={(event) => setDuration(event.target.value)}
             />
             <TextField
               className={styles.formControl}
@@ -57,9 +81,11 @@ const CreateSpecialOffer = () => {
               label="Hinta"
               placeholder="Hinta"
               variant="outlined"
+              onChange={(event) => setPrice(event.target.value)}
             />
             <TextField
               className={styles.formControl}
+              required
               id="description"
               label="Kuvaus"
               fullWidth
@@ -68,6 +94,7 @@ const CreateSpecialOffer = () => {
               rowsMax={7}
               placeholder="Anna tarkempi kuvaus siivouksen yksityiskohdista."
               variant="outlined"
+              onChange={(event) => setDescription(event.target.value)}
             />
           </form>
           <Grid className={styles.info} container spacing={1} p={2} m={2}>
