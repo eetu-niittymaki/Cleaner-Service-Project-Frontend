@@ -28,14 +28,20 @@ const CreateSpecialOffer = () => {
     //TODO: send special order data and create new special offer
     console.log(`Sending values: ${title}
     ${description}\n ${price}`);
+    const offer = {
+      product_name: "perusteellisempi siivous",
+      product_description: "joku kuvausteksti",
+      product_price: 100,
+    };
+    BackendConnection.postSpecialOffer(offer);
     //const priceToDouble = parseFloat(price).toFixed(2);
     if (checkValues()) {
       console.log("create new special offer and go to companyfront");
-      BackendConnection.postSpecialOffer({
+      /*BackendConnection.postSpecialOffer({
         product_name: title,
         product_description: description,
         product_price: 100,
-      });
+      });*/
       window.location.href = "/mypage/company";
     } else {
       alert("Tarkista pikatarjouksen tiedot");
