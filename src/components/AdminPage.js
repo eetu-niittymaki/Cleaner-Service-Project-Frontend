@@ -5,10 +5,11 @@ import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import axios from "axios"
+import BackendConnection from "./BackendConnection";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
-    //margin: theme.spacing(1),
+    margin: theme.spacing(1),
     minWidth: "100%",
     marginBottom: theme.spacing(2),
   },
@@ -19,60 +20,87 @@ const useStyles = makeStyles((theme) => ({
 
 const AdminPage = () => {
   const styles = useStyles();
+  const customersTxt = "Asiakkaat";
+  const companiesTxt = "Palveluntarjoajat";
+  const offersTxt = "Pikatarjoukset";
   const [adminRights, setAdminRights] = useState(false);
+  const [selectedPage, setSelectedPage] = useState(customersTxt)
   const [customers, setCustomers] = useState([]);
   const [companies, setCompanies] = useState([]);
-  const checkIfAdmin = () => {
-    //TODO
-    //check from backend if current user has admin rights
-    setAdminRights(true);
-  };
-  const fetchData = async () => {
-    const url = "https://clean-buddy.herokuapp.com/api/customers/"
-    const response = await axios.get(url);
-    console.log("test")
-    console.log(response.data);
-  }
-  const getCompanies = () => {
-    //TODO get company (etc ) lists from backend
-    fetchData()
-    const data = [
-      {
-        id: "0",
-        name: "exampleCompany1",
-        contactPerson: "pena",
-        phoneNumber: "123",
-        address: "kujalla",
-        postNumber: "321",
-        city: "Bollywood",
-        email: "maili@maili",
-        description: "hieno yritys",
-      },
-      {
-        id: "1",
-        name: "exampleCompany2",
-        contactPerson: "pena",
-        phoneNumber: "123",
-        address: "kujalla",
-        postNumber: "321",
-        city: "Bollywood",
-        email: "maili@maili",
-        description: "hieno yritys",
-      },
-    ];
-    return data;
-  };
-  useEffect(() => {
-    checkIfAdmin();
+  const [offers, setOffers] = useState([]);
 
-  }, []);
+  useEffect(() => {
+    const checkIfAdmin = async () => {
+      //TODO
+      //check from backend if current user has admin rights
+      const result = true;
+      setAdminRights(result)
+    };
+    checkIfAdmin();
+    console.log(adminRights);
+    if (adminRights) {
+      fetchData();
+    }
+  }, [adminRights]);
+
+  const fetchData = async () => {
+    try{
+      const customersListed = await BackendConnection.getAllCustomers();
+      const companiesListed = await BackendConnection.getAllCompanies();
+      const offersListed = await BackendConnection.getAllSpecialOffers();
+      setCustomers(customersListed);
+      setCompanies(companiesListed);
+      setOffers(offersListed);
+      //console.log(customers);
+      //console.log(companies);
+      //console.log(offers);
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
+  const getContent = (selectedP) => {
+    console.log(selectedP)
+    if(selectedP==customersTxt) {
+      return(
+        <div>
+          <p>customers</p>
+        </div>
+      )
+    } else if(selectedPage==companiesTxt) {
+      return(
+        <div>
+          <p>companies</p>
+        </div>
+      )
+    } else if(selectedPage==offersTxt) {
+      return(
+        <div>
+          <p>offers</p>
+        </div>
+      )
+    }
+  }
+
   return (
     <div>
       {adminRights ? (
         <div>
           <HeaderComponent />
           <div>
-            <h1>Edit Companies</h1>
+            <br />
+          <Button variant="outlined" size="large" color="primary" onClick={()=>setSelectedPage(customersTxt)}>
+            {customersTxt}
+          </Button>
+          <Button variant="outlined" size="large" color="primary" onClick={()=>setSelectedPage(companiesTxt)}>
+            {companiesTxt}
+          </Button>
+          <Button variant="outlined" size="large" color="primary" onClick={()=>setSelectedPage(offersTxt)}>
+            {offersTxt}
+          </Button>
+          <br />
+          {getContent(selectedPage)}
+            {/*
             {getCompanies().map((d) => (
               <ul key={d.id}>
                 <div>
@@ -144,6 +172,7 @@ const AdminPage = () => {
                 </div>
               </ul>
             ))}
+            */}
           </div>
         </div>
       ) : (
