@@ -14,6 +14,7 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -76,6 +77,7 @@ const HeaderComponent = () => {
   const handleLogin = async () => {
     if (email && password) {
       const login = await axios.post(
+        //`http://localhost:8080/api/auth/signin`,
         `https://clean-buddy.herokuapp.com/api/auth/signin`,
         {
           email: email,
@@ -180,6 +182,11 @@ const HeaderComponent = () => {
                   onChange={handlePasswordChange}
                   fullWidth
                 />
+                <div>
+                  <Link to="/signup" onClick={handleModalClose}>
+                    Luo uusi käyttäjätili
+                  </Link>
+                </div>
               </DialogContent>
               <DialogActions>
                 <Button
