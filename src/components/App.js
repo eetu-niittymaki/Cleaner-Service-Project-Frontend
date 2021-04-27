@@ -17,6 +17,7 @@ import HeaderComponent from "./HeaderComponent";
 import ModifyCompanyData from "./ModifyCompanyData";
 import BackendConnection from "./BackendConnection";
 import ModifyCustomerData from "./ModifyCustomerData";
+import Signup from "./Signup";
 
 const App = () => {
   // const exampleCompanyData = {
@@ -101,6 +102,11 @@ const App = () => {
         <Route exact path="/privacy">
           <div className="App">
             <PrivacyPolicy />
+          </div>
+        </Route>
+        <Route exact path="/signup">
+          <div className="App">
+            <Signup />
           </div>
         </Route>
         <Route exact path="/mypage/customer/modifydata">
