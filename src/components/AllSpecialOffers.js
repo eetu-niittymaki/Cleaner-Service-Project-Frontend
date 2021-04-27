@@ -16,6 +16,7 @@ const AllSpecialOffers = () => {
           );
           //setSpecialOffers(exampleData);
         } else {
+          //setSpecialOffers(Array.from(offersListed));
           setSpecialOffers(offersListed);
         }
       } catch (err) {
@@ -41,6 +42,7 @@ const AllSpecialOffers = () => {
   });
 
   return <div>{specialOfferList}</div>;
+  //return <div>Here we have offers</div>;
 };
 
 export default AllSpecialOffers;
