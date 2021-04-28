@@ -150,6 +150,7 @@ const postNewOfferRequest = async ({
   apartment_type,
   apartment_area,
   cleaning_frequency,
+  request_suppliers,
   optional_information,
   first_name,
   last_name,
@@ -163,6 +164,7 @@ const postNewOfferRequest = async ({
     ${apartment_type},
     ${apartment_area},
     ${cleaning_frequency},
+    ${request_suppliers}
     ${optional_information},
     ${first_name},
     ${last_name},
@@ -176,6 +178,7 @@ const postNewOfferRequest = async ({
       apartment_type: apartment_type,
       apartment_area: apartment_area,
       cleaning_frequency: cleaning_frequency,
+      request_suppliers: request_suppliers,
       optional_information: optional_information,
       first_name: first_name,
       last_name: last_name,
