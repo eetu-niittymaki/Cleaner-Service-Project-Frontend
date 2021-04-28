@@ -18,6 +18,7 @@ import ModifyCompanyData from "./ModifyCompanyData";
 import BackendConnection from "./BackendConnection";
 import ModifyCustomerData from "./ModifyCustomerData";
 import Signup from "./Signup";
+import AddSupplier from "./AddSupplier";
 
 const App = () => {
   // const exampleCompanyData = {
@@ -144,7 +145,11 @@ const App = () => {
             <CompanyFront companyId={loggedInCompanyId} />
           </div>
         </Route>
-
+        <Route exact path="/admin/addsupplier">
+          <div className="App">
+            <AddSupplier />
+          </div>
+        </Route>
         <Route exact path="/admin">
           <div className="App">
             <AdminPage />
