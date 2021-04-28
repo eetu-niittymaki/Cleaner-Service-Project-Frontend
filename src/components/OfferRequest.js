@@ -14,6 +14,7 @@ import FormHelperText from "@material-ui/core/FormHelperText";
 import Checkbox from "@material-ui/core/Checkbox";
 import React, { useState, useEffect } from "react";
 import HeaderComponent from "./HeaderComponent";
+import BackendConnection from "./BackendConnection";
 import "./styles/TextPage.css";
 
 const useStyles = makeStyles((theme) => ({
@@ -30,27 +31,80 @@ const useStyles = makeStyles((theme) => ({
 const OfferRequest = () => {
   const styles = useStyles();
 
+  const [companies, setCompanies] = useState([]);
+
   const [apartmentType, setApartmentType] = useState("");
   const [apartmentArea, setApartmentArea] = useState("");
   const [frequency, setFrequency] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [address, setAddress] = useState("");
+  const [postcode, setPostcode] = useState("");
+  const [city, setCity] = useState("");
+  const [email, setEmail] = useState("");
+
+  // useEffect(() => {
+  //   console.log("apartment type or area changed");
+  // }, [apartmentType, apartmentArea]);
 
   useEffect(() => {
-    console.log("apartment type or area changed");
-  }, [apartmentType, apartmentArea]);
+    // Load all companies from database and search with given props companyId
+    const loadCompanyData = async () => {
+      const temp = await BackendConnection.getAllCompanies();
+      if (temp.length > 0) {
+        temp.map((comp) => {
+          return setCompanies([
+            ...companies,
+            {
+              //[comp.name]: false,
+              name: `${comp.name}`,
+              isChecked: false,
+            },
+          ]);
+        });
+        console.log(temp);
+      }
+    };
+    loadCompanyData();
+  }, []);
 
   const handleChange = (event) => {
     setApartmentType(event.target.value);
   };
 
-  const [companies, setCompanies] = useState({
+  /*const [companies, setCompanies] = useState({
     siivouspojat: false,
     yritys: false,
     duuniapukkaa: false,
-  });
+  }); */
 
-  const { siivouspojat, yritys, duuniapukkaa } = companies;
-  const error =
-    [siivouspojat, yritys, duuniapukkaa].filter((v) => v).length < 1;
+  //const { siivouspojat, yritys, duuniapukkaa } = companies;
+  const error = [companies].filter((v) => v).length < 1;
+
+  const showCompaniesList = () => {
+    const ui = companies.map((comp) => {
+      console.log(comp);
+      return (
+        <FormControlLabel
+          control={
+            <Checkbox
+              checked={comp.isChecked}
+              onChange={(event) =>
+                setCompanies({
+                  ...companies,
+                  [event.target.name]: event.target.checked,
+                })
+              }
+              name={comp.name}
+            />
+          }
+          label={comp.name}
+        />
+      );
+    });
+    return ui;
+  };
 
   return (
     <div>
@@ -129,7 +183,8 @@ const OfferRequest = () => {
                 Valitse palveluntarjoajat, joilta tahdot tarjouksen
               </FormLabel>
               <FormGroup>
-                <FormControlLabel
+                {showCompaniesList()}
+                {/* <FormControlLabel
                   control={
                     <Checkbox
                       checked={siivouspojat}
@@ -173,7 +228,7 @@ const OfferRequest = () => {
                     />
                   }
                   label="DuuniaPukkaa"
-                />
+                /> */}
               </FormGroup>
               {/* <FormHelperText display={error}>
                 Valitse vähintään yksi palveluntarjoaja
@@ -227,7 +282,7 @@ const OfferRequest = () => {
                 required
                 id="standard-required"
                 label="Postinumero"
-                placeholder="Postinumer"
+                placeholder="Postinumero"
                 variant="outlined"
               />
               <TextField
