@@ -146,6 +146,60 @@ const postNewSupplier = async ({
   return result.data;
 };
 
+const postNewOfferRequest = async ({
+  apartment_type,
+  apartment_area,
+  cleaning_frequency,
+  optional_information,
+  first_name,
+  last_name,
+  street_address,
+  city,
+  postcode,
+  phone,
+  email,
+}) => {
+  console.log(`Sending this data with axios post
+    ${apartment_type},
+    ${apartment_area},
+    ${cleaning_frequency},
+    ${optional_information},
+    ${first_name},
+    ${last_name},
+    ${street_address},
+    ${city},
+    ${postcode},
+    ${phone},
+    ${email}`);
+  const result = await axios
+    .post(`${baseUrl}offer-requests/`, {
+      apartment_type: apartment_type,
+      apartment_area: apartment_area,
+      cleaning_frequency: cleaning_frequency,
+      optional_information: optional_information,
+      first_name: first_name,
+      last_name: last_name,
+      street_address: street_address,
+      city: city,
+      postcode: postcode,
+      phone: phone,
+      email: email,
+    })
+    .then(function (response) {
+      try {
+        // your own try...catch block to catch the error before axios ..catch
+        console.log(response);
+      } catch (e) {
+        console.log(e);
+      } // your catch block
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  //console.log(result.data);
+  return result.data;
+};
+
 const obj = {
   getAllCompanies,
   getAllCustomers,
@@ -153,5 +207,6 @@ const obj = {
   postSpecialOffer,
   postNewCustomer,
   postNewSupplier,
+  postNewOfferRequest,
 };
 export default obj;
