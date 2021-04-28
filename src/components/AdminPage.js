@@ -6,10 +6,13 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import axios from "axios"
 import BackendConnection from "./BackendConnection";
+import AdminModifyCompanyData from "./AdminModifyCompanyData";
+import AdminModifyCustomerData from "./AdminModifyCustomerData";
+import AdminModifyUserData from "./AdminModifyUserData"
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
-    margin: theme.spacing(1),
+    //margin: theme.spacing(1),
     minWidth: "100%",
     marginBottom: theme.spacing(2),
   },
@@ -51,7 +54,7 @@ const AdminPage = () => {
       setCustomers(customersListed);
       setCompanies(companiesListed);
       setOffers(offersListed);
-      //console.log(customers);
+      console.log(customers);
       //console.log(companies);
       //console.log(offers);
     } catch (err) {
@@ -64,7 +67,20 @@ const AdminPage = () => {
     if(selectedP==customersTxt) {
       return(
         <div>
-          <p>customers</p>
+          
+          
+          {customers.map((data) => (
+            <ul key={data.customer_id}>
+              <p>{data.customer_id}</p>
+              <AdminModifyCustomerData 
+              cData = {data}
+              cSave = {()=>console.log("cSave")} 
+              cDelete = {()=>console.log("cDelete")} />
+            </ul>
+            
+          ))}
+          
+
         </div>
       )
     } else if(selectedPage==companiesTxt) {
@@ -80,6 +96,14 @@ const AdminPage = () => {
         </div>
       )
     }
+    // this should never happen, but just in case
+    else {
+      return(
+        <div>
+          <p>What the fuck?</p>
+        </div>
+      )
+    }
   }
 
   return (
@@ -89,14 +113,26 @@ const AdminPage = () => {
           <HeaderComponent />
           <div>
             <br />
-          <Button variant="outlined" size="large" color="primary" onClick={()=>setSelectedPage(customersTxt)}>
-            {customersTxt}
+          <Button 
+            variant="contained" 
+            size="large" 
+            color={selectedPage==customersTxt?"primary":"default"} 
+            onClick={()=>setSelectedPage(customersTxt)}>
+              {customersTxt}
           </Button>
-          <Button variant="outlined" size="large" color="primary" onClick={()=>setSelectedPage(companiesTxt)}>
-            {companiesTxt}
+          <Button 
+            variant="contained" 
+            size="large" 
+            color={selectedPage==companiesTxt?"primary":"default"} 
+            onClick={()=>setSelectedPage(companiesTxt)}>
+              {companiesTxt}
           </Button>
-          <Button variant="outlined" size="large" color="primary" onClick={()=>setSelectedPage(offersTxt)}>
-            {offersTxt}
+          <Button 
+            variant="contained" 
+            size="large" 
+            color={selectedPage==offersTxt?"primary":"default"} 
+            onClick={()=>setSelectedPage(offersTxt)}>
+              {offersTxt}
           </Button>
           <br />
           {getContent(selectedPage)}
