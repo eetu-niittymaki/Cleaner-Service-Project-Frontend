@@ -68,7 +68,6 @@ const AdminModifyCustomerData = ({cData, cSave, cDelete}) => {
     return(
       
         <div>
-          <h1>Muokkaa asiakastietoja:</h1>
           <div className="TextContainer">
             <form
               style={{ textAlign: "left", marginBottom: 30 }}

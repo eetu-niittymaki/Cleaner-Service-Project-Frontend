@@ -67,11 +67,10 @@ const AdminPage = () => {
     if(selectedP==customersTxt) {
       return(
         <div>
-          
+          <h1>Muokkaa asiakastietoja:</h1>
           
           {customers.map((data) => (
             <ul key={data.customer_id}>
-              <p>{data.customer_id}</p>
               <AdminModifyCustomerData 
               cData = {data}
               cSave = {()=>console.log("cSave")} 
