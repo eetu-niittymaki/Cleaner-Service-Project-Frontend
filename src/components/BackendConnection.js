@@ -101,11 +101,57 @@ const postNewCustomer = async ({
   return result.data;
 };
 
+const postNewSupplier = async ({
+  name,
+  supplier_description,
+  street_address,
+  city,
+  postcode,
+  phone,
+  email,
+  password,
+}) => {
+  console.log(`Sending this data with axios post
+    ${name},
+    ${supplier_description},
+    ${street_address},
+    ${city},
+    ${postcode},
+    ${phone},
+    ${email},
+    ${password}`);
+  const result = await axios
+    .post(`${baseUrl}suppliers/`, {
+      name: name,
+      supplier_description: supplier_description,
+      street_address: street_address,
+      city: city,
+      postcode: postcode,
+      phone: phone,
+      email: email,
+      password: password,
+    })
+    .then(function (response) {
+      try {
+        // your own try...catch block to catch the error before axios ..catch
+        console.log(response);
+      } catch (e) {
+        console.log(e);
+      } // your catch block
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  //console.log(result.data);
+  return result.data;
+};
+
 const obj = {
   getAllCompanies,
   getAllCustomers,
   getAllSpecialOffers,
   postSpecialOffer,
   postNewCustomer,
+  postNewSupplier,
 };
 export default obj;
