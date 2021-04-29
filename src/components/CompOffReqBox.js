@@ -62,14 +62,16 @@ const CompOffReqBox = ({ offerReq, isCompany }) => {
         </Grid>
       );
     } else {
-      <Grid className={styles.info} container spacing={1} p={2} mb={2}>
-        <Grid className={styles.leftColumn} item xs={5}>
-          Asiakas:
+      return (
+        <Grid className={styles.info} container spacing={1} p={2} mb={2}>
+          <Grid className={styles.leftColumn} item xs={5}>
+            Yritykset:
+          </Grid>
+          <Grid className={styles.rightColumn} item xs={7}>
+            {offerRequest.request_suppliers}
+          </Grid>
         </Grid>
-        <Grid className={styles.rightColumn} item xs={7}>
-          {offerRequest.first_name} {offerRequest.last_name}
-        </Grid>
-      </Grid>;
+      );
     }
   };
 
