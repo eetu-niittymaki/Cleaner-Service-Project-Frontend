@@ -1,9 +1,9 @@
 import { makeStyles } from "@material-ui/core/styles";
-import Connection from "./BackendConnection";
-import { Paper, Grid, Box, Button } from "@material-ui/core";
 import React, { useState, useEffect } from "react";
 import HeaderComponent from "./HeaderComponent";
 import "./styles/TextPage.css";
+import Connection from "./BackendConnection";
+import { Paper, Grid, Box, Button } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   info: {
@@ -18,35 +18,36 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const CustomerFront = ({ customerId }) => {
+const CompanyFront = ({ companyId }) => {
   const styles = useStyles();
 
   // const exampleData = {
-  //   customer_id: 1,
-  //   first_name: "Pasi",
-  //   last_name: "Virtanen",
-  //   street_address: "Kotikatu 3 A",
+  //   id: 1,
+  //   name: "Siivouspojat Ab",
+  //   contactPerson: "Jussi Mäkinen",
+  //   phone: "040 5544671",
+  //   street_address: "Mäkitie 3",
+  //   postcode: "36100",
   //   city: "Tampere",
-  //   postcode: "33310",
-  //   phone: "+42312231",
-  //   email: "email@email.com",
+  //   email: "asiakaspalvelu@siivouspojat.fi",
+  //   description: "Tehdään loistavaa jälkeä",
   // };
 
-  const [customer, setCustomer] = useState(null);
+  const [company, setCompany] = useState(null);
 
   useEffect(() => {
     // Load all companies from database and search with given props companyId
-    const loadCustomerData = async () => {
-      const temp = await Connection.getAllCustomers();
+    const loadCompanyData = async () => {
+      const temp = await Connection.getAllCompanies();
       if (temp.length > 0) {
-        temp.filter((cust) => cust.customer_id === customerId);
-        setCustomer(temp[0]);
+        temp.filter((comp) => comp.supplier_id === companyId);
+        setCompany(temp[0]);
       }
     };
-    loadCustomerData();
-  }, [customerId]);
+    loadCompanyData();
+  }, [companyId]);
 
-  if (customer === null) {
+  if (company === null) {
     return (
       <div>
         <HeaderComponent />
@@ -57,7 +58,8 @@ const CustomerFront = ({ customerId }) => {
     return (
       <div>
         <HeaderComponent />
-        <h1>Tervetuloa omille sivuille {customer.first_name}!</h1>
+
+        <h1>Tervetuloa yrityksen omille sivuille!</h1>
         <Box m={1} p={2}>
           <Grid className={styles.info} container spacing={1} p={2} mb={2}>
             <Grid item xs={6}>
@@ -66,9 +68,11 @@ const CustomerFront = ({ customerId }) => {
                 size="large"
                 color="primary"
                 fullWidth
-                //onClick={() => (window.location.href = "/")}
+                onClick={() =>
+                  (window.location.href = "/mypage/company/createspecialoffer")
+                }
               >
-                Ostohistoria
+                Luo pikatarjous
               </Button>
             </Grid>
             <Grid item xs={6}>
@@ -77,57 +81,79 @@ const CustomerFront = ({ customerId }) => {
                 size="large"
                 color="primary"
                 fullWidth
-                //onClick={() => (window.location.href = "/")}
+                onClick={() =>
+                  (window.location.href = "/mypage/company/myofferrequests")
+                }
               >
                 Katso tarjouspyynnöt
               </Button>
             </Grid>
+            <Grid item xs={6}>
+              <Button
+                variant="outlined"
+                size="large"
+                color="primary"
+                fullWidth
+                onClick={() =>
+                  (window.location.href = "/mypage/company/myspecialoffers")
+                }
+              >
+                Omat pikatarjoukset
+              </Button>
+            </Grid>
           </Grid>
         </Box>
-        <h3>Tässä on asiakkaan yhteystiedot.</h3>
+        <h3>Tässä on yrityksen yhteystiedot.</h3>
         <Box border={1} m={2} p={1}>
           <Grid className={styles.info} container spacing={1} p={2} mb={2}>
             <Grid className={styles.leftColumn} item xs={4} sm={5}>
-              Nimi:
+              Yrityksen nimi:
             </Grid>
             <Grid item xs={1} />
             <Grid className={styles.rightColumn} item xs={7} sm={6}>
-              {customer.first_name} {customer.last_name}
+              {company.name}
+            </Grid>
+            <Grid className={styles.leftColumn} item xs={4} sm={5}>
+              Yhteyshenkilö:
+            </Grid>
+            <Grid item xs={1} />
+            <Grid className={styles.rightColumn} item xs={7} sm={6}>
+              {company.contactPerson}
             </Grid>
             <Grid className={styles.leftColumn} item xs={4} sm={5}>
               Puhelinnumero:
             </Grid>
             <Grid item xs={1} />
             <Grid className={styles.rightColumn} item xs={7} sm={6}>
-              {customer.phone}
+              {company.phone}
             </Grid>
             <Grid className={styles.leftColumn} item xs={4} sm={5}>
               Osoite:
             </Grid>
             <Grid item xs={1} />
             <Grid className={styles.rightColumn} item xs={7} sm={6}>
-              {customer.street_address}
+              {company.street_address}
             </Grid>
             <Grid className={styles.leftColumn} item xs={4} sm={5}>
               Postinumero:
             </Grid>
             <Grid item xs={1} />
             <Grid className={styles.rightColumn} item xs={7} sm={6}>
-              {customer.postcode}
+              {company.postcode}
             </Grid>
             <Grid className={styles.leftColumn} item xs={4} sm={5}>
               Postitoimipaikka:
             </Grid>
             <Grid item xs={1} />
             <Grid className={styles.rightColumn} item xs={7} sm={6}>
-              {customer.city}
+              {company.city}
             </Grid>
             <Grid className={styles.leftColumn} item xs={4} sm={5}>
               Sähköpostiosoite:
             </Grid>
             <Grid item xs={1} />
             <Grid className={styles.rightColumn} item xs={7} sm={6}>
-              {customer.email}
+              {company.email}
             </Grid>
           </Grid>
           <div className={styles.info}>
@@ -136,7 +162,7 @@ const CustomerFront = ({ customerId }) => {
               size="large"
               color="primary"
               onClick={() =>
-                (window.location.href = "/mypage/customer/modifydata")
+                (window.location.href = "/mypage/company/modifydata")
               }
             >
               Muokkaa tietoja
@@ -144,11 +170,11 @@ const CustomerFront = ({ customerId }) => {
           </div>
         </Box>
         <Box border={1} m={2} p={3}>
-          <div>Data from database is now: {JSON.stringify(customer)}</div>
+          <div>Data from database is now: {JSON.stringify(company)}</div>
         </Box>
       </div>
     );
   }
 };
 
-export default CustomerFront;
+export default CompanyFront;

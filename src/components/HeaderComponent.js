@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
@@ -13,7 +13,8 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
-import axios from 'axios'
+import axios from "axios";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -43,14 +44,15 @@ const useStyles = makeStyles((theme) => ({
 const HeaderComponent = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [open, setOpen] = useState(false);
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
+  const [adminRights, setAdminRights] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-  const PORT = (8080 || process.env.PORT)
+  // const PORT = (8080 || process.env.PORT)
 
   const setToken = (userToken) => {
-    sessionStorage.setItem('token', JSON.stringify(userToken))
-  }
+    sessionStorage.setItem("token", JSON.stringify(userToken));
+  };
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -72,43 +74,55 @@ const HeaderComponent = () => {
     setOpen(false);
   };
 
-  // Posts email and password to backend 
-  // TODO: if Promise returns status code 200 redirects to users homepage.
-  // TODO: save and use session token
   const handleLogin = async () => {
     if (email && password) {
-      const login = await axios.post(`http://localhost:${PORT}/api/auth/signin`, {
-      email: email,
-      password: password
-      })
+      const login = await axios.post(
+        //`http://localhost:8080/api/auth/signin`,
+        `https://clean-buddy.herokuapp.com/api/auth/signin`,
+        {
+          email: email,
+          password: password,
+        }
+      );
       if (login.status === 204) {
-        alert('Väärä sähköposti/salasana!')
+        alert("Väärä sähköposti/salasana!");
       } else if (login.status === 200) {
-        setToken(login.token)
-        window.location.href = "/myPages"
-        handleModalClose()
+        setToken(login.token);
+        window.location.href = "/mypage/customer";
+        handleModalClose();
       }
     } else {
-      alert("Give email and password")
+      alert("Give email and password");
     }
-    
+
     //return <Redirect to="/companies/" />;
-  }
+  };
 
   const clickedLogin = () => {
     console.log("clicked login button");
     handleModalOpen();
   };
 
-  const handleEmailChange = event => {
-    setEmail(event.target.value)
-  }
+  const handleEmailChange = (event) => {
+    setEmail(event.target.value);
+  };
 
-  const handlePasswordChange = event => {
-    setPassword(event.target.value)
-  }
+  const handlePasswordChange = (event) => {
+    setPassword(event.target.value);
+  };
+
+  // if user is admin, dropdown menu will have an Admin button
+  const checkIfAdmin = () => {
+    //TODO
+    //check from backend if current user has admin rights
+    setAdminRights(true);
+  };
+  useEffect(() => {
+    checkIfAdmin();
+  }, []);
 
   const classes = useStyles();
+
   return (
     <AppBar position="static">
       <Toolbar>
@@ -168,6 +182,11 @@ const HeaderComponent = () => {
                   onChange={handlePasswordChange}
                   fullWidth
                 />
+                <div>
+                  <Link to="/signup" onClick={handleModalClose}>
+                    Luo uusi käyttäjätili
+                  </Link>
+                </div>
               </DialogContent>
               <DialogActions>
                 <Button
@@ -202,7 +221,9 @@ const HeaderComponent = () => {
             anchorEl={anchorEl}
             open={Boolean(anchorEl)}
             onClose={handleClose}
-            anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+            //this line caused an error
+            //anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+
             transformOrigin={{ vertical: -65, horizontal: "center" }}
             //aria-label="menu"
             //aria-haspopup="true"
@@ -219,6 +240,16 @@ const HeaderComponent = () => {
             </MenuItem>
             <MenuItem onClick={() => handleClose("/privacy")}>
               Tietosuojaseloste
+            </MenuItem>
+
+            {adminRights ? (
+              <MenuItem onClick={() => handleClose("/admin")}>Admin</MenuItem>
+            ) : null}
+            <MenuItem onClick={() => handleClose("/mypage/customer/")}>
+              Customer myPages
+            </MenuItem>
+            <MenuItem onClick={() => handleClose("/mypage/company/")}>
+              Company myPages
             </MenuItem>
           </Menu>
         </div>

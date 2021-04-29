@@ -14,6 +14,7 @@ import FormHelperText from "@material-ui/core/FormHelperText";
 import Checkbox from "@material-ui/core/Checkbox";
 import React, { useState, useEffect } from "react";
 import HeaderComponent from "./HeaderComponent";
+import BackendConnection from "./BackendConnection";
 import "./styles/TextPage.css";
 
 const useStyles = makeStyles((theme) => ({
@@ -30,27 +31,129 @@ const useStyles = makeStyles((theme) => ({
 const OfferRequest = () => {
   const styles = useStyles();
 
+  const [companyData, setCompanyData] = useState([]);
+
   const [apartmentType, setApartmentType] = useState("");
   const [apartmentArea, setApartmentArea] = useState("");
   const [frequency, setFrequency] = useState("");
+  const [suppliers, setSuppliers] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [address, setAddress] = useState("");
+  const [postcode, setPostcode] = useState("");
+  const [city, setCity] = useState("");
+  const [email, setEmail] = useState("");
+  const [additionalInfo, setAdditionalInfo] = useState("");
 
-  useEffect(() => {
-    console.log("apartment type or area changed");
-  }, [apartmentType, apartmentArea]);
-
-  const handleChange = (event) => {
-    setApartmentType(event.target.value);
+  // Load all companies from database
+  const loadCompanyData = async () => {
+    const temp = await BackendConnection.getAllCompanies();
+    if (temp.length > 0) {
+      const tempArr = [];
+      temp.forEach((comp) => {
+        tempArr.push({ name: comp.name, isChecked: false });
+      });
+      setCompanyData(tempArr);
+      //console.log(companyData);
+    }
   };
 
-  const [companies, setCompanies] = useState({
-    siivouspojat: false,
-    yritys: false,
-    duuniapukkaa: false,
-  });
+  // load companies from db only once
+  useEffect(() => {
+    loadCompanyData();
+  }, []);
 
-  const { siivouspojat, yritys, duuniapukkaa } = companies;
-  const error =
-    [siivouspojat, yritys, duuniapukkaa].filter((v) => v).length < 1;
+  const sendOfferRequest = () => {
+    getRequestedSuppliers();
+    var rdy = true;
+    if (suppliers === "") {
+      rdy = false;
+    }
+    if (rdy) {
+      console.log(`Posting values:
+      ${apartmentType}
+      ${apartmentArea}
+      ${frequency}
+      ${suppliers}
+      ${firstName}
+      ${lastName}
+      ${phone}
+      ${additionalInfo}
+      ${address}
+      ${postcode}
+      ${city}
+      ${email}`);
+      BackendConnection.postNewOfferRequest({
+        apartment_type: apartmentType,
+        apartment_area: apartmentArea,
+        cleaning_frequency: frequency,
+        request_suppliers: suppliers,
+        optional_information: additionalInfo,
+        first_name: firstName,
+        last_name: lastName,
+        street_address: address,
+        city: city,
+        postcode: postcode,
+        phone: phone,
+        email: email,
+      });
+      window.location.href = "/";
+    } else {
+      alert("Tarkista että kaikki kentät on täytetty.");
+    }
+  };
+
+  const getRequestedSuppliers = () => {
+    var tempStr = "";
+    console.log("Getting supplierlist for send");
+    companyData.forEach((comp) => {
+      if (comp.isChecked === true) {
+        console.log("adding company to supplierlist");
+        tempStr += comp.name + " ";
+      }
+    });
+    console.log(`String is now: ${tempStr}`);
+    setSuppliers(tempStr);
+    return tempStr;
+  };
+
+  const error = [companyData].filter((v) => v.isChecked === true).length < 1;
+
+  const showCompaniesList = () => {
+    const ui = companyData.map((comp) => {
+      //console.log(comp);
+      return (
+        <FormControlLabel
+          key={comp.name}
+          control={
+            <Checkbox
+              checked={comp.isChecked}
+              onChange={(event) => {
+                console.log(event.target.name);
+                console.log(event.target.checked);
+                const temp = companyData.map((comp) => {
+                  if (comp.name === event.target.name) {
+                    comp = {
+                      name: comp.name,
+                      isChecked: !comp.isChecked,
+                    };
+                    return comp;
+                  } else {
+                    return comp;
+                  }
+                });
+                setCompanyData(temp);
+              }}
+              name={comp.name}
+            />
+          }
+          label={comp.name}
+        />
+      );
+    });
+    return ui;
+  };
 
   return (
     <div>
@@ -128,53 +231,7 @@ const OfferRequest = () => {
               <FormLabel component="legend">
                 Valitse palveluntarjoajat, joilta tahdot tarjouksen
               </FormLabel>
-              <FormGroup>
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      checked={siivouspojat}
-                      onChange={(event) =>
-                        setCompanies({
-                          ...companies,
-                          [event.target.name]: event.target.checked,
-                        })
-                      }
-                      name="siivouspojat"
-                    />
-                  }
-                  label="Siivouspojat"
-                />
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      checked={yritys}
-                      onChange={(event) =>
-                        setCompanies({
-                          ...companies,
-                          [event.target.name]: event.target.checked,
-                        })
-                      }
-                      name="yritys"
-                    />
-                  }
-                  label="Yritys Oy"
-                />
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      checked={duuniapukkaa}
-                      onChange={(event) =>
-                        setCompanies({
-                          ...companies,
-                          [event.target.name]: event.target.checked,
-                        })
-                      }
-                      name="duuniapukkaa"
-                    />
-                  }
-                  label="DuuniaPukkaa"
-                />
-              </FormGroup>
+              <FormGroup>{showCompaniesList()}</FormGroup>
               {/* <FormHelperText display={error}>
                 Valitse vähintään yksi palveluntarjoaja
               </FormHelperText> */}
@@ -189,6 +246,7 @@ const OfferRequest = () => {
               rowsMax={7}
               placeholder="Tähän voit antaa lisätietoa, esimerkiksi onko asunnossa lemmikkejä."
               variant="outlined"
+              onChange={(event) => setAdditionalInfo(event.target.value)}
             />
           </form>
           <form style={{ textAlign: "left" }}>
@@ -201,6 +259,7 @@ const OfferRequest = () => {
                 label="Etunimi"
                 placeholder="Etunimi"
                 variant="outlined"
+                onChange={(event) => setFirstName(event.target.value)}
               />
               <TextField
                 className={styles.formControl}
@@ -209,6 +268,7 @@ const OfferRequest = () => {
                 label="Sukunimi"
                 placeholder="Sukunimi"
                 variant="outlined"
+                onChange={(event) => setLastName(event.target.value)}
               />
             </div>
             <div>
@@ -219,6 +279,7 @@ const OfferRequest = () => {
                 label="Osoite"
                 placeholder="Osoite"
                 variant="outlined"
+                onChange={(event) => setAddress(event.target.value)}
               />
             </div>
             <div>
@@ -227,8 +288,9 @@ const OfferRequest = () => {
                 required
                 id="standard-required"
                 label="Postinumero"
-                placeholder="Postinumer"
+                placeholder="Postinumero"
                 variant="outlined"
+                onChange={(event) => setCity(event.target.value)}
               />
               <TextField
                 className={styles.formControl}
@@ -237,6 +299,7 @@ const OfferRequest = () => {
                 label="Postitoimipaikka"
                 placeholder="Postitoimipaikka"
                 variant="outlined"
+                onChange={(event) => setPostcode(event.target.value)}
               />
             </div>
             <div>
@@ -246,6 +309,7 @@ const OfferRequest = () => {
                 label="Puhelinnumero"
                 placeholder="Puhelinnumero"
                 variant="outlined"
+                onChange={(event) => setPhone(event.target.value)}
               />
             </div>
             <div>
@@ -256,13 +320,19 @@ const OfferRequest = () => {
                 label="Sähköpostiosoite"
                 placeholder="Sähköpostiosoite"
                 variant="outlined"
+                onChange={(event) => setEmail(event.target.value)}
               />
             </div>
           </form>
         </div>
       </div>
       <div className="bottomButtons">
-        <Button variant="outlined" size="large" color="primary">
+        <Button
+          variant="outlined"
+          size="large"
+          color="primary"
+          onClick={sendOfferRequest}
+        >
           Lähetä
         </Button>
       </div>

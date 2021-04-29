@@ -1,15 +1,17 @@
 # CleanBuddy platform for cleaning services
 
-##Getting started
+## Getting started
 
-###Installing dependencies
+### Installing dependencies
+
 In root folder type command:
 
 ```
 npm install
 ```
 
-###Launch React App
+### Launch React App
+
 In root folder type command:
 
 ```
@@ -19,7 +21,8 @@ npm start
 This opens the app locally in http://localhost:3000/
 and it can be viewed in browser.
 
-###Create production build
+### Create production build
+
 In root folder type command:
 
 ```
