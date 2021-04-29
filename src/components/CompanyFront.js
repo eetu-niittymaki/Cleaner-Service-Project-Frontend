@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import HeaderComponent from "./HeaderComponent";
 import "./styles/TextPage.css";
 import Connection from "./BackendConnection";
-import { Paper, Grid, Box, Button } from "@material-ui/core";
+import { Grid, Box, Button } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   info: {
