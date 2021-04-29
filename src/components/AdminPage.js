@@ -8,7 +8,7 @@ import axios from "axios"
 import BackendConnection from "./BackendConnection";
 import AdminModifyCompanyData from "./AdminModifyCompanyData";
 import AdminModifyCustomerData from "./AdminModifyCustomerData";
-import AdminModifyUserData from "./AdminModifyUserData"
+import AdminModifyOfferData from "./AdminModifyOfferData"
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -85,13 +85,30 @@ const AdminPage = () => {
     } else if(selectedPage==companiesTxt) {
       return(
         <div>
-          <p>companies</p>
+          <h1>Muokkaa yritystietoja:</h1>
+          
+          {companies.map((data) => (
+            <ul key = {data.supplier_id}>
+              <AdminModifyCompanyData
+              cData = {data}
+              cSave = {() => console.log("cSave")}
+              cDelete = {()=>console.log("cDelete")} />
+            </ul>
+          ))}
+        
         </div>
       )
     } else if(selectedPage==offersTxt) {
       return(
         <div>
-          <p>offers</p>
+          <h1>Muokkaa tarjoustietoja:</h1>
+          {/*product_id*/}
+          {offers.map((data) => (
+            <AdminModifyOfferData
+            oData = {data}
+            oSave = {() => console.log("oSave")}
+            oDelete = {() => console.log("oDelete")} />
+          ))}
         </div>
       )
     }
@@ -135,79 +152,6 @@ const AdminPage = () => {
           </Button>
           <br />
           {getContent(selectedPage)}
-            {/*
-            {getCompanies().map((d) => (
-              <ul key={d.id}>
-                <div>
-                  <form style={{ textAlign: "left" }}>
-                    <TextField
-                      InputLabelProps={{ shrink: true }}
-                      className={styles.formControl}
-                      label="Company name"
-                      placeholder={d.name}
-                      variant="outlined"
-                    />
-                    <TextField
-                      InputLabelProps={{ shrink: true }}
-                      className={styles.formControl}
-                      label="Contact person"
-                      placeholder={d.contactPerson}
-                      variant="outlined"
-                    />
-                    <TextField
-                      InputLabelProps={{ shrink: true }}
-                      className={styles.formControl}
-                      label="PhoneNumber"
-                      placeholder={d.phoneNumber}
-                      variant="outlined"
-                    />
-                    <TextField
-                      InputLabelProps={{ shrink: true }}
-                      className={styles.formControl}
-                      label="Address"
-                      placeholder={d.address}
-                      variant="outlined"
-                    />
-                    <TextField
-                      InputLabelProps={{ shrink: true }}
-                      className={styles.formControl}
-                      label="PostNumber"
-                      placeholder={d.postNumber}
-                      variant="outlined"
-                    />
-                    <TextField
-                      InputLabelProps={{ shrink: true }}
-                      className={styles.formControl}
-                      label="City"
-                      placeholder={d.city}
-                      variant="outlined"
-                    />
-                    <TextField
-                      InputLabelProps={{ shrink: true }}
-                      className={styles.formControl}
-                      label="Email"
-                      placeholder={d.email}
-                      variant="outlined"
-                    />
-                    <TextField
-                      InputLabelProps={{ shrink: true }}
-                      className={styles.formControl}
-                      label="Description"
-                      placeholder={d.description}
-                      variant="outlined"
-                    />
-                  </form>
-                  <Button variant="outlined" size="large" color="primary">
-                    Save
-                  </Button>
-                  <Button variant="outlined" size="large" color="primary">
-                    Delete
-                  </Button>
-                  <br />
-                </div>
-              </ul>
-            ))}
-            */}
           </div>
         </div>
       ) : (

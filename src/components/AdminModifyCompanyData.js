@@ -1,8 +1,6 @@
 import { TextField, Button, Grid } from "@material-ui/core";
-import { makeStyles, ThemeProvider } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import React, { useState, useEffect } from "react";
-import HeaderComponent from "./HeaderComponent";
-import BackendConnection from "./BackendConnection.js";
 import "./styles/TextPage.css";
 
 const useStyles = makeStyles((theme) => ({
@@ -16,40 +14,44 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const AdminModifyCustomerData = ({cData, cSave, cDelete}) => {
-  const [customer, setCustomer] = useState(null);
+const AdminModifyCompanyData = ({ cData, cSave, cDelete }) => {
+
+  const [company, setCompany] = useState(null);
+
   const styles = useStyles();
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
+  const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
   const [postcode, setPostcode] = useState("");
   const [city, setCity] = useState("");
   const [email, setEmail] = useState("");
+  const [description, setDescription] = useState("");
 
-  const fillValues = (cust) => {
-    setFirstName(cust.first_name);
-    setLastName(cust.last_name);
-    setPhone(cust.phone);
-    setAddress(cust.street_address);
-    setPostcode(cust.postcode);
-    setCity(cust.city);
-    setEmail(cust.email);
+  const fillValues = (comp) => {
+    setName(comp.name);
+    setPhone(comp.phone);
+    setAddress(comp.street_address);
+    setPostcode(comp.postcode);
+    setCity(comp.city);
+    setEmail(comp.email);
+    setDescription(comp.supplier_description);
   };
 
   useEffect(() => {
-    const loadCustomerData = async () => {
-      setCustomer(cData);
-      fillValues(cData);
+    const loadCompanyData = async () => {
+      
+        setCompany(cData);
+        fillValues(cData);
       
     };
-    loadCustomerData();
-  },[]);
+    loadCompanyData();
+  }, []);
 
+  // Checking that title and description have content and price is positive
   const checkValues = () => {
     return (
-      firstName !== "" &&
-      lastName !== "" &&
+      name !== "" &&
+      description !== "" &&
       phone !== "" &&
       postcode !== "" &&
       address !== "" &&
@@ -58,14 +60,14 @@ const AdminModifyCustomerData = ({cData, cSave, cDelete}) => {
     );
   };
 
-  if (customer === null) {
-    return(
+  if (company === null) {
+    return (
       <div>
         <h2>Loading data</h2>
       </div>
-    )
+    );
   } else {
-    return(
+    return (
       
         <div>
           <div className="TextContainer">
@@ -76,26 +78,19 @@ const AdminModifyCustomerData = ({cData, cSave, cDelete}) => {
               <TextField
                 className={styles.formControl}
                 required
-                id="modify-firstname"
-                label="Etunimi"
-                value={firstName}
+                id="modify-name"
+                label="Yrityksen nimi"
+                //placeholder="Yrityksen nimi"
+                value={name}
                 variant="outlined"
-                onChange={(event) => setFirstName(event.target.value)}
-              />
-              <TextField
-                className={styles.formControl}
-                required
-                id="modify-lastname"
-                label="Sukunimi"
-                value={lastName}
-                variant="outlined"
-                onChange={(event) => setLastName(event.target.value)}
+                onChange={(event) => setName(event.target.value)}
               />
               <TextField
                 className={styles.formControl}
                 required
                 id="modify-phone"
                 label="Puhelinnumero"
+                //placeholder="Puhelinnumero"
                 value={phone}
                 variant="outlined"
                 onChange={(event) => setPhone(event.target.value)}
@@ -105,6 +100,7 @@ const AdminModifyCustomerData = ({cData, cSave, cDelete}) => {
                 required
                 id="modify-address"
                 label="Osoite"
+                //placeholder="Osoite"
                 value={address}
                 variant="outlined"
                 onChange={(event) => setAddress(event.target.value)}
@@ -114,6 +110,7 @@ const AdminModifyCustomerData = ({cData, cSave, cDelete}) => {
                 required
                 id="modify-postcode"
                 label="Postinumero"
+                //placeholder="Postinumero"
                 value={postcode}
                 variant="outlined"
                 onChange={(event) => setPostcode(event.target.value)}
@@ -123,6 +120,7 @@ const AdminModifyCustomerData = ({cData, cSave, cDelete}) => {
                 required
                 id="modify-city"
                 label="Postitoimipaikka"
+                //placeholder="Postitoimipaikka"
                 value={city}
                 variant="outlined"
                 onChange={(event) => setCity(event.target.value)}
@@ -132,10 +130,24 @@ const AdminModifyCustomerData = ({cData, cSave, cDelete}) => {
                 required
                 id="modify-email"
                 label="Sähköpostiosoite"
+                //placeholder="Sähköpostiosoite"
                 value={email}
                 variant="outlined"
                 onChange={(event) => setEmail(event.target.value)}
               />
+              {/* <TextField
+              className={styles.formControl}
+              required
+              id="modify-description"
+              label="Kuvaus"
+              fullWidth
+              multiline
+              rows={4}
+              rowsMax={7}
+              placeholder="Yrityksen kuvaus"
+              variant="outlined"
+              onChange={(event) => setDescription(event.target.value)}
+            /> */}
             </form>
             <Grid className={styles.info} container spacing={1} p={2} m={2}>
               <Grid item xs={6} ml={2}>
@@ -155,7 +167,7 @@ const AdminModifyCustomerData = ({cData, cSave, cDelete}) => {
                   size="large"
                   color="primary"
                   fullWidth
-                  onClick={() => cDelete()}
+                  onClick={()=>cDelete()}
                 >
                   Poista
                 </Button>
@@ -163,9 +175,8 @@ const AdminModifyCustomerData = ({cData, cSave, cDelete}) => {
             </Grid>
           </div>
         </div>
-      
-    )
+    );
   }
-}
+};
 
-export default AdminModifyCustomerData;
+export default AdminModifyCompanyData;
