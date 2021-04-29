@@ -77,7 +77,9 @@ const CustomerFront = ({ customerId }) => {
                 size="large"
                 color="primary"
                 fullWidth
-                //onClick={() => (window.location.href = "/")}
+                onClick={() =>
+                  (window.location.href = "/mypage/customer/myofferrequests")
+                }
               >
                 Katso tarjouspyynnöt
               </Button>
