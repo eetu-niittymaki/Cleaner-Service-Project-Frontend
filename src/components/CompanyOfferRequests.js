@@ -36,7 +36,9 @@ const CompanyOfferRequests = ({ supplierName }) => {
 
   const showOfferList = () => {
     return offerRequests.map((req) => {
-      return <CompOffReqBox key={req.request_id} offerReq={req} />;
+      return (
+        <CompOffReqBox key={req.request_id} offerReq={req} isCompany={true} />
+      );
     });
   };
 
@@ -44,7 +46,7 @@ const CompanyOfferRequests = ({ supplierName }) => {
     return (
       <div>
         <HeaderComponent />
-        <div>Loading data</div>
+        <div>No offer requests yet.</div>
       </div>
     );
   } else {
