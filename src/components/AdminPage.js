@@ -5,6 +5,10 @@ import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import axios from "axios"
+import BackendConnection from "./BackendConnection";
+import AdminModifyCompanyData from "./AdminModifyCompanyData";
+import AdminModifyCustomerData from "./AdminModifyCustomerData";
+import AdminModifyOfferData from "./AdminModifyOfferData"
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -19,131 +23,135 @@ const useStyles = makeStyles((theme) => ({
 
 const AdminPage = () => {
   const styles = useStyles();
+  const customersTxt = "Asiakkaat";
+  const companiesTxt = "Palveluntarjoajat";
+  const offersTxt = "Pikatarjoukset";
   const [adminRights, setAdminRights] = useState(false);
+  const [selectedPage, setSelectedPage] = useState(customersTxt)
   const [customers, setCustomers] = useState([]);
   const [companies, setCompanies] = useState([]);
-  const checkIfAdmin = () => {
-    //TODO
-    //check from backend if current user has admin rights
-    setAdminRights(true);
-  };
-  const fetchData = async () => {
-    const url = "https://clean-buddy.herokuapp.com/api/customers/"
-    const response = await axios.get(url);
-    console.log("test")
-    console.log(response.data);
-  }
-  const getCompanies = () => {
-    //TODO get company (etc ) lists from backend
-    fetchData()
-    const data = [
-      {
-        id: "0",
-        name: "exampleCompany1",
-        contactPerson: "pena",
-        phoneNumber: "123",
-        address: "kujalla",
-        postNumber: "321",
-        city: "Bollywood",
-        email: "maili@maili",
-        description: "hieno yritys",
-      },
-      {
-        id: "1",
-        name: "exampleCompany2",
-        contactPerson: "pena",
-        phoneNumber: "123",
-        address: "kujalla",
-        postNumber: "321",
-        city: "Bollywood",
-        email: "maili@maili",
-        description: "hieno yritys",
-      },
-    ];
-    return data;
-  };
-  useEffect(() => {
-    checkIfAdmin();
+  const [offers, setOffers] = useState([]);
 
-  }, []);
+  useEffect(() => {
+    const checkIfAdmin = async () => {
+      //TODO
+      //check from backend if current user has admin rights
+      const result = true;
+      setAdminRights(result)
+    };
+    checkIfAdmin();
+    console.log(adminRights);
+    if (adminRights) {
+      fetchData();
+    }
+  }, [adminRights]);
+
+  const fetchData = async () => {
+    try{
+      const customersListed = await BackendConnection.getAllCustomers();
+      const companiesListed = await BackendConnection.getAllCompanies();
+      const offersListed = await BackendConnection.getAllSpecialOffers();
+      setCustomers(customersListed);
+      setCompanies(companiesListed);
+      setOffers(offersListed);
+      console.log(customers);
+      //console.log(companies);
+      //console.log(offers);
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
+  const getContent = (selectedP) => {
+    console.log(selectedP)
+    if(selectedP==customersTxt) {
+      return(
+        <div>
+          <h1>Muokkaa asiakastietoja:</h1>
+          
+          {customers.map((data) => (
+            <ul key={data.customer_id}>
+              <AdminModifyCustomerData 
+              cData = {data}
+              cSave = {()=>console.log("cSave")} 
+              cDelete = {()=>console.log("cDelete")} />
+            </ul>
+            
+          ))}
+          
+
+        </div>
+      )
+    } else if(selectedPage==companiesTxt) {
+      return(
+        <div>
+          <h1>Muokkaa yritystietoja:</h1>
+          
+          {companies.map((data) => (
+            <ul key = {data.supplier_id}>
+              <AdminModifyCompanyData
+              cData = {data}
+              cSave = {() => console.log("cSave")}
+              cDelete = {()=>console.log("cDelete")} />
+            </ul>
+          ))}
+        
+        </div>
+      )
+    } else if(selectedPage==offersTxt) {
+      return(
+        <div>
+          <h1>Muokkaa tarjoustietoja:</h1>
+          {/*product_id*/}
+          {offers.map((data) => (
+            <AdminModifyOfferData
+            oData = {data}
+            oSave = {() => console.log("oSave")}
+            oDelete = {() => console.log("oDelete")} />
+          ))}
+        </div>
+      )
+    }
+    // this should never happen, but just in case
+    else {
+      return(
+        <div>
+          <p>What the fuck?</p>
+        </div>
+      )
+    }
+  }
+
   return (
     <div>
       {adminRights ? (
         <div>
           <HeaderComponent />
           <div>
-            <h1>Edit Companies</h1>
-            {getCompanies().map((d) => (
-              <ul key={d.id}>
-                <div>
-                  <form style={{ textAlign: "left" }}>
-                    <TextField
-                      InputLabelProps={{ shrink: true }}
-                      className={styles.formControl}
-                      label="Company name"
-                      placeholder={d.name}
-                      variant="outlined"
-                    />
-                    <TextField
-                      InputLabelProps={{ shrink: true }}
-                      className={styles.formControl}
-                      label="Contact person"
-                      placeholder={d.contactPerson}
-                      variant="outlined"
-                    />
-                    <TextField
-                      InputLabelProps={{ shrink: true }}
-                      className={styles.formControl}
-                      label="PhoneNumber"
-                      placeholder={d.phoneNumber}
-                      variant="outlined"
-                    />
-                    <TextField
-                      InputLabelProps={{ shrink: true }}
-                      className={styles.formControl}
-                      label="Address"
-                      placeholder={d.address}
-                      variant="outlined"
-                    />
-                    <TextField
-                      InputLabelProps={{ shrink: true }}
-                      className={styles.formControl}
-                      label="PostNumber"
-                      placeholder={d.postNumber}
-                      variant="outlined"
-                    />
-                    <TextField
-                      InputLabelProps={{ shrink: true }}
-                      className={styles.formControl}
-                      label="City"
-                      placeholder={d.city}
-                      variant="outlined"
-                    />
-                    <TextField
-                      InputLabelProps={{ shrink: true }}
-                      className={styles.formControl}
-                      label="Email"
-                      placeholder={d.email}
-                      variant="outlined"
-                    />
-                    <TextField
-                      InputLabelProps={{ shrink: true }}
-                      className={styles.formControl}
-                      label="Description"
-                      placeholder={d.description}
-                      variant="outlined"
-                    />
-                  </form>
-                  <Button variant="outlined" size="large" color="primary">
-                    Save
-                  </Button>
-                  <Button variant="outlined" size="large" color="primary">
-                    Delete
-                  </Button>
-                  <br />
-                </div>
-              </ul>
-            ))}
+            <br />
+          <Button 
+            variant="contained" 
+            size="large" 
+            color={selectedPage==customersTxt?"primary":"default"} 
+            onClick={()=>setSelectedPage(customersTxt)}>
+              {customersTxt}
+          </Button>
+          <Button 
+            variant="contained" 
+            size="large" 
+            color={selectedPage==companiesTxt?"primary":"default"} 
+            onClick={()=>setSelectedPage(companiesTxt)}>
+              {companiesTxt}
+          </Button>
+          <Button 
+            variant="contained" 
+            size="large" 
+            color={selectedPage==offersTxt?"primary":"default"} 
+            onClick={()=>setSelectedPage(offersTxt)}>
+              {offersTxt}
+          </Button>
+          <br />
+          {getContent(selectedPage)}
           </div>
         </div>
       ) : (
