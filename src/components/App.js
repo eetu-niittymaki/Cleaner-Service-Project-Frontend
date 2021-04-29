@@ -17,6 +17,7 @@ import HeaderComponent from "./HeaderComponent";
 import ModifyCompanyData from "./ModifyCompanyData";
 import BackendConnection from "./BackendConnection";
 import ModifyCustomerData from "./ModifyCustomerData";
+import CustomerOfferRequests from "./CustomerOfferRequests";
 import Signup from "./Signup";
 import AddSupplier from "./AddSupplier";
 
@@ -113,6 +114,11 @@ const App = () => {
         <Route exact path="/mypage/customer/modifydata">
           <div className="App">
             <ModifyCustomerData customerId={loggedInCustomerId} />
+          </div>
+        </Route>
+        <Route exact path="/mypage/customer/myofferrequests">
+          <div className="App">
+            <CustomerOfferRequests />
           </div>
         </Route>
         <Route exact path="/mypage/customer">
