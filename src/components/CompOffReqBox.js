@@ -14,38 +14,15 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const CompOffReqBox = ({ offerReq }) => {
+const CompOffReqBox = ({ offerReq, isCompany }) => {
   const styles = useStyles();
   const [offerRequest, setOfferRequest] = useState(offerReq);
+  const [companyDetails, setCompanyDetails] = useState(isCompany);
 
-  if (offerReq !== null) {
-    return (
-      <Box border={1} m={1} p={2}>
+  const showUserSpecificData = () => {
+    if (companyDetails) {
+      return (
         <Grid className={styles.info} container spacing={1} p={2} mb={2}>
-          <Grid className={styles.leftColumn} item xs={5}>
-            ID:
-          </Grid>
-          <Grid className={styles.rightColumn} item xs={7}>
-            {offerRequest.request_id}
-          </Grid>
-          <Grid className={styles.leftColumn} item xs={5}>
-            Asuntotyyppi:
-          </Grid>
-          <Grid className={styles.rightColumn} item xs={7}>
-            {offerRequest.apartment_type}
-          </Grid>
-          <Grid className={styles.leftColumn} item xs={5}>
-            Asunnon pinta-ala:
-          </Grid>
-          <Grid className={styles.rightColumn} item xs={7}>
-            {offerRequest.apartment_area}
-          </Grid>
-          <Grid className={styles.leftColumn} item xs={5}>
-            Siivoustiheys:
-          </Grid>
-          <Grid className={styles.rightColumn} item xs={7}>
-            {offerRequest.cleaning_frequency}
-          </Grid>
           <Grid className={styles.leftColumn} item xs={5}>
             Asiakas:
           </Grid>
@@ -82,6 +59,49 @@ const CompOffReqBox = ({ offerReq }) => {
           <Grid className={styles.rightColumn} item xs={7}>
             {offerRequest.email}
           </Grid>
+        </Grid>
+      );
+    } else {
+      <Grid className={styles.info} container spacing={1} p={2} mb={2}>
+        <Grid className={styles.leftColumn} item xs={5}>
+          Asiakas:
+        </Grid>
+        <Grid className={styles.rightColumn} item xs={7}>
+          {offerRequest.first_name} {offerRequest.last_name}
+        </Grid>
+      </Grid>;
+    }
+  };
+
+  if (offerReq !== null) {
+    return (
+      <Box border={1} m={1} p={2}>
+        <Grid className={styles.info} container spacing={1} p={2} mb={2}>
+          <Grid className={styles.leftColumn} item xs={5}>
+            ID:
+          </Grid>
+          <Grid className={styles.rightColumn} item xs={7}>
+            {offerRequest.request_id}
+          </Grid>
+          <Grid className={styles.leftColumn} item xs={5}>
+            Asuntotyyppi:
+          </Grid>
+          <Grid className={styles.rightColumn} item xs={7}>
+            {offerRequest.apartment_type}
+          </Grid>
+          <Grid className={styles.leftColumn} item xs={5}>
+            Asunnon pinta-ala:
+          </Grid>
+          <Grid className={styles.rightColumn} item xs={7}>
+            {offerRequest.apartment_area}
+          </Grid>
+          <Grid className={styles.leftColumn} item xs={5}>
+            Siivoustiheys:
+          </Grid>
+          <Grid className={styles.rightColumn} item xs={7}>
+            {offerRequest.cleaning_frequency}
+          </Grid>
+          {showUserSpecificData()}
           <Grid className={styles.leftColumn} item xs={5}>
             Lisätietoa:
           </Grid>
