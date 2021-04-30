@@ -1,10 +1,11 @@
-import { Grid, Box } from "@material-ui/core";
+import { Button, Grid, Box } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import React, { useState, useEffect } from "react";
 
 const useStyles = makeStyles((theme) => ({
   backButton: {
     textAlign: "center",
+    marginTop: 15,
   },
   leftColumn: {
     textAlign: "right",
@@ -49,7 +50,7 @@ const CompanySpecialOffer = ({ specialOffer }) => {
             Kokonaishinta:
           </Grid>
           <Grid className={styles.rightColumn} item xs={7}>
-            {specialOffer.price}
+            {specialOffer.product_price}
           </Grid>
           <Grid className={styles.leftColumn} item xs={5}>
             Luotu:
@@ -67,9 +68,21 @@ const CompanySpecialOffer = ({ specialOffer }) => {
             Tarjous voimassa:
           </Grid>
           <Grid className={styles.rightColumn} item xs={7}>
-            {specialOffer.is_available}
+            {specialOffer.product_is_available}
           </Grid>
         </Grid>
+        <div className={styles.backButton}>
+          <Button
+            variant="outlined"
+            size="large"
+            color="primary"
+            //   onClick={() =>
+            //     (window.location.href = "/mypage/company/myspecialoffers")
+            //   }
+          >
+            Muokkaa
+          </Button>
+        </div>
       </Box>
     );
   }
