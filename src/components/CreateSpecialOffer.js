@@ -16,32 +16,37 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const CreateSpecialOffer = () => {
+const CreateSpecialOffer = ({ companyId }) => {
   const styles = useStyles();
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [price, setPrice] = useState(100);
+  const [price, setPrice] = useState(0);
   //TODO: Change duration to real duration
-  const [duration, setDuration] = useState(3);
+  const [duration, setDuration] = useState(0);
 
   const handleClick = () => {
     //TODO: send special order data and create new special offer
-    console.log(`Sending values: ${title}
-    ${description}\n ${price}`);
     const offer = {
-      product_name: "perusteellisempi siivous",
-      product_description: "joku kuvausteksti",
-      product_price: 100,
+      supplier_id: companyId,
+      product_name: title,
+      product_description: description,
+      product_price: price,
+      ends_at: "2021-05-20",
+      work_hours: duration,
+      product_is_available: 1,
     };
-    BackendConnection.postSpecialOffer(offer);
-    //const priceToDouble = parseFloat(price).toFixed(2);
+    console.log(JSON.stringify(offer));
     if (checkValues()) {
       console.log("create new special offer and go to companyfront");
-      /*BackendConnection.postSpecialOffer({
+      BackendConnection.postSpecialOffer({
+        supplier_id: companyId,
         product_name: title,
         product_description: description,
-        product_price: 100,
-      });*/
+        product_price: price,
+        ends_at: "2021-05-20",
+        work_hours: duration,
+        product_is_available: 1,
+      });
       window.location.href = "/mypage/company";
     } else {
       alert("Tarkista pikatarjouksen tiedot");
@@ -50,7 +55,7 @@ const CreateSpecialOffer = () => {
 
   // Checking that title and description have content and price is positive
   const checkValues = () => {
-    return title !== "" && description !== "" && price >= 0;
+    return title !== "" && description !== "" && price >= 0 && duration >= 0;
   };
 
   return (
@@ -79,7 +84,9 @@ const CreateSpecialOffer = () => {
               label="Kesto"
               placeholder="Kesto"
               variant="outlined"
-              onChange={(event) => setDuration(event.target.value)}
+              onChange={(event) =>
+                setDuration(parseFloat(event.target.value).toFixed(2))
+              }
             />
             <TextField
               className={styles.formControl}
@@ -88,7 +95,9 @@ const CreateSpecialOffer = () => {
               label="Hinta"
               placeholder="Hinta"
               variant="outlined"
-              onChange={(event) => setPrice(event.target.value)}
+              onChange={(event) =>
+                setPrice(parseFloat(event.target.value).toFixed(2))
+              }
             />
             <TextField
               className={styles.formControl}
