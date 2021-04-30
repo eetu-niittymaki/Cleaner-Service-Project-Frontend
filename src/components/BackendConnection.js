@@ -34,21 +34,34 @@ const getOfferRequestsBySupplier = async (supplier) => {
 };
 
 const postSpecialOffer = async ({
+  supplier_id,
   product_name,
   product_description,
   product_price,
+  ends_at,
+  work_hours,
 }) => {
   console.log(
-    `Posting values: ${product_name}, ${product_description}, ${product_price}`
+    `Posting values:
+    ${supplier_id},
+    ${product_name},
+    ${product_description},
+    ${product_price},
+    ${ends_at},
+    ${work_hours}`
   );
   const result = await axios
     .post(`${baseUrl}products/`, {
       // product_name: "Perusteellisempi siivous",
       // product_description: "Tähän joku hyvä testikuvaus.",
       // product_price: 150,
+      supplier_id: supplier_id,
       product_name: product_name,
       product_description: product_description,
       product_price: product_price,
+      ends_at: ends_at,
+      work_hours: work_hours,
+      is_available: 1,
     })
     .then(function (response) {
       try {
