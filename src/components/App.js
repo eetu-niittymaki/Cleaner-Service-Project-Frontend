@@ -128,7 +128,7 @@ const App = () => {
         </Route>
         <Route exact path="/mypage/company/createspecialoffer">
           <div className="App">
-            <CreateSpecialOffer />
+            <CreateSpecialOffer companyId={loggedInCompanyId} />
           </div>
         </Route>
         <Route exact path="/mypage/company/myspecialoffers">
