@@ -24,6 +24,15 @@ const getAllSpecialOffers = async () => {
   return result.data;
 };
 
+const getOfferRequestsBySupplier = async (supplier) => {
+  const result = await axios.get(
+    `${baseUrl}offer-requests?supplier=${supplier}`
+  );
+  console.log("BackendConnection: Getting all offer request for supplier.");
+  console.log(result.data);
+  return result.data;
+};
+
 const postSpecialOffer = async ({
   product_name,
   product_description,
@@ -207,6 +216,7 @@ const obj = {
   getAllCompanies,
   getAllCustomers,
   getAllSpecialOffers,
+  getOfferRequestsBySupplier,
   postSpecialOffer,
   postNewCustomer,
   postNewSupplier,

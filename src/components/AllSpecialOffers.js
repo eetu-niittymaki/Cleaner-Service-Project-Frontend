@@ -14,9 +14,7 @@ const AllSpecialOffers = () => {
           console.log(
             "Got empty list from backend, using example data instead"
           );
-          //setSpecialOffers(exampleData);
         } else {
-          //setSpecialOffers(Array.from(offersListed));
           setSpecialOffers(offersListed);
         }
       } catch (err) {
@@ -29,8 +27,7 @@ const AllSpecialOffers = () => {
   const specialOfferList = specialOffers.map((offer) => {
     return (
       <SpecialOffer
-        // TODO: change key to product_id
-        key={offer.name}
+        key={offer.product_id}
         title={offer.product_name}
         //TODO: get real duration from db
         duration={4}
@@ -42,7 +39,6 @@ const AllSpecialOffers = () => {
   });
 
   return <div>{specialOfferList}</div>;
-  //return <div>Here we have offers</div>;
 };
 
 export default AllSpecialOffers;
