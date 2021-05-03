@@ -1,43 +1,41 @@
 import React, { useState, useEffect } from "react";
-import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
+import {
+  AppBar,
+  Toolbar,
+  Button,
+  Typography,
+  Menu,
+  MenuItem,
+  TextField,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  Grid,
+} from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
-import Menu from "@material-ui/core/Menu";
-import MenuItem from "@material-ui/core/MenuItem";
-import TextField from "@material-ui/core/TextField";
-import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
-import DialogTitle from "@material-ui/core/DialogTitle";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-  },
-  menuButton: {
-    marginLeft: theme.spacing(1),
-  },
   title: {
-    flexGrow: 1,
-    marginTop: 50,
-    marginBottom: 50,
-    marginLeft: 20,
+    marginTop: 30,
+    marginBottom: 30,
+    //marginLeft: 20,
+    display: "block",
     textAlign: "left",
   },
-  buttons: {},
   button: {
-    minWidth: 150,
-    display: "block",
     margin: 10,
   },
   login: {
-    margin: 50,
+    //margin: 50,
+  },
+  frontLink: {
+    textDecoration: "none",
+    color: "white",
   },
 }));
 
@@ -63,8 +61,6 @@ const HeaderComponent = () => {
   const handleClose = (nav) => {
     setAnchorEl(null);
     console.log("nav is" + nav);
-    //onChangePage(nav);
-    //<Redirect to={nav.toString()} />;
     window.location.href = nav;
   };
   const handleModalOpen = () => {
@@ -96,8 +92,6 @@ const HeaderComponent = () => {
     } else {
       alert("Give email and password");
     }
-
-    //return <Redirect to="/companies/" />;
   };
 
   const clickedLogin = () => {
@@ -128,24 +122,28 @@ const HeaderComponent = () => {
   return (
     <AppBar position="static">
       <Toolbar>
-        <div className={classes.title}>
-          <Typography variant="h3">CleanBuddy</Typography>
-          <Typography variant="h6">Siivouspalvelut helposti netistä</Typography>
-        </div>
-        <div className={classes.buttons}>
-          <Button
-            className={classes.button}
-            size="large"
-            variant="outlined"
-            color="inherit"
-            onClick={clickedLogin}
-          >
-            Login
-          </Button>
-          <div>
-            {/* <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-        Open form dialog
-      </Button> */}
+        <Grid container spacing={2}>
+          <Grid item xs={12} sm={6}>
+            <Link style={{ textDecoration: "none", color: "white" }} to="/">
+              <div className={classes.title}>
+                <Typography variant="h3">CleanBuddy</Typography>
+                <Typography variant="h6">
+                  Siivouspalvelut helposti netistä
+                </Typography>
+              </div>
+            </Link>
+          </Grid>
+          <Grid item xs={6} sm={3}>
+            <Button
+              className={classes.button}
+              size="large"
+              variant="outlined"
+              color="inherit"
+              fullWidth
+              onClick={clickedLogin}
+            >
+              Login
+            </Button>
             <Dialog
               open={open}
               maxWidth="sm"
@@ -207,54 +205,59 @@ const HeaderComponent = () => {
                 </Button>
               </DialogActions>
             </Dialog>
-          </div>
-          <Button
-            className={classes.button}
-            size="large"
-            variant="outlined"
-            color="inherit"
-            startIcon={<MenuIcon />}
-            onClick={handleClick}
-          >
-            Menu
-          </Button>
-          <Menu
-            id="simple-menu"
-            anchorEl={anchorEl}
-            open={Boolean(anchorEl)}
-            onClose={handleClose}
-            //this line caused an error
-            //anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+          </Grid>
+          <Grid item xs={6} sm={3}>
+            <Button
+              className={classes.button}
+              size="large"
+              variant="outlined"
+              color="inherit"
+              startIcon={<MenuIcon />}
+              onClick={handleClick}
+              fullWidth
+            >
+              Menu
+            </Button>
+            <Menu
+              id="simple-menu"
+              anchorEl={anchorEl}
+              open={Boolean(anchorEl)}
+              onClose={handleClose}
+              //this line caused an error
+              //anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
 
-            transformOrigin={{ vertical: -65, horizontal: "center" }}
-            //aria-label="menu"
-            //aria-haspopup="true"
-          >
-            <MenuItem onClick={() => handleClose("/info")}>
-              Tietoa palvelusta
-            </MenuItem>
-            <MenuItem onClick={() => handleClose("/")}>Pikatarjoukset</MenuItem>
-            <MenuItem onClick={() => handleClose("/companies")}>
-              Palveluntarjoajat
-            </MenuItem>
-            <MenuItem onClick={() => handleClose("/offerRequest")}>
-              Pyydä tarjous
-            </MenuItem>
-            <MenuItem onClick={() => handleClose("/privacy")}>
-              Tietosuojaseloste
-            </MenuItem>
+              transformOrigin={{ vertical: -50, horizontal: 20 }}
+              //aria-label="menu"
+              //aria-haspopup="true"
+            >
+              <MenuItem onClick={() => handleClose("/info")}>
+                Tietoa palvelusta
+              </MenuItem>
+              <MenuItem onClick={() => handleClose("/")}>
+                Pikatarjoukset
+              </MenuItem>
+              <MenuItem onClick={() => handleClose("/companies")}>
+                Palveluntarjoajat
+              </MenuItem>
+              <MenuItem onClick={() => handleClose("/offerRequest")}>
+                Pyydä tarjous
+              </MenuItem>
+              <MenuItem onClick={() => handleClose("/privacy")}>
+                Tietosuojaseloste
+              </MenuItem>
 
-            {adminRights ? (
-              <MenuItem onClick={() => handleClose("/admin")}>Admin</MenuItem>
-            ) : null}
-            <MenuItem onClick={() => handleClose("/mypage/customer/")}>
-              Customer myPages
-            </MenuItem>
-            <MenuItem onClick={() => handleClose("/mypage/company/")}>
-              Company myPages
-            </MenuItem>
-          </Menu>
-        </div>
+              {adminRights ? (
+                <MenuItem onClick={() => handleClose("/admin")}>Admin</MenuItem>
+              ) : null}
+              <MenuItem onClick={() => handleClose("/mypage/customer/")}>
+                Customer myPages
+              </MenuItem>
+              <MenuItem onClick={() => handleClose("/mypage/company/")}>
+                Company myPages
+              </MenuItem>
+            </Menu>
+          </Grid>
+        </Grid>
       </Toolbar>
     </AppBar>
   );
