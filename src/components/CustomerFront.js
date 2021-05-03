@@ -60,7 +60,7 @@ const CustomerFront = ({ customerId }) => {
         <h1>Tervetuloa omille sivuille {customer.first_name}!</h1>
         <Box m={1} p={2}>
           <Grid className={styles.info} container spacing={1} p={2} mb={2}>
-            <Grid item xs={6}>
+            <Grid item xs={12} sm={6}>
               <Button
                 variant="outlined"
                 size="large"
@@ -71,7 +71,7 @@ const CustomerFront = ({ customerId }) => {
                 Ostohistoria
               </Button>
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={12} sm={6}>
               <Button
                 variant="outlined"
                 size="large"
@@ -145,9 +145,9 @@ const CustomerFront = ({ customerId }) => {
             </Button>
           </div>
         </Box>
-        <Box border={1} m={2} p={3}>
+        {/* <Box border={1} m={2} p={3}>
           <div>Data from database is now: {JSON.stringify(customer)}</div>
-        </Box>
+        </Box> */}
       </div>
     );
   }
