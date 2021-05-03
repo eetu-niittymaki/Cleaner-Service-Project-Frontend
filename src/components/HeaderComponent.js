@@ -47,6 +47,7 @@ const HeaderComponent = () => {
   const [adminRights, setAdminRights] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [customerId, setCustomerId] = useState()
 
   // const PORT = (8080 || process.env.PORT)
 
@@ -88,6 +89,7 @@ const HeaderComponent = () => {
         alert("Väärä sähköposti/salasana!");
       } else if (login.status === 200) {
         setToken(login.token);
+        setCustomerId(login.customer_id)
         window.location.href = "/mypage/customer";
         handleModalClose();
       }
