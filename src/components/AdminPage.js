@@ -9,6 +9,7 @@ import BackendConnection from "./BackendConnection";
 import AdminModifyCompanyData from "./AdminModifyCompanyData";
 import AdminModifyCustomerData from "./AdminModifyCustomerData";
 import AdminModifyOfferData from "./AdminModifyOfferData"
+import AddSupplier from "./AddSupplier"
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -26,11 +27,15 @@ const AdminPage = () => {
   const customersTxt = "Asiakkaat";
   const companiesTxt = "Palveluntarjoajat";
   const offersTxt = "Pikatarjoukset";
+  //placeholder text
+  const supplierTxt ="Lisää yritys";
+
   const [adminRights, setAdminRights] = useState(false);
   const [selectedPage, setSelectedPage] = useState(customersTxt)
   const [customers, setCustomers] = useState([]);
   const [companies, setCompanies] = useState([]);
   const [offers, setOffers] = useState([]);
+  //const []
 
   useEffect(() => {
     const checkIfAdmin = async () => {
@@ -111,6 +116,12 @@ const AdminPage = () => {
           ))}
         </div>
       )
+    } else if(selectedPage==supplierTxt) {
+      return(
+        <div>
+        <AddSupplier />
+        </div>
+      )
     }
     // this should never happen, but just in case
     else {
@@ -129,6 +140,13 @@ const AdminPage = () => {
           <HeaderComponent />
           <div>
             <br />
+          <Button 
+            variant = "contained"
+            size = "large"
+            color={selectedPage==supplierTxt?"primary":"default"}
+            onClick = {()=>setSelectedPage(supplierTxt)}>
+              {supplierTxt}
+            </Button>
           <Button 
             variant="contained" 
             size="large" 

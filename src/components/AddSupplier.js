@@ -84,8 +84,8 @@ const AddSupplier = () => {
   };
 
   return (
-    <div>
-      <HeaderComponent />
+    //<div>
+     // <HeaderComponent />
       <div>
         <h1>Täytä uuden yrityskäyttäjän tiedot:</h1>
         <div className="TextContainer">
@@ -197,7 +197,7 @@ const AddSupplier = () => {
           </Grid>
         </div>
       </div>
-    </div>
+    //</div>
   );
 };
 
