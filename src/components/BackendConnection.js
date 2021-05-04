@@ -151,6 +151,8 @@ const postNewSupplier = async ({
   const result = await axios
     .post(`${baseUrl}suppliers/`, {
       name: name,
+      //supplierDescription: supplier_description,
+      //streetAddress: street_address,
       supplier_description: supplier_description,
       street_address: street_address,
       city: city,
@@ -170,7 +172,7 @@ const postNewSupplier = async ({
     .catch(function (error) {
       console.log(error);
     });
-  //console.log(result.data);
+  console.log(result.data);
   return result.data;
   //return result[0].data;
 };
