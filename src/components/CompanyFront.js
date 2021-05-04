@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import HeaderComponent from "./HeaderComponent";
 import "./styles/TextPage.css";
 import Connection from "./BackendConnection";
-import { Paper, Grid, Box, Button } from "@material-ui/core";
+import { Grid, Box, Button } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   info: {
@@ -62,7 +62,7 @@ const CompanyFront = ({ companyId }) => {
         <h1>Tervetuloa yrityksen omille sivuille!</h1>
         <Box m={1} p={2}>
           <Grid className={styles.info} container spacing={1} p={2} mb={2}>
-            <Grid item xs={6}>
+            <Grid item xs={12} sm={6}>
               <Button
                 variant="outlined"
                 size="large"
@@ -75,7 +75,7 @@ const CompanyFront = ({ companyId }) => {
                 Luo pikatarjous
               </Button>
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={12} sm={6}>
               <Button
                 variant="outlined"
                 size="large"
@@ -88,7 +88,7 @@ const CompanyFront = ({ companyId }) => {
                 Katso tarjouspyynnöt
               </Button>
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={12} sm={6}>
               <Button
                 variant="outlined"
                 size="large"
@@ -169,9 +169,9 @@ const CompanyFront = ({ companyId }) => {
             </Button>
           </div>
         </Box>
-        <Box border={1} m={2} p={3}>
+        {/* <Box border={1} m={2} p={3}>
           <div>Data from database is now: {JSON.stringify(company)}</div>
-        </Box>
+        </Box> */}
       </div>
     );
   }

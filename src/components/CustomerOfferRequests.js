@@ -1,4 +1,4 @@
-import { Button, Grid, Box } from "@material-ui/core";
+import { Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import React, { useState, useEffect } from "react";
 import HeaderComponent from "./HeaderComponent";
@@ -12,17 +12,16 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const CompanyOfferRequests = ({ supplierName }) => {
+const CustomerOfferRequests = ({ customerEmail }) => {
   const styles = useStyles();
   const [offerRequests, setOfferRequests] = useState([]);
 
-  const compName = "Siivouspojat";
+  const email = "Siivouspojat";
 
+  // TODO: change this to search offers by customer email
   const loadOfferRequests = async () => {
     console.log("loading offer request now once");
-    let offerReqs = await BackendConnection.getOfferRequestsBySupplier(
-      compName
-    );
+    let offerReqs = await BackendConnection.getOfferRequestsBySupplier(email);
     if (offerReqs.length > 0) {
       // Reverse result array because we want to show newest offer requests first
       offerReqs = offerReqs.reverse();
@@ -37,7 +36,7 @@ const CompanyOfferRequests = ({ supplierName }) => {
   const showOfferList = () => {
     return offerRequests.map((req) => {
       return (
-        <CompOffReqBox key={req.request_id} offerReq={req} isCompany={true} />
+        <CompOffReqBox key={req.request_id} offerReq={req} isCompany={false} />
       );
     });
   };
@@ -60,7 +59,7 @@ const CompanyOfferRequests = ({ supplierName }) => {
             variant="outlined"
             size="large"
             color="primary"
-            onClick={() => (window.location.href = "/mypage/company")}
+            onClick={() => (window.location.href = "/mypage/customer")}
           >
             Takaisin
           </Button>
@@ -70,4 +69,4 @@ const CompanyOfferRequests = ({ supplierName }) => {
   }
 };
 
-export default CompanyOfferRequests;
+export default CustomerOfferRequests;

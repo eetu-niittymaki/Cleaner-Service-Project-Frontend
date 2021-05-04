@@ -15,6 +15,7 @@ import Checkbox from "@material-ui/core/Checkbox";
 import React, { useState, useEffect } from "react";
 import HeaderComponent from "./HeaderComponent";
 import "./styles/TextPage.css";
+import SpecialOfferDataBox from "./SpecialOfferDataBox";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -27,30 +28,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const OrderForm = () => {
+const OrderForm = ({ specialOfferId }) => {
   const styles = useStyles();
-
-  const [apartmentType, setApartmentType] = useState("");
-  const [apartmentArea, setApartmentArea] = useState("");
-  const [frequency, setFrequency] = useState("");
+  const [specialOffer, setSpecialOffer] = useState({});
 
   useEffect(() => {
     console.log("apartment type or area changed");
-  }, [apartmentType, apartmentArea]);
-
-  const handleChange = (event) => {
-    setApartmentType(event.target.value);
-  };
-
-  const [companies, setCompanies] = useState({
-    siivouspojat: false,
-    yritys: false,
-    duuniapukkaa: false,
-  });
-
-  const { siivouspojat, yritys, duuniapukkaa } = companies;
-  const error =
-    [siivouspojat, yritys, duuniapukkaa].filter((v) => v).length < 1;
+  }, []);
 
   return (
     <div>
@@ -63,6 +47,7 @@ const OrderForm = () => {
             autoComplete="false"
           >
             <h3>Siivoustarjouksen tiedot:</h3>
+            <SpecialOfferDataBox specialOffer={specialOffer} />
           </form>
           <form style={{ textAlign: "left" }}>
             <h3>Asiakkaan tiedot:</h3>

@@ -1,6 +1,5 @@
 import React from "react";
 import HeaderComponent from "./HeaderComponent";
-import "./styles/TextPage.css";
 import AllSpecialOffers from "./AllSpecialOffers";
 
 const MainPage = () => {
@@ -9,9 +8,7 @@ const MainPage = () => {
       <HeaderComponent />
       <div>
         <h1>Tervetuloa CleanBuddyn etusivulle!</h1>
-        <div className="TextContainer">
-          <p>Tässä meillä tulee olemaan pikatarjouksia.</p>
-        </div>
+        <h3>Tässä voimassaolevat pikatarjoukset, nappaa heti omasi.</h3>
         <AllSpecialOffers />
       </div>
     </div>

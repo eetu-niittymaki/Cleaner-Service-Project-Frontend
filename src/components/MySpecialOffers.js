@@ -1,50 +1,59 @@
 import React, { useState, useEffect } from "react";
-import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
 import HeaderComponent from "./HeaderComponent";
-import Connection from "./BackendConnection";
+import BackendConnection from "./BackendConnection";
+import CompanySpecialOffer from "./CompanySpecialOffer";
 
 const MySpecialOffers = ({ companyId }) => {
-  const [offers, setOffers] = useState([]);
+  const [specialOffers, setSpecialOffers] = useState([]);
+
+  const loadSpecialOffers = async () => {
+    console.log("loading all special offers now once");
+    let specOffers = await BackendConnection.getAllSpecialOffers();
+    if (specOffers.length > 0) {
+      // TODO: change this to filter values with companyId props
+      let temp = specOffers.filter((spec) => spec.supplier_id === 2);
+      if (temp.length > 0) {
+        temp = temp.reverse();
+        setSpecialOffers(temp);
+      }
+    }
+  };
 
   useEffect(() => {
-    // TODO: load special offers from db and map them
-  });
+    loadSpecialOffers();
+  }, []);
 
-  return (
-    <div>
-      <HeaderComponent />
-      <h3>Omat pikatarjoukset:</h3>
-      <Box border={1} mb={2} p={1}>
-        <div>
-          <p>Otsikko</p>
-          <p>Kesto: 5 h</p>
-          <p>Hinta: 100 €</p>
-        </div>
-        <div>
-          <p>Kuvaus</p>
-        </div>
+  const showSpecialOfferList = () => {
+    return specialOffers.map((spec) => {
+      return <CompanySpecialOffer key={spec.product_id} specialOffer={spec} />;
+    });
+  };
+
+  if (specialOffers.length === 0) {
+    return (
+      <div>
+        <HeaderComponent />
+        <div>No offer requests yet.</div>
+      </div>
+    );
+  } else {
+    return (
+      <div>
+        <HeaderComponent />
+        <h3>Omat pikatarjoukset:</h3>
+        {showSpecialOfferList()}
         <Button
           variant="outlined"
           size="large"
           color="primary"
-          //   onClick={() =>
-          //     (window.location.href = "/mypage/company/myspecialoffers")
-          //   }
+          onClick={() => (window.location.href = "/mypage/company")}
         >
-          Muokkaa
+          Takaisin
         </Button>
-      </Box>
-      <Button
-        variant="outlined"
-        size="large"
-        color="primary"
-        onClick={() => (window.location.href = "/mypage/company")}
-      >
-        Omalle sivulle
-      </Button>
-    </div>
-  );
+      </div>
+    );
+  }
 };
 
 export default MySpecialOffers;

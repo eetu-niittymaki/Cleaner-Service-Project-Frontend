@@ -17,6 +17,7 @@ import HeaderComponent from "./HeaderComponent";
 import ModifyCompanyData from "./ModifyCompanyData";
 import BackendConnection from "./BackendConnection";
 import ModifyCustomerData from "./ModifyCustomerData";
+import CustomerOfferRequests from "./CustomerOfferRequests";
 import Signup from "./Signup";
 import AddSupplier from "./AddSupplier";
 
@@ -115,6 +116,11 @@ const App = () => {
             <ModifyCustomerData customerId={loggedInCustomerId} />
           </div>
         </Route>
+        <Route exact path="/mypage/customer/myofferrequests">
+          <div className="App">
+            <CustomerOfferRequests />
+          </div>
+        </Route>
         <Route exact path="/mypage/customer">
           <div className="App">
             <CustomerFront customerId={loggedInCustomerId} />
@@ -122,7 +128,7 @@ const App = () => {
         </Route>
         <Route exact path="/mypage/company/createspecialoffer">
           <div className="App">
-            <CreateSpecialOffer />
+            <CreateSpecialOffer companyId={loggedInCompanyId} />
           </div>
         </Route>
         <Route exact path="/mypage/company/myspecialoffers">
