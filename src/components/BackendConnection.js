@@ -172,6 +172,7 @@ const postNewSupplier = async ({
     });
   //console.log(result.data);
   return result.data;
+  //return result[0].data;
 };
 
 const postNewOfferRequest = async ({
@@ -231,6 +232,26 @@ const postNewOfferRequest = async ({
   return result.data;
 };
 
+const deleteCustomer = async ({id},e) => {
+  //const result = 
+  await axios.delete(`${baseUrl}customers/${id}`)
+  .then(function (response) {
+    try {
+      // your own try...catch block to catch the error before axios ..catch
+      console.log(response);
+    } catch (e) {
+      console.log(e);
+    } // your catch block
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+  
+//console.log(result.data);
+//return result.data;
+}
+
+
 const obj = {
   getAllCompanies,
   getAllCustomers,
@@ -240,5 +261,6 @@ const obj = {
   postNewCustomer,
   postNewSupplier,
   postNewOfferRequest,
+  deleteCustomer,
 };
 export default obj;

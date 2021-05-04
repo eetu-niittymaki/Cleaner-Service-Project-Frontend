@@ -41,7 +41,7 @@ const AddSupplier = () => {
 
   const handleClick = () => {
     //TODO: send data to db
-
+    // (name, supplierDescription, streetAddress, city, postcode, phone, email, password)
     if (checkValues()) {
       console.log("post values and go to adminpage");
       console.log(`Sending this data with axios post
@@ -55,8 +55,8 @@ const AddSupplier = () => {
         ${password}`);
       BackendConnection.postNewSupplier({
         name: name,
-        supplier_description: description,
-        street_address: address,
+        supplierDescription: description,
+        streetAddress: address,
         city: city,
         postcode: postcode,
         phone: phone,

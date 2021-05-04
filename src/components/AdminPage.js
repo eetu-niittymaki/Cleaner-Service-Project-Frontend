@@ -67,6 +67,15 @@ const AdminPage = () => {
     }
   }
 
+  const deleteCustomer = async (id) => {
+    console.log("delete customer id " + id)
+    await BackendConnection.deleteCustomer(id);
+    //const customersListed = await BackendConnection.getAllCustomers()
+    //setCustomers(customersListed);
+    setCustomers(await BackendConnection.getAllCustomers())
+    //fetchData()
+  }
+
   const getContent = (selectedP) => {
     console.log(selectedP)
     if(selectedP==customersTxt) {
@@ -79,7 +88,7 @@ const AdminPage = () => {
               <AdminModifyCustomerData 
               cData = {data}
               cSave = {()=>console.log("cSave")} 
-              cDelete = {()=>console.log("cDelete")} />
+              cDelete = {()=>deleteCustomer(data.customer_id)} />
             </ul>
             
           ))}
