@@ -1,17 +1,10 @@
 import TextField from "@material-ui/core/TextField";
 import FormControl from "@material-ui/core/FormControl";
-import InputLabel from "@material-ui/core/InputLabel";
-import MenuItem from "@material-ui/core/MenuItem";
-import Select from "@material-ui/core/Select";
 import { makeStyles } from "@material-ui/core/styles";
-import OutlinedInput from "@material-ui/core/OutlinedInput";
-import InputAdornment from "@material-ui/core/InputAdornment";
 import Button from "@material-ui/core/Button";
-import FormLabel from "@material-ui/core/FormLabel";
-import FormGroup from "@material-ui/core/FormGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
-import FormHelperText from "@material-ui/core/FormHelperText";
 import Checkbox from "@material-ui/core/Checkbox";
+import { Link } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import HeaderComponent from "./HeaderComponent";
 import "./styles/TextPage.css";
@@ -20,18 +13,15 @@ import BackendConnection from "./BackendConnection";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
-    //margin: theme.spacing(1),
     minWidth: "100%",
     marginBottom: theme.spacing(2),
-  },
-  selectEmpty: {
-    marginTop: theme.spacing(2),
   },
 }));
 
 const OrderForm = ({ specialOfferId }) => {
   const styles = useStyles();
   const [specialOffer, setSpecialOffer] = useState(null);
+  const [acceptTerms, setAcceptTerms] = useState(false);
 
   useEffect(() => {
     // Load all companies from database and search with given props companyId
@@ -44,6 +34,33 @@ const OrderForm = ({ specialOfferId }) => {
     };
     loadSpecialOfferData();
   }, [specialOfferId]);
+
+  const getButton = () => {
+    if (acceptTerms) {
+      return (
+        <Button
+          variant="outlined"
+          size="large"
+          color="primary"
+          //onClick={() => (window.location.href = "/")}
+        >
+          Vahvista tilaus
+        </Button>
+      );
+    } else {
+      return (
+        <Button
+          variant="outlined"
+          size="large"
+          color="primary"
+          disabled
+          //onClick={() => (window.location.href = "/")}
+        >
+          Vahvista tilaus
+        </Button>
+      );
+    }
+  };
 
   if (specialOffer == null) {
     return (
@@ -74,7 +91,7 @@ const OrderForm = ({ specialOfferId }) => {
                 <TextField
                   className={styles.formControl}
                   required
-                  id="standard-required"
+                  id="orderform_firstname"
                   label="Etunimi"
                   placeholder="Etunimi"
                   variant="outlined"
@@ -82,7 +99,7 @@ const OrderForm = ({ specialOfferId }) => {
                 <TextField
                   className={styles.formControl}
                   required
-                  id="standard-required"
+                  id="orderform_lastname"
                   label="Sukunimi"
                   placeholder="Sukunimi"
                   variant="outlined"
@@ -92,7 +109,7 @@ const OrderForm = ({ specialOfferId }) => {
                 <TextField
                   className={styles.formControl}
                   required
-                  id="standard-required"
+                  id="orderfrom_address"
                   label="Osoite"
                   placeholder="Osoite"
                   variant="outlined"
@@ -102,7 +119,7 @@ const OrderForm = ({ specialOfferId }) => {
                 <TextField
                   className={styles.formControl}
                   required
-                  id="standard-required"
+                  id="orderform_postcode"
                   label="Postinumero"
                   placeholder="Postinumero"
                   variant="outlined"
@@ -110,7 +127,7 @@ const OrderForm = ({ specialOfferId }) => {
                 <TextField
                   className={styles.formControl}
                   required
-                  id="standard-required"
+                  id="orderform_city"
                   label="Postitoimipaikka"
                   placeholder="Postitoimipaikka"
                   variant="outlined"
@@ -119,7 +136,7 @@ const OrderForm = ({ specialOfferId }) => {
               <div>
                 <TextField
                   className={styles.formControl}
-                  id="standard-required"
+                  id="orderform_phone"
                   label="Puhelinnumero"
                   placeholder="Puhelinnumero"
                   variant="outlined"
@@ -129,7 +146,7 @@ const OrderForm = ({ specialOfferId }) => {
                 <TextField
                   className={styles.formControl}
                   required
-                  id="standard-required"
+                  id="orderform_email"
                   type="email"
                   label="Sähköpostiosoite"
                   placeholder="Sähköpostiosoite"
@@ -138,7 +155,7 @@ const OrderForm = ({ specialOfferId }) => {
               </div>
               <TextField
                 className={styles.formControl}
-                id="standard-required"
+                id="orderform_optionalinfo"
                 label="Lisätietoa"
                 fullWidth
                 multiline
@@ -147,19 +164,21 @@ const OrderForm = ({ specialOfferId }) => {
                 placeholder="Tähän voit antaa lisätietoa, esimerkiksi onko asunnossa lemmikkejä."
                 variant="outlined"
               />
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={acceptTerms}
+                    onChange={() => setAcceptTerms(!acceptTerms)}
+                    name="accept_terms"
+                  />
+                }
+                label="Hyväksyn tilausehdot ja tietosuojakäytännöt."
+              />
+              <Link to="/privacy">Tietosuojaseloste</Link>
             </form>
           </div>
         </div>
-        <div className="bottomButtons">
-          <Button
-            variant="outlined"
-            size="large"
-            color="primary"
-            onClick={() => (window.location.href = "/")}
-          >
-            Vahvista tilaus
-          </Button>
-        </div>
+        <div className="bottomButtons">{getButton()}</div>
       </div>
     );
   }
