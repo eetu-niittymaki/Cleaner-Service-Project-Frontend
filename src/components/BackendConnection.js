@@ -234,9 +234,9 @@ const postNewOfferRequest = async ({
   return result.data;
 };
 
-const deleteCustomer = async ({id},e) => {
+const deleteCustomer = async (id) => {
   //const result = 
-  await axios.delete(`${baseUrl}customers/${id}`)
+  const result = await axios.delete(`${baseUrl}customers/${id}`)
   .then(function (response) {
     try {
       // your own try...catch block to catch the error before axios ..catch
@@ -250,7 +250,7 @@ const deleteCustomer = async ({id},e) => {
   });
   
 //console.log(result.data);
-//return result.data;
+return result.data;
 }
 
 const deleteSupplier = async ({id}, e) => {

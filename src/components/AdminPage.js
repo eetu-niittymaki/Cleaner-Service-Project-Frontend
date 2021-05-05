@@ -69,11 +69,13 @@ const AdminPage = () => {
 
   const deleteCustomer = async (id) => {
     console.log("delete customer id " + id)
-    await BackendConnection.deleteCustomer(id);
+    await BackendConnection.deleteCustomer(id).then
     //const customersListed = await BackendConnection.getAllCustomers()
     //setCustomers(customersListed);
     setCustomers(await BackendConnection.getAllCustomers())
     //fetchData()
+    window.location.href = "/admin";
+    setSelectedPage(customersTxt);
   }
   const deleteCompany = async (id) => {
 
