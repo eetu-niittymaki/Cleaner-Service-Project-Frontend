@@ -75,6 +75,13 @@ const AdminPage = () => {
     setCustomers(await BackendConnection.getAllCustomers())
     //fetchData()
   }
+  const deleteCompany = async (id) => {
+
+  }
+
+  const deleteOffer = async (id) => {
+    
+  }
 
   const getContent = (selectedP) => {
     console.log(selectedP)

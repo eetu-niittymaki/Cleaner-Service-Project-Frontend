@@ -253,6 +253,13 @@ const deleteCustomer = async ({id},e) => {
 //return result.data;
 }
 
+const deleteSupplier = async ({id}, e) => {
+  await axios.delete(`${baseUrl}suppliers/${id}`)
+}
+
+const deleteOffer = async ({id}, e) => {
+  await axios.delete(`${baseUrl}products/${id}`)
+}
 
 const obj = {
   getAllCompanies,
@@ -264,5 +271,7 @@ const obj = {
   postNewSupplier,
   postNewOfferRequest,
   deleteCustomer,
+  deleteSupplier,
+  deleteOffer,
 };
 export default obj;
