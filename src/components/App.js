@@ -98,7 +98,7 @@ const App = () => {
         </Route>
         <Route exact path="/orderform">
           <div className="App">
-            <OrderForm />
+            <OrderForm specialOfferId={1} />
           </div>
         </Route>
         <Route exact path="/privacy">
