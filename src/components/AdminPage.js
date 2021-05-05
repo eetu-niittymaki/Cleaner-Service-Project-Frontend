@@ -63,6 +63,22 @@ const AdminPage = () => {
     }
   }
 
+  const modifyCustomer = async (id) => {
+    await BackendConnection.modifyCustomer(id).then
+    setSelectedPage([]);
+    setSelectedPage(customersTxt);
+  }
+  const modifyCompany = async (id) => {
+    await BackendConnection.modifyCompany(id).then
+    setSelectedPage([]);
+    setSelectedPage(companiesTxt);
+  }
+  const modifyOffer = async (id) => {
+    await BackendConnection.modifyOffer(id).then
+    setSelectedPage([]);
+    setSelectedPage(offersTxt);
+  }
+
   const deleteCustomer = async (id) => {
     await BackendConnection.deleteCustomer(id).then
     setSelectedPage([]);
@@ -90,7 +106,7 @@ const AdminPage = () => {
             <ul key={data.customer_id}>
               <AdminModifyCustomerData 
               cData = {data}
-              cSave = {()=>console.log("cSave")} 
+              cSave = {()=>modifyCustomer(data.customer_id)} 
               cDelete = {()=>deleteCustomer(data.customer_id)} />
             </ul>
             
@@ -108,7 +124,7 @@ const AdminPage = () => {
             <ul key = {data.supplier_id}>
               <AdminModifyCompanyData
               cData = {data}
-              cSave = {() => console.log("cSave")}
+              cSave = {() => modifyCompany(data.supplier_id)}
               cDelete = {()=>deleteCompany(data.supplier_id)} />
             </ul>
           ))}
@@ -125,7 +141,7 @@ const AdminPage = () => {
             <ul key ={data.product_id}>
               <AdminModifyOfferData
               oData = {data}
-              oSave = {() => console.log("oSave")}
+              oSave = {() => modifyOffer(data.product_id)}
               oDelete = {() => deleteOffer(data.product_id)} />
             </ul>
           ))}

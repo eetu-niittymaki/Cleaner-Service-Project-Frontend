@@ -233,7 +233,15 @@ const postNewOfferRequest = async ({
   //console.log(result.data);
   return result.data;
 };
-
+const modifyCustomer = async (id) => {
+  console.log("modifyCustomer" + id)
+}
+const modifySupplier = async (id) => {
+  console.log("modifySupplier" + id)
+}
+const modifyOffer = async (id) => {
+  console.log("modifyOffer" + id)
+}
 const deleteCustomer = async (id) => {
   //const result = 
   await axios.delete(`${baseUrl}customers/${id}`)
