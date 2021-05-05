@@ -34,7 +34,7 @@ const getOfferRequestsBySupplier = async (supplier) => {
 };
 
 const postSpecialOffer = async ({
-  supplier_id,
+  supplier_name,
   product_name,
   product_description,
   product_price,
@@ -44,7 +44,7 @@ const postSpecialOffer = async ({
 }) => {
   console.log(
     `Posting values to db with axios:
-    ${supplier_id},
+    ${supplier_name},
     ${product_name},
     ${product_description},
     ${product_price},
@@ -54,20 +54,20 @@ const postSpecialOffer = async ({
   );
   const result = await axios
     .post(`${baseUrl}products/`, {
-      supplier_id: 1,
-      product_name: "Juhlasiivous",
-      product_description: "Tarkempi kuvaus juhlasiivouksesta",
-      product_price: 100,
-      ends_at: null,
-      work_hours: 5,
-      is_available: true,
-      // supplier_id: supplier_id,
-      // product_name: product_name,
-      // product_description: product_description,
-      // product_price: product_price,
-      // ends_at: ends_at,
-      // work_hours: work_hours,
-      // product_is_available: product_is_available,
+      // supplier_name: "Siivouspojat Oy",
+      // product_name: "Juhlasiivous",
+      // product_description: "Tarkempi kuvaus juhlasiivouksesta",
+      // product_price: 100,
+      // ends_at: null,
+      // work_hours: 5,
+      // is_available: true,
+      supplier_name: supplier_name,
+      product_name: product_name,
+      product_description: product_description,
+      product_price: product_price,
+      ends_at: ends_at,
+      work_hours: work_hours,
+      is_available: is_available,
     })
     .then(function (response) {
       try {
@@ -80,7 +80,7 @@ const postSpecialOffer = async ({
     .catch(function (error) {
       console.log(error);
     });
-  //console.log(result.data);
+  console.log(result.data);
   return result.data;
 };
 
