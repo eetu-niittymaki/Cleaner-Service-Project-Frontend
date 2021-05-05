@@ -42,7 +42,7 @@ const AddSupplier = () => {
   const handleClick = () => {
     //TODO: send data to db
     // (name, supplierDescription, streetAddress, city, postcode, phone, email, password)
-    //if (checkValues()) {
+    if (checkValues()) {
       console.log("post values and go to adminpage");
       console.log(`Sending this data with axios post
         ${name},
@@ -54,7 +54,7 @@ const AddSupplier = () => {
         ${email},
         ${password}`);
       BackendConnection.postNewSupplier({
-        /*
+        
         name: name,
         //supplierDescription: description,
         supplier_description: description,
@@ -65,8 +65,8 @@ const AddSupplier = () => {
         phone: phone,
         email: email,
         password: password,
-        */
-       
+        
+       /*
         //testData
         name: "test",
         //supplierDescription: "test",
@@ -78,12 +78,12 @@ const AddSupplier = () => {
         phone: 12345,
         email: "test@test.fi",
         password: "test",
-
+*/
       });
       window.location.href = "/admin";
-    //} else {
-    //  alert("Jokin kenttä on jätetty tyhjäksi, tarkista tiedot.");
-    //}
+    } else {
+      alert("Jokin kenttä on jätetty tyhjäksi, tarkista tiedot.");
+    }
   };
 
   // Checking that title and description have content and price is positive
