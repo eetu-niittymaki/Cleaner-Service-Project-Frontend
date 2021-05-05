@@ -45,7 +45,6 @@ const AdminPage = () => {
       setAdminRights(result)
     };
     checkIfAdmin();
-    console.log(adminRights);
     if (adminRights) {
       fetchData();
     }
@@ -59,42 +58,29 @@ const AdminPage = () => {
       setCustomers(customersListed);
       setCompanies(companiesListed);
       setOffers(offersListed);
-      console.log(customers);
-      //console.log(companies);
-      //console.log(offers);
     } catch (err) {
       console.log(err)
     }
   }
 
   const deleteCustomer = async (id) => {
-    console.log("delete customer id " + id)
     await BackendConnection.deleteCustomer(id).then
-    //setCustomers(await BackendConnection.getAllCustomers())
-    //window.location.href = "/admin";
     setSelectedPage([]);
     setSelectedPage(customersTxt);
   }
   const deleteCompany = async (id) => {
-    console.log("delete company id " + id)
     await BackendConnection.deleteSupplier(id).then
-    //setCompanies(await BackendConnection.getAllCompanies())
-    //window.location.href = "/admin";
     setSelectedPage([]);
     setSelectedPage(companiesTxt);
   }
 
   const deleteOffer = async (id) => {
-    console.log("delete offer id " + id)
     await BackendConnection.deleteOffer(id).then
-    //setOffers(await BackendConnection.getAllSpecialOffers())
-    //window.location.href = "/admin";
     setSelectedPage([]);
     setSelectedPage(offersTxt);
   }
 
   const getContent = (selectedP) => {
-    console.log(selectedP)
     if(selectedP==customersTxt) {
       return(
         <div>
@@ -152,8 +138,7 @@ const AdminPage = () => {
         </div>
       )
     }
-    // this should never happen, but just in case
-    // works as a pageswitcher -> reload data
+    // works as a pageswitcher -> reload data (useEffect)
     else {
       return(
         <div>
