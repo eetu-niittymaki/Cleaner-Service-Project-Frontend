@@ -49,7 +49,7 @@ const AdminPage = () => {
     if (adminRights) {
       fetchData();
     }
-  }, [adminRights]);
+  }, [adminRights, selectedPage]);
 
   const fetchData = async () => {
     try{

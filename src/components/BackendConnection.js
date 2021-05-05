@@ -236,7 +236,7 @@ const postNewOfferRequest = async ({
 
 const deleteCustomer = async (id) => {
   //const result = 
-  const result = await axios.delete(`${baseUrl}customers/${id}`)
+  await axios.delete(`${baseUrl}customers/${id}`)
   .then(function (response) {
     try {
       // your own try...catch block to catch the error before axios ..catch
@@ -250,11 +250,12 @@ const deleteCustomer = async (id) => {
   });
   
 //console.log(result.data);
-return result.data;
+//return result.data;
 }
 
 const deleteSupplier = async (id) => {
-  const result = await axios.delete(`${baseUrl}suppliers/${id}`)
+  //const result = 
+  await axios.delete(`${baseUrl}suppliers/${id}`)
   .then(function (response) {
     try {
       // your own try...catch block to catch the error before axios ..catch
@@ -268,11 +269,12 @@ const deleteSupplier = async (id) => {
   });
   
 //console.log(result.data);
-return result.data;
+//return result.data;
 }
 
 const deleteOffer = async (id) => {
-  const result = await axios.delete(`${baseUrl}products/${id}`)
+  //const result = 
+  await axios.delete(`${baseUrl}products/${id}`)
   .then(function (response) {
     try {
       // your own try...catch block to catch the error before axios ..catch
@@ -286,7 +288,7 @@ const deleteOffer = async (id) => {
   });
   
 //console.log(result.data);
-return result.data;
+//return result.data;
 }
 
 const obj = {
