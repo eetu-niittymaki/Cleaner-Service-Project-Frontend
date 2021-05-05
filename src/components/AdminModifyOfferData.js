@@ -115,7 +115,7 @@ const AdminModifyOfferData = ({ oData, oSave, oDelete }) => {
                 size="large"
                 color="primary"
                 fullWidth
-                onClick={() => oSave}
+                onClick={() => oSave()}
               >
                 Tallenna
               </Button>
@@ -126,7 +126,7 @@ const AdminModifyOfferData = ({ oData, oSave, oDelete }) => {
                 size="large"
                 color="primary"
                 fullWidth
-                onClick={() => oDelete}
+                onClick={() => oDelete()}
               >
                 Poista
               </Button>

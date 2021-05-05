@@ -83,7 +83,11 @@ const AdminPage = () => {
   }
 
   const deleteOffer = async (id) => {
-    
+    console.log("delete offer id " + id)
+    await BackendConnection.deleteOffer(id).then
+    setOffers(await BackendConnection.getAllSpecialOffers())
+    //window.location.href = "/admin";
+    //setSelectedPage(offersTxt);
   }
 
   const getContent = (selectedP) => {
@@ -133,7 +137,7 @@ const AdminPage = () => {
               <AdminModifyOfferData
               oData = {data}
               oSave = {() => console.log("oSave")}
-              oDelete = {() => console.log("oDelete")} />
+              oDelete = {() => deleteOffer(data.product_id)} />
             </ul>
           ))}
         </div>
@@ -149,7 +153,7 @@ const AdminPage = () => {
     else {
       return(
         <div>
-          <p>What the fuck?</p>
+          <p>Something went wrong</p>
         </div>
       )
     }
