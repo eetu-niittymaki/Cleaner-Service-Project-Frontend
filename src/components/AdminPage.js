@@ -70,24 +70,27 @@ const AdminPage = () => {
   const deleteCustomer = async (id) => {
     console.log("delete customer id " + id)
     await BackendConnection.deleteCustomer(id).then
-    setCustomers(await BackendConnection.getAllCustomers())
+    //setCustomers(await BackendConnection.getAllCustomers())
     //window.location.href = "/admin";
-    //setSelectedPage(customersTxt);
+    setSelectedPage([]);
+    setSelectedPage(customersTxt);
   }
   const deleteCompany = async (id) => {
     console.log("delete company id " + id)
     await BackendConnection.deleteSupplier(id).then
-    setCompanies(await BackendConnection.getAllCompanies())
+    //setCompanies(await BackendConnection.getAllCompanies())
     //window.location.href = "/admin";
-    //setSelectedPage(companiesTxt);
+    setSelectedPage([]);
+    setSelectedPage(companiesTxt);
   }
 
   const deleteOffer = async (id) => {
     console.log("delete offer id " + id)
     await BackendConnection.deleteOffer(id).then
-    setOffers(await BackendConnection.getAllSpecialOffers())
+    //setOffers(await BackendConnection.getAllSpecialOffers())
     //window.location.href = "/admin";
-    //setSelectedPage(offersTxt);
+    setSelectedPage([]);
+    setSelectedPage(offersTxt);
   }
 
   const getContent = (selectedP) => {
@@ -150,10 +153,11 @@ const AdminPage = () => {
       )
     }
     // this should never happen, but just in case
+    // works as a pageswitcher -> reload data
     else {
       return(
         <div>
-          <p>Something went wrong</p>
+          <p>Loading</p>
         </div>
       )
     }
