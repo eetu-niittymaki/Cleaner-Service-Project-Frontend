@@ -70,15 +70,16 @@ const AdminPage = () => {
   const deleteCustomer = async (id) => {
     console.log("delete customer id " + id)
     await BackendConnection.deleteCustomer(id).then
-    //const customersListed = await BackendConnection.getAllCustomers()
-    //setCustomers(customersListed);
     setCustomers(await BackendConnection.getAllCustomers())
-    //fetchData()
-    window.location.href = "/admin";
-    setSelectedPage(customersTxt);
+    //window.location.href = "/admin";
+    //setSelectedPage(customersTxt);
   }
   const deleteCompany = async (id) => {
-
+    console.log("delete company id " + id)
+    await BackendConnection.deleteSupplier(id).then
+    setCompanies(await BackendConnection.getAllCompanies())
+    //window.location.href = "/admin";
+    //setSelectedPage(companiesTxt);
   }
 
   const deleteOffer = async (id) => {
@@ -115,22 +116,25 @@ const AdminPage = () => {
               <AdminModifyCompanyData
               cData = {data}
               cSave = {() => console.log("cSave")}
-              cDelete = {()=>console.log("cDelete")} />
+              cDelete = {()=>deleteCompany(data.supplier_id)} />
             </ul>
           ))}
         
         </div>
       )
     } else if(selectedPage==offersTxt) {
+      //product_id
       return(
         <div>
           <h1>Muokkaa tarjoustietoja:</h1>
           {/*product_id*/}
           {offers.map((data) => (
-            <AdminModifyOfferData
-            oData = {data}
-            oSave = {() => console.log("oSave")}
-            oDelete = {() => console.log("oDelete")} />
+            <ul key ={data.product_id}>
+              <AdminModifyOfferData
+              oData = {data}
+              oSave = {() => console.log("oSave")}
+              oDelete = {() => console.log("oDelete")} />
+            </ul>
           ))}
         </div>
       )

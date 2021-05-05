@@ -253,12 +253,40 @@ const deleteCustomer = async (id) => {
 return result.data;
 }
 
-const deleteSupplier = async ({id}, e) => {
-  await axios.delete(`${baseUrl}suppliers/${id}`)
+const deleteSupplier = async (id) => {
+  const result = await axios.delete(`${baseUrl}suppliers/${id}`)
+  .then(function (response) {
+    try {
+      // your own try...catch block to catch the error before axios ..catch
+      console.log(response);
+    } catch (e) {
+      console.log(e);
+    } // your catch block
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+  
+//console.log(result.data);
+return result.data;
 }
 
-const deleteOffer = async ({id}, e) => {
-  await axios.delete(`${baseUrl}products/${id}`)
+const deleteOffer = async (id) => {
+  const result = await axios.delete(`${baseUrl}products/${id}`)
+  .then(function (response) {
+    try {
+      // your own try...catch block to catch the error before axios ..catch
+      console.log(response);
+    } catch (e) {
+      console.log(e);
+    } // your catch block
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+  
+//console.log(result.data);
+return result.data;
 }
 
 const obj = {
