@@ -51,7 +51,6 @@ const HeaderComponent = () => {
 
   // this is not working currently
 
-
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
     console.log("Clicked menu button");
@@ -77,20 +76,20 @@ const HeaderComponent = () => {
         //`https://clean-buddy.herokuapp.com/api/auth/signin`,
         {
           email: email,
-          password: password,
+          password: password
         }
-      );
-      if (login.status === 204) {
-        alert("Väärä sähköposti/salasana!");
+      )
+      if (login.status === 204 || login.status === 206) {
+        alert('Väärä sähköposti/salasana');
       } else if (login.status === 200) {
-        localStorage.setItem('token', login.data.token)
+        localStorage.setItem('token', login.data.token, 'customerId', login.data.customerId)
         console.log(login.data.token)
         setLoggedIn(true)
         window.location.href = "/mypage/customer";
         handleModalClose();
       }
     } else {
-      alert("Give email and password");
+      alert('Anna sähköposti ja salasana')
     }
   };
 
@@ -101,7 +100,8 @@ const HeaderComponent = () => {
 
   const clickedLogout = () => {
     setLoggedIn(false);
-    localStorage.clear()
+    localStorage.removeItem("token")
+    localStorage.removeItem("customerId")
     window.location.href = "/";
   };
 
