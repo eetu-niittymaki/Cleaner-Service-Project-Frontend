@@ -62,19 +62,27 @@ const AdminPage = () => {
       console.log(err)
     }
   }
-
-  const modifyCustomer = async (id) => {
-    await BackendConnection.modifyCustomer(id).then
+/*
+ustomer_id,
+  customer_firstName,
+  customer_lastName,
+  customer_streetAddress,
+  customer_city,
+  customer_postCode,
+  customer_phone,
+  customer_email, */
+  const modifyCustomer = () => {
+    //await BackendConnection.modifyCustomer(id).then
     setSelectedPage([]);
     setSelectedPage(customersTxt);
   }
-  const modifyCompany = async (id) => {
-    await BackendConnection.modifyCompany(id).then
+  const modifyCompany = () => {
+    //await BackendConnection.modifyCompany(id).then
     setSelectedPage([]);
     setSelectedPage(companiesTxt);
   }
-  const modifyOffer = async (id) => {
-    await BackendConnection.modifyOffer(id).then
+  const modifyOffer = () => {
+    //await BackendConnection.modifyOffer(id).then
     setSelectedPage([]);
     setSelectedPage(offersTxt);
   }
@@ -95,7 +103,16 @@ const AdminPage = () => {
     setSelectedPage([]);
     setSelectedPage(offersTxt);
   }
-
+/*
+  customer_id,
+  customer_firstName,
+  customer_lastName,
+  customer_streetAddress,
+  customer_city,
+  customer_postCode,
+  customer_phone,
+  customer_email,
+*/
   const getContent = (selectedP) => {
     if(selectedP==customersTxt) {
       return(

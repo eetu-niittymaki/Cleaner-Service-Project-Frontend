@@ -233,9 +233,34 @@ const postNewOfferRequest = async ({
   //console.log(result.data);
   return result.data;
 };
-const modifyCustomer = async (id) => {
-  console.log("modifyCustomer" + id)
+const modifyCustomer = async ({
+  customer_id,
+  customer_firstName,
+  customer_lastName,
+  customer_streetAddress,
+  customer_city,
+  customer_postCode,
+  customer_phone,
+  customer_email,
+}) => {
+  const result = await axios.put(``, {
+    customerId: customer_id,
+    firstName: customer_firstName,
+    lastName: customer_lastName,
+    streetAddress: customer_streetAddress,
+    city: customer_city,
+    postcode: customer_postCode,
+    phone: customer_phone,
+    email: customer_email,
+  })
+  return result.data
 }
+  
+  /*
+  console.log("modifyCustomer" + id)
+  await axios.put(`${baseUrl}customers/${id}`)
+}
+*/
 const modifySupplier = async (id) => {
   console.log("modifySupplier" + id)
 }
@@ -311,5 +336,8 @@ const obj = {
   deleteCustomer,
   deleteSupplier,
   deleteOffer,
+  modifySupplier,
+  modifyCustomer,
+  modifyOffer,
 };
 export default obj;
