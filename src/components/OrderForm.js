@@ -45,7 +45,7 @@ const OrderForm = () => {
           variant="outlined"
           size="large"
           color="primary"
-          //onClick={() => (window.location.href = "/")}
+          onClick={() => (window.location.href = "/")}
         >
           Vahvista tilaus
         </Button>
