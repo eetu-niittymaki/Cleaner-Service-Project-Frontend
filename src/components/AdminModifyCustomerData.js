@@ -72,7 +72,7 @@ const AdminModifyCustomerData = ({cData, cSave, cDelete}) => {
         phone,
         email
     )} else {
-      console.log("fill all values")
+      alert("Please fill all values")
     }
   }
 
