@@ -243,7 +243,7 @@ const modifyCustomer = async ({
   customer_phone,
   customer_email,
 }) => {
-  const result = await axios.put(``, {
+  const result = await axios.put(`${baseUrl}customers/`, { //${customer_id}
     customerId: customer_id,
     firstName: customer_firstName,
     lastName: customer_lastName,
@@ -261,6 +261,7 @@ const modifyCustomer = async ({
   await axios.put(`${baseUrl}customers/${id}`)
 }
 */
+
 const modifySupplier = async (id) => {
   console.log("modifySupplier" + id)
 }

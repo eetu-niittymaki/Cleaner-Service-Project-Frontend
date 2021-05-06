@@ -58,6 +58,25 @@ const AdminModifyCustomerData = ({cData, cSave, cDelete}) => {
     );
   };
 
+  const saveAndUpdate = () => {
+    if (checkValues) {
+      console.log(cData)
+      BackendConnection.modifyCustomer(
+        cData.customer_id,
+        firstName,
+        lastName,
+        address,
+        city,
+        postcode,
+        phone,
+        email,
+      )
+      cSave();
+    } else {
+      console.log("dsplay warning");
+    }
+  }
+
   if (customer === null) {
     return(
       <div>
@@ -144,7 +163,7 @@ const AdminModifyCustomerData = ({cData, cSave, cDelete}) => {
                   size="large"
                   color="primary"
                   fullWidth
-                  onClick={() => cSave()}
+                  onClick={() => saveAndUpdate()}
                 >
                   Tallenna
                 </Button>

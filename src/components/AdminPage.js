@@ -123,7 +123,7 @@ ustomer_id,
             <ul key={data.customer_id}>
               <AdminModifyCustomerData 
               cData = {data}
-              cSave = {()=>modifyCustomer(data.customer_id)} 
+              cSave = {()=>modifyCustomer()} 
               cDelete = {()=>deleteCustomer(data.customer_id)} />
             </ul>
             
