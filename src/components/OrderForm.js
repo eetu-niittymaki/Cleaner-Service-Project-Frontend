@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const OrderForm = ({ specialOfferId }) => {
+const OrderForm = ({ match }) => {
   const styles = useStyles();
   const [specialOffer, setSpecialOffer] = useState(null);
   const [acceptTerms, setAcceptTerms] = useState(false);
@@ -28,12 +28,13 @@ const OrderForm = ({ specialOfferId }) => {
     const loadSpecialOfferData = async () => {
       const temp = await BackendConnection.getAllSpecialOffers();
       if (temp.length > 0) {
-        temp.filter((offer) => offer.product_id === specialOfferId);
+        temp.filter((offer) => offer.product_id === 1);
         setSpecialOffer(temp[0]);
       }
     };
     loadSpecialOfferData();
-  }, [specialOfferId]);
+    console.log(match);
+  }, []);
 
   const getButton = () => {
     if (acceptTerms) {
