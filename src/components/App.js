@@ -34,7 +34,7 @@ const App = () => {
   //   description: "Tehdään loistavaa jälkeä",
   //};
   const [loggedInCompanyId, setLoggedInCompanyId] = useState(1);
-  const [loggedInCustomerId, setLoggedInCustomerId] = useState(null);
+  const [loggedInCustomerId, setLoggedInCustomerId] = useState(1);
   //const [loggedInCompany, setLoggedInCompany] = useState(exampleCompanyData);
 
   // useEffect(() => {
@@ -91,10 +91,7 @@ const App = () => {
             renders the first one that matches the current URL. */}
         <Switch>
           <Route exact path="/info">
-            <InfoPage
-              loggedInCustomerId={loggedInCustomerId}
-              customerLogin={customerLogin}
-            />
+            <InfoPage />
           </Route>
           <Route exact path="/companies">
             <CompaniesPage />
@@ -143,16 +140,10 @@ const App = () => {
             <AdminPage />
           </Route>
           <Route exact path="/">
-            <MainPage
-              loggedInCustomerId={loggedInCustomerId}
-              customerLogin={customerLogin}
-            />
+            <MainPage />
           </Route>
           <Route path="*">
-            <MainPage
-              loggedInCustomerId={loggedInCustomerId}
-              customerLogin={customerLogin}
-            />
+            <MainPage />
           </Route>
         </Switch>
       </div>
