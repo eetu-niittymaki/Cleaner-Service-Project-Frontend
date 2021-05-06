@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Box from "@material-ui/core/Box";
 import "./styles/SpecialOffer.css";
 import Button from "@material-ui/core/Button";
+import { Link } from "react-router-dom";
 
 const SpecialOffer = ({
   id,
@@ -25,9 +26,9 @@ const SpecialOffer = ({
             color="secondary"
             size="large"
             variant="outlined"
-            onClick={() => (window.location.href = "/orderform")}
+            //onClick={() => (window.location.href = `/orderform/${id}`)}
           >
-            Osta diili!
+            <Link to={`/orderform/${id}`}>Osta diili! </Link>
           </Button>
         </div>
         <div className="FlexIt3">
