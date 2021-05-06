@@ -61,6 +61,7 @@ const AdminModifyCustomerData = ({cData, cSave, cDelete}) => {
   const saveAndUpdate = () => {
     if (checkValues) {
       console.log(cData)
+      console.log(firstName)
       BackendConnection.modifyCustomer(
         cData.customer_id,
         firstName,
@@ -70,7 +71,7 @@ const AdminModifyCustomerData = ({cData, cSave, cDelete}) => {
         postcode,
         phone,
         email,
-      )
+      ).then
       cSave();
     } else {
       console.log("dsplay warning");
