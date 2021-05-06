@@ -87,6 +87,7 @@ const App = () => {
   return (
     <BrowserRouter>
       <div className="App">
+        <HeaderComponent />
         {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
         <Switch>

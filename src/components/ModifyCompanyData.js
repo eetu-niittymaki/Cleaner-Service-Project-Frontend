@@ -1,7 +1,6 @@
 import { TextField, Button, Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import React, { useState, useEffect } from "react";
-import HeaderComponent from "./HeaderComponent";
 import BackendConnection from "./BackendConnection.js";
 import "./styles/TextPage.css";
 
@@ -94,82 +93,79 @@ const ModifyCompanyData = ({ companyId }) => {
   if (company === null) {
     return (
       <div>
-        <HeaderComponent />
         <h2>Loading data</h2>
       </div>
     );
   } else {
     return (
       <div>
-        <HeaderComponent />
-        <div>
-          <h1>Muokkaa yrityksen tietoja:</h1>
-          <div className="TextContainer">
-            <form
-              style={{ textAlign: "left", marginBottom: 30 }}
-              autoComplete="false"
-            >
-              <TextField
-                className={styles.formControl}
-                required
-                id="modify-name"
-                label="Yrityksen nimi"
-                //placeholder="Yrityksen nimi"
-                value={name}
-                variant="outlined"
-                onChange={(event) => setName(event.target.value)}
-              />
-              <TextField
-                className={styles.formControl}
-                required
-                id="modify-phone"
-                label="Puhelinnumero"
-                //placeholder="Puhelinnumero"
-                value={phone}
-                variant="outlined"
-                onChange={(event) => setPhone(event.target.value)}
-              />
-              <TextField
-                className={styles.formControl}
-                required
-                id="modify-address"
-                label="Osoite"
-                //placeholder="Osoite"
-                value={address}
-                variant="outlined"
-                onChange={(event) => setAddress(event.target.value)}
-              />
-              <TextField
-                className={styles.formControl}
-                required
-                id="modify-postcode"
-                label="Postinumero"
-                //placeholder="Postinumero"
-                value={postcode}
-                variant="outlined"
-                onChange={(event) => setPostcode(event.target.value)}
-              />
-              <TextField
-                className={styles.formControl}
-                required
-                id="modify-city"
-                label="Postitoimipaikka"
-                //placeholder="Postitoimipaikka"
-                value={city}
-                variant="outlined"
-                onChange={(event) => setCity(event.target.value)}
-              />
-              <TextField
-                className={styles.formControl}
-                required
-                id="modify-email"
-                label="Sähköpostiosoite"
-                //placeholder="Sähköpostiosoite"
-                value={email}
-                variant="outlined"
-                onChange={(event) => setEmail(event.target.value)}
-              />
-              {/* <TextField
+        <h1>Muokkaa yrityksen tietoja:</h1>
+        <div className="TextContainer">
+          <form
+            style={{ textAlign: "left", marginBottom: 30 }}
+            autoComplete="false"
+          >
+            <TextField
+              className={styles.formControl}
+              required
+              id="modify-name"
+              label="Yrityksen nimi"
+              //placeholder="Yrityksen nimi"
+              value={name}
+              variant="outlined"
+              onChange={(event) => setName(event.target.value)}
+            />
+            <TextField
+              className={styles.formControl}
+              required
+              id="modify-phone"
+              label="Puhelinnumero"
+              //placeholder="Puhelinnumero"
+              value={phone}
+              variant="outlined"
+              onChange={(event) => setPhone(event.target.value)}
+            />
+            <TextField
+              className={styles.formControl}
+              required
+              id="modify-address"
+              label="Osoite"
+              //placeholder="Osoite"
+              value={address}
+              variant="outlined"
+              onChange={(event) => setAddress(event.target.value)}
+            />
+            <TextField
+              className={styles.formControl}
+              required
+              id="modify-postcode"
+              label="Postinumero"
+              //placeholder="Postinumero"
+              value={postcode}
+              variant="outlined"
+              onChange={(event) => setPostcode(event.target.value)}
+            />
+            <TextField
+              className={styles.formControl}
+              required
+              id="modify-city"
+              label="Postitoimipaikka"
+              //placeholder="Postitoimipaikka"
+              value={city}
+              variant="outlined"
+              onChange={(event) => setCity(event.target.value)}
+            />
+            <TextField
+              className={styles.formControl}
+              required
+              id="modify-email"
+              label="Sähköpostiosoite"
+              //placeholder="Sähköpostiosoite"
+              value={email}
+              variant="outlined"
+              onChange={(event) => setEmail(event.target.value)}
+            />
+            {/* <TextField
               className={styles.formControl}
               required
               id="modify-description"
@@ -182,32 +178,31 @@ const ModifyCompanyData = ({ companyId }) => {
               variant="outlined"
               onChange={(event) => setDescription(event.target.value)}
             /> */}
-            </form>
-            <Grid className={styles.info} container spacing={1} p={2} m={2}>
-              <Grid item xs={6} ml={2}>
-                <Button
-                  variant="outlined"
-                  size="large"
-                  color="primary"
-                  fullWidth
-                  onClick={() => (window.location.href = "/mypage/company")}
-                >
-                  Takaisin
-                </Button>
-              </Grid>
-              <Grid item xs={6}>
-                <Button
-                  variant="outlined"
-                  size="large"
-                  color="primary"
-                  fullWidth
-                  onClick={handleClick}
-                >
-                  Tallenna muutokset
-                </Button>
-              </Grid>
+          </form>
+          <Grid className={styles.info} container spacing={1} p={2} m={2}>
+            <Grid item xs={6} ml={2}>
+              <Button
+                variant="outlined"
+                size="large"
+                color="primary"
+                fullWidth
+                onClick={() => (window.location.href = "/mypage/company")}
+              >
+                Takaisin
+              </Button>
             </Grid>
-          </div>
+            <Grid item xs={6}>
+              <Button
+                variant="outlined"
+                size="large"
+                color="primary"
+                fullWidth
+                onClick={handleClick}
+              >
+                Tallenna muutokset
+              </Button>
+            </Grid>
+          </Grid>
         </div>
       </div>
     );

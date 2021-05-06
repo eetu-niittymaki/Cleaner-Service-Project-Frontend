@@ -1,7 +1,6 @@
 import { Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import React, { useState, useEffect } from "react";
-import HeaderComponent from "./HeaderComponent";
 import BackendConnection from "./BackendConnection";
 import "./styles/TextPage.css";
 import CompOffReqBox from "./CompOffReqBox";
@@ -44,26 +43,30 @@ const CustomerOfferRequests = ({ customerEmail }) => {
   if (offerRequests.length === 0) {
     return (
       <div>
-        <HeaderComponent />
-        <div>No offer requests yet.</div>
+        <h3>Ei tarjouspyyntöjä vielä.</h3>
+        <Button
+          variant="outlined"
+          size="large"
+          color="primary"
+          onClick={() => (window.location.href = "/mypage/customer")}
+        >
+          Takaisin
+        </Button>
       </div>
     );
   } else {
     return (
       <div>
-        <HeaderComponent />
-        <div>
-          <h1>Tässä saapuneet tarjouspyynnöt:</h1>
-          {showOfferList()}
-          <Button
-            variant="outlined"
-            size="large"
-            color="primary"
-            onClick={() => (window.location.href = "/mypage/customer")}
-          >
-            Takaisin
-          </Button>
-        </div>
+        <h1>Tässä saapuneet tarjouspyynnöt:</h1>
+        {showOfferList()}
+        <Button
+          variant="outlined"
+          size="large"
+          color="primary"
+          onClick={() => (window.location.href = "/mypage/customer")}
+        >
+          Takaisin
+        </Button>
       </div>
     );
   }

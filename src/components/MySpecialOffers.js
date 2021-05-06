@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import Button from "@material-ui/core/Button";
-import HeaderComponent from "./HeaderComponent";
 import BackendConnection from "./BackendConnection";
 import CompanySpecialOffer from "./CompanySpecialOffer";
 
@@ -33,14 +32,20 @@ const MySpecialOffers = ({ companyId }) => {
   if (specialOffers.length === 0) {
     return (
       <div>
-        <HeaderComponent />
-        <div>No offer requests yet.</div>
+        <h3>Et ole luonut vielä pikatarjouksia.</h3>
+        <Button
+          variant="outlined"
+          size="large"
+          color="primary"
+          onClick={() => (window.location.href = "/mypage/company")}
+        >
+          Takaisin
+        </Button>
       </div>
     );
   } else {
     return (
       <div>
-        <HeaderComponent />
         <h3>Omat pikatarjoukset:</h3>
         {showSpecialOfferList()}
         <Button

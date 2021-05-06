@@ -1,6 +1,5 @@
 import { makeStyles } from "@material-ui/core/styles";
 import React, { useState, useEffect } from "react";
-import HeaderComponent from "./HeaderComponent";
 import "./styles/TextPage.css";
 import Connection from "./BackendConnection";
 import { Grid, Box, Button } from "@material-ui/core";
@@ -50,15 +49,12 @@ const CompanyFront = ({ companyId }) => {
   if (company === null) {
     return (
       <div>
-        <HeaderComponent />
         <h2>Loading data</h2>
       </div>
     );
   } else {
     return (
       <div>
-        <HeaderComponent />
-
         <h1>Tervetuloa yrityksen omille sivuille!</h1>
         <Box m={1} p={2}>
           <Grid className={styles.info} container spacing={1} p={2} mb={2}>
