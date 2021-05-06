@@ -6,7 +6,6 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 import { Link } from "react-router-dom";
 import React, { useState, useEffect } from "react";
-import HeaderComponent from "./HeaderComponent";
 import "./styles/TextPage.css";
 import SpecialOfferDataBox from "./SpecialOfferDataBox";
 import BackendConnection from "./BackendConnection";
@@ -66,16 +65,12 @@ const OrderForm = ({ match }) => {
   if (specialOffer == null) {
     return (
       <div>
-        <HeaderComponent />
-        <div>
-          <h1>Kyseistä pikatarjousta ei löytynyt!</h1>
-        </div>
+        <h1>Kyseistä pikatarjousta ei löytynyt!</h1>
       </div>
     );
   } else {
     return (
       <div>
-        <HeaderComponent />
         <div>
           <h1>Tilauksen tiedot:</h1>
           <div className="TextContainer">

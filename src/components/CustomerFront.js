@@ -1,8 +1,7 @@
 import { makeStyles } from "@material-ui/core/styles";
 import Connection from "./BackendConnection";
-import { Paper, Grid, Box, Button } from "@material-ui/core";
+import { Grid, Box, Button } from "@material-ui/core";
 import React, { useState, useEffect } from "react";
-import HeaderComponent from "./HeaderComponent";
 import "./styles/TextPage.css";
 
 const useStyles = makeStyles((theme) => ({
@@ -49,14 +48,12 @@ const CustomerFront = ({ customerId }) => {
   if (customer === null) {
     return (
       <div>
-        <HeaderComponent />
         <h2>Loading data</h2>
       </div>
     );
   } else {
     return (
       <div>
-        <HeaderComponent />
         <h1>Tervetuloa omille sivuille {customer.first_name}!</h1>
         <Box m={1} p={2}>
           <Grid className={styles.info} container spacing={1} p={2} mb={2}>

@@ -1,7 +1,6 @@
 import { TextField, Button, Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import React, { useState, useEffect } from "react";
-import HeaderComponent from "./HeaderComponent";
 import BackendConnection from "./BackendConnection.js";
 import "./styles/TextPage.css";
 
@@ -82,110 +81,106 @@ const ModifyCustomerData = ({ customerId }) => {
   if (customer === null) {
     return (
       <div>
-        <HeaderComponent />
         <h2>Loading data</h2>
       </div>
     );
   } else {
     return (
       <div>
-        <HeaderComponent />
-        <div>
-          <h1>Muokkaa asiakastietoja:</h1>
-          <div className="TextContainer">
-            <form
-              style={{ textAlign: "left", marginBottom: 30 }}
-              autoComplete="false"
-            >
-              <TextField
-                className={styles.formControl}
-                required
-                id="modify-firstname"
-                label="Etunimi"
-                value={firstName}
+        <h1>Muokkaa asiakastietoja:</h1>
+        <div className="TextContainer">
+          <form
+            style={{ textAlign: "left", marginBottom: 30 }}
+            autoComplete="false"
+          >
+            <TextField
+              className={styles.formControl}
+              required
+              id="modify-firstname"
+              label="Etunimi"
+              value={firstName}
+              variant="outlined"
+              onChange={(event) => setFirstName(event.target.value)}
+            />
+            <TextField
+              className={styles.formControl}
+              required
+              id="modify-lastname"
+              label="Sukunimi"
+              value={lastName}
+              variant="outlined"
+              onChange={(event) => setLastName(event.target.value)}
+            />
+            <TextField
+              className={styles.formControl}
+              required
+              id="modify-phone"
+              label="Puhelinnumero"
+              value={phone}
+              variant="outlined"
+              onChange={(event) => setPhone(event.target.value)}
+            />
+            <TextField
+              className={styles.formControl}
+              required
+              id="modify-address"
+              label="Osoite"
+              value={address}
+              variant="outlined"
+              onChange={(event) => setAddress(event.target.value)}
+            />
+            <TextField
+              className={styles.formControl}
+              required
+              id="modify-postcode"
+              label="Postinumero"
+              value={postcode}
+              variant="outlined"
+              onChange={(event) => setPostcode(event.target.value)}
+            />
+            <TextField
+              className={styles.formControl}
+              required
+              id="modify-city"
+              label="Postitoimipaikka"
+              value={city}
+              variant="outlined"
+              onChange={(event) => setCity(event.target.value)}
+            />
+            <TextField
+              className={styles.formControl}
+              required
+              id="modify-email"
+              label="Sähköpostiosoite"
+              value={email}
+              variant="outlined"
+              onChange={(event) => setEmail(event.target.value)}
+            />
+          </form>
+          <Grid className={styles.info} container spacing={1} p={2} m={2}>
+            <Grid item xs={6} ml={2}>
+              <Button
                 variant="outlined"
-                onChange={(event) => setFirstName(event.target.value)}
-              />
-              <TextField
-                className={styles.formControl}
-                required
-                id="modify-lastname"
-                label="Sukunimi"
-                value={lastName}
-                variant="outlined"
-                onChange={(event) => setLastName(event.target.value)}
-              />
-              <TextField
-                className={styles.formControl}
-                required
-                id="modify-phone"
-                label="Puhelinnumero"
-                value={phone}
-                variant="outlined"
-                onChange={(event) => setPhone(event.target.value)}
-              />
-              <TextField
-                className={styles.formControl}
-                required
-                id="modify-address"
-                label="Osoite"
-                value={address}
-                variant="outlined"
-                onChange={(event) => setAddress(event.target.value)}
-              />
-              <TextField
-                className={styles.formControl}
-                required
-                id="modify-postcode"
-                label="Postinumero"
-                value={postcode}
-                variant="outlined"
-                onChange={(event) => setPostcode(event.target.value)}
-              />
-              <TextField
-                className={styles.formControl}
-                required
-                id="modify-city"
-                label="Postitoimipaikka"
-                value={city}
-                variant="outlined"
-                onChange={(event) => setCity(event.target.value)}
-              />
-              <TextField
-                className={styles.formControl}
-                required
-                id="modify-email"
-                label="Sähköpostiosoite"
-                value={email}
-                variant="outlined"
-                onChange={(event) => setEmail(event.target.value)}
-              />
-            </form>
-            <Grid className={styles.info} container spacing={1} p={2} m={2}>
-              <Grid item xs={6} ml={2}>
-                <Button
-                  variant="outlined"
-                  size="large"
-                  color="primary"
-                  fullWidth
-                  onClick={() => (window.location.href = "/mypage/customer")}
-                >
-                  Takaisin
-                </Button>
-              </Grid>
-              <Grid item xs={6}>
-                <Button
-                  variant="outlined"
-                  size="large"
-                  color="primary"
-                  fullWidth
-                  onClick={handleClick}
-                >
-                  Tallenna muutokset
-                </Button>
-              </Grid>
+                size="large"
+                color="primary"
+                fullWidth
+                onClick={() => (window.location.href = "/mypage/customer")}
+              >
+                Takaisin
+              </Button>
             </Grid>
-          </div>
+            <Grid item xs={6}>
+              <Button
+                variant="outlined"
+                size="large"
+                color="primary"
+                fullWidth
+                onClick={handleClick}
+              >
+                Tallenna muutokset
+              </Button>
+            </Grid>
+          </Grid>
         </div>
       </div>
     );

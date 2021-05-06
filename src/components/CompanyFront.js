@@ -1,6 +1,5 @@
 import { makeStyles } from "@material-ui/core/styles";
 import React, { useState, useEffect } from "react";
-import HeaderComponent from "./HeaderComponent";
 import "./styles/TextPage.css";
 import Connection from "./BackendConnection";
 import { Grid, Box, Button } from "@material-ui/core";

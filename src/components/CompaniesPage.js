@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import HeaderComponent from "./HeaderComponent";
 import Company from "./Company";
 import BackendConnection from "./BackendConnection";
 

@@ -14,7 +14,6 @@ import {
   Checkbox,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import HeaderComponent from "./HeaderComponent";
 import BackendConnection from "./BackendConnection";
 import "./styles/TextPage.css";
 
@@ -176,7 +175,6 @@ const OfferRequest = () => {
 
   return (
     <div>
-      <HeaderComponent />
       <div>
         <h1>Pyydä tarjous:</h1>
         <div className="TextContainer">

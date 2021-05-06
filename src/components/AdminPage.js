@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import HeaderComponent from "./HeaderComponent";
 import "./styles/TextPage.css";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";

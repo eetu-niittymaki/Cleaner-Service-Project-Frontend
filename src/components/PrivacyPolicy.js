@@ -1,11 +1,9 @@
 import React from "react";
-import HeaderComponent from "./HeaderComponent";
 import "./styles/TextPage.css";
 
 const PrivacyPolicy = () => {
   return (
     <div>
-      <HeaderComponent />
       <h1>Tietosuojaseloste</h1>
       <div className="TextContainer">
         <h3>Rekisterinpitäjä</h3>
