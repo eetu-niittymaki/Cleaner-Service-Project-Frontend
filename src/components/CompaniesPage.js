@@ -66,11 +66,9 @@ const CompaniesPage = (props) => {
   });
   return (
     <div>
-      <HeaderComponent />
-      <div>
-        <h1>Palveluntarjoajat:</h1>
-        {companyList}
-        {/* <Company
+      <h1>Palveluntarjoajat:</h1>
+      {companyList}
+      {/* <Company
           name="Yritys Oy"
           address="Mäkikatu 3"
           postnumber="33100"
@@ -97,7 +95,6 @@ const CompaniesPage = (props) => {
           email="reiska@yahoo.com"
           description="Phasellus tristique massa eget arcu mollis pellentesque. Maecenas imperdiet blandit lobortis. Aenean scelerisque in ipsum quis lacinia. Nullam auctor interdum nibh, ut ultricies purus suscipit non. Integer mattis mollis feugiat. Duis fringilla orci interdum, facilisis ex vitae, tempus turpis. Donec imperdiet, urna ac euismod dapibus, magna metus convallis risus, sed rhoncus diam risus at risus."
         /> */}
-      </div>
     </div>
   );
 };
