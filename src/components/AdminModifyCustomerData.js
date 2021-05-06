@@ -27,6 +27,15 @@ const AdminModifyCustomerData = ({cData, cSave, cDelete}) => {
   const [city, setCity] = useState("");
   const [email, setEmail] = useState("");
 
+  // null values for unmodified edit axios
+  const [mFirstName, setMFirstName] = useState(null);
+  const [mLastName, setMLastName] = useState(null);
+  const [mphone, setMPhone] = useState(null);
+  const [mAddress, setMAddress] = useState(null);
+  const [mPostcode, setMPostcode] = useState(null);
+  const [mCity, setMCity] = useState(null);
+  const [mEmail, setMEmail] = useState(null);
+
   const fillValues = (cust) => {
     setFirstName(cust.first_name);
     setLastName(cust.last_name);
@@ -46,6 +55,11 @@ const AdminModifyCustomerData = ({cData, cSave, cDelete}) => {
     loadCustomerData();
   },[]);
 
+
+  useEffect(()=> {
+    nullValues()
+  },[firstName,lastName,phone,address,postcode,city,email])
+
   const checkValues = () => {
     return (
       firstName !== "" &&
@@ -58,21 +72,46 @@ const AdminModifyCustomerData = ({cData, cSave, cDelete}) => {
     );
   };
 
-  const saveAndUpdate = () => {
+  //implement better version of this function later
+  const nullValues = () => {
+    if (cData.first_name!=firstName) {
+      setMFirstName(firstName)
+    }
+    if (cData.last_name!=lastName) {
+      setMLastName(lastName)
+    }
+    if (cData.phone!=phone) {
+      setMPhone(phone)
+    }
+    if (cData.postcode!=postcode) {
+      setMPostcode(postcode)
+    }
+    if (cData.street_address!=address) {
+      setMAddress(address)
+    }
+    if (cData.city!=city) {
+      setMCity(city)
+    }
+    if (cData.email!=email) {
+      setMEmail(email)
+    }
+  }
+  const saveAndUpdate = async () => {
     if (checkValues) {
-      console.log(cData)
-      console.log(firstName)
-      BackendConnection.modifyCustomer(
+      console.log(mFirstName)
+      await BackendConnection.modifyCustomer(
         cData.customer_id,
-        firstName,
-        lastName,
-        address,
-        city,
-        postcode,
-        phone,
-        email,
-      ).then
-      cSave();
+        
+        mFirstName,
+        mLastName,
+        mAddress,
+        mCity,
+        mPostcode,
+        mphone,
+        mEmail,
+        
+      );
+      //cSave();
     } else {
       console.log("dsplay warning");
     }
