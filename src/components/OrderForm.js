@@ -4,7 +4,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import "./styles/TextPage.css";
 import SpecialOfferDataBox from "./SpecialOfferDataBox";
@@ -17,7 +17,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const OrderForm = ({ match }) => {
+const OrderForm = () => {
+  let params = useParams();
   const styles = useStyles();
   const [specialOffer, setSpecialOffer] = useState(null);
   const [acceptTerms, setAcceptTerms] = useState(false);
@@ -27,13 +28,15 @@ const OrderForm = ({ match }) => {
     const loadSpecialOfferData = async () => {
       const temp = await BackendConnection.getAllSpecialOffers();
       if (temp.length > 0) {
-        temp.filter((offer) => offer.product_id === 1);
-        setSpecialOffer(temp[0]);
+        console.log(params.id);
+        const value = temp.filter(
+          (offer) => offer.product_id === parseInt(params.id)
+        );
+        setSpecialOffer(value[0]);
       }
     };
     loadSpecialOfferData();
-    console.log(match);
-  }, []);
+  }, [params.id]);
 
   const getButton = () => {
     if (acceptTerms) {
@@ -62,10 +65,10 @@ const OrderForm = ({ match }) => {
     }
   };
 
-  if (specialOffer == null) {
+  if (specialOffer === null) {
     return (
       <div>
-        <h1>Kyseistä pikatarjousta ei löytynyt!</h1>
+        <h1>Loading special offer data.</h1>
       </div>
     );
   } else {
