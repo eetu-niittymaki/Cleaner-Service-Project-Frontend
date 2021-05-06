@@ -33,6 +33,14 @@ const MySpecialOffers = ({ companyId }) => {
     return (
       <div>
         <h3>Et ole luonut vielä pikatarjouksia.</h3>
+        <Button
+          variant="outlined"
+          size="large"
+          color="primary"
+          onClick={() => (window.location.href = "/mypage/company")}
+        >
+          Takaisin
+        </Button>
       </div>
     );
   } else {
