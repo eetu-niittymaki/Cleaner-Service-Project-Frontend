@@ -39,13 +39,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const HeaderComponent = ({ loggedInCustomerId, customerLogin }) => {
+const HeaderComponent = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [open, setOpen] = useState(false);
   const [adminRights, setAdminRights] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [customerId, setCustomerId] = useState(loggedInCustomerId);
+  const [customerId, setCustomerId] = useState(null);
 
   // const PORT = (8080 || process.env.PORT)
 
@@ -87,8 +87,6 @@ const HeaderComponent = ({ loggedInCustomerId, customerLogin }) => {
       } else if (login.status === 200) {
         setToken(login.token);
         setCustomerId(login.customer_id);
-        // passing customerId to app.js here
-        customerLogin(login.customer_id);
         window.location.href = "/mypage/customer";
         handleModalClose();
       }
@@ -105,7 +103,6 @@ const HeaderComponent = ({ loggedInCustomerId, customerLogin }) => {
 
   const clickedLogout = () => {
     //setCustomerId(null);
-    customerLogin(null);
     window.location.href = "/";
   };
 
