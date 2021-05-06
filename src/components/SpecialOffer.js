@@ -26,9 +26,9 @@ const SpecialOffer = ({
             color="secondary"
             size="large"
             variant="outlined"
-            //onClick={() => (window.location.href = `/orderform/${id}`)}
+            onClick={() => (window.location.href = `/orderform/${id}`)}
           >
-            <Link to={`/orderform/${id}`}>Osta diili! </Link>
+            Osta diili!{/* <Link to={`/orderform/${id}`}>Osta diili! </Link> */}
           </Button>
         </div>
         <div className="FlexIt3">
