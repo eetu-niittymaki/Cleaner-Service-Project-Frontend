@@ -72,17 +72,17 @@ ustomer_id,
   customer_email, */
   const modifyCustomer = () => {
     //await BackendConnection.modifyCustomer(id).then
-    setSelectedPage([]);
+    //setSelectedPage([]);
     setSelectedPage(customersTxt);
   };
   const modifyCompany = () => {
     //await BackendConnection.modifyCompany(id).then
-    setSelectedPage([]);
+    //setSelectedPage([]);
     setSelectedPage(companiesTxt);
   };
   const modifyOffer = () => {
     //await BackendConnection.modifyOffer(id).then
-    setSelectedPage([]);
+    //setSelectedPage([]);
     setSelectedPage(offersTxt);
   };
 

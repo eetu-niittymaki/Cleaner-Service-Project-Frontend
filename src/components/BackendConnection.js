@@ -243,11 +243,11 @@ const modifyCustomer = async ({
   customer_phone,
   customer_email,
 }) => {
-  const result = await axios.put(`${baseUrl}customers/`, { //${customer_id}
-    customerId: customer_id,
-    firstName: customer_firstName,
-    lastName: customer_lastName,
-    streetAddress: customer_streetAddress,
+  const result = await axios.put(`${baseUrl}customers`, { //${customer_id}
+    customer_id: customer_id,
+    first_name: customer_firstName,
+    last_name: customer_lastName,
+    street_address: customer_streetAddress,
     city: customer_city,
     postcode: customer_postCode,
     phone: customer_phone,

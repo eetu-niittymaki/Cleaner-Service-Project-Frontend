@@ -98,7 +98,7 @@ const AdminModifyCustomerData = ({cData, cSave, cDelete}) => {
   }
   const saveAndUpdate = async () => {
     if (checkValues) {
-      console.log(mFirstName)
+      console.log(typeof(cData.customer_id))
       await BackendConnection.modifyCustomer(
         cData.customer_id,
         
@@ -111,7 +111,7 @@ const AdminModifyCustomerData = ({cData, cSave, cDelete}) => {
         mEmail,
         
       );
-      //cSave();
+      cSave();
     } else {
       console.log("dsplay warning");
     }
