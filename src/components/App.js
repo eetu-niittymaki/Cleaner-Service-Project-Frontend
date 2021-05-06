@@ -34,7 +34,7 @@ const App = () => {
   //   description: "Tehdään loistavaa jälkeä",
   //};
   const [loggedInCompanyId, setLoggedInCompanyId] = useState(1);
-  const [loggedInCustomerId, setLoggedInCustomerId] = useState(1);
+  const [loggedInCustomerId, setLoggedInCustomerId] = useState(null);
   //const [loggedInCompany, setLoggedInCompany] = useState(exampleCompanyData);
 
   // useEffect(() => {
@@ -62,6 +62,7 @@ const App = () => {
   //   loadCompanyData();
   // }, [loggedInCompany, loggedInCompanyId]);
 
+  /* SessionStorage is not used now
   const getToken = () => {
     const tokenToString = sessionStorage.getItem("token");
     const userToken = JSON.parse(tokenToString);
@@ -76,102 +77,85 @@ const App = () => {
   if (!getToken) {
     return <HeaderComponent setToken={setToken} />;
   }
+  */
+
+  const customerLogin = (id) => {
+    console.log("changin customerId in app.js to " + id);
+    setLoggedInCustomerId(id);
+  };
+
   return (
     <BrowserRouter>
-      {/* A <Switch> looks through its children <Route>s and
+      <div className="App">
+        {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
-      <Switch>
-        <Route exact path="/info">
-          <div className="App">
-            <InfoPage />
-          </div>
-        </Route>
-        <Route exact path="/companies">
-          <div className="App">
+        <Switch>
+          <Route exact path="/info">
+            <InfoPage
+              loggedInCustomerId={loggedInCustomerId}
+              customerLogin={customerLogin}
+            />
+          </Route>
+          <Route exact path="/companies">
             <CompaniesPage />
-          </div>
-        </Route>
-        <Route exact path="/offerRequest">
-          <div className="App">
+          </Route>
+          <Route exact path="/offerRequest">
             <OfferRequest />
-          </div>
-        </Route>
-        <Route exact path="/orderform">
-          <div className="App">
-            <OrderForm specialOfferId={1} />
-          </div>
-        </Route>
-        <Route exact path="/privacy">
-          <div className="App">
+          </Route>
+          <Route path="/orderform/:id">
+            <OrderForm />
+            {/* <OrderForm specialOfferId={1} /> */}
+          </Route>
+          <Route exact path="/privacy">
             <PrivacyPolicy />
-          </div>
-        </Route>
-        <Route exact path="/signup">
-          <div className="App">
+          </Route>
+          <Route exact path="/signup">
             <Signup />
-          </div>
-        </Route>
-        <Route exact path="/mypage/customer/modifydata">
-          <div className="App">
+          </Route>
+          <Route exact path="/mypage/customer/modifydata">
             <ModifyCustomerData customerId={loggedInCustomerId} />
-          </div>
-        </Route>
-        <Route exact path="/mypage/customer/myofferrequests">
-          <div className="App">
+          </Route>
+          <Route exact path="/mypage/customer/myofferrequests">
             <CustomerOfferRequests />
-          </div>
-        </Route>
-        <Route exact path="/mypage/customer">
-          <div className="App">
+          </Route>
+          <Route exact path="/mypage/customer">
             <CustomerFront customerId={loggedInCustomerId} />
-          </div>
-        </Route>
-        <Route exact path="/mypage/company/createspecialoffer">
-          <div className="App">
+          </Route>
+          <Route exact path="/mypage/company/createspecialoffer">
             <CreateSpecialOffer companyId={loggedInCompanyId} />
-          </div>
-        </Route>
-        <Route exact path="/mypage/company/myspecialoffers">
-          <div className="App">
+          </Route>
+          <Route exact path="/mypage/company/myspecialoffers">
             <MySpecialOffers />
-          </div>
-        </Route>
-        <Route exact path="/mypage/company/myofferrequests">
-          <div className="App">
+          </Route>
+          <Route exact path="/mypage/company/myofferrequests">
             <CompanyOfferRequests />
-          </div>
-        </Route>
-        <Route exact path="/mypage/company/modifydata">
-          <div className="App">
+          </Route>
+          <Route exact path="/mypage/company/modifydata">
             <ModifyCompanyData companyId={loggedInCompanyId} />
-          </div>
-        </Route>
-        <Route exact path="/mypage/company">
-          <div className="App">
+          </Route>
+          <Route exact path="/mypage/company">
             <CompanyFront companyId={loggedInCompanyId} />
-          </div>
-        </Route>
-        <Route exact path="/admin/addsupplier">
-          <div className="App">
+          </Route>
+          <Route exact path="/admin/addsupplier">
             <AddSupplier />
-          </div>
-        </Route>
-        <Route exact path="/admin">
-          <div className="App">
+          </Route>
+          <Route exact path="/admin">
             <AdminPage />
-          </div>
-        </Route>
-        <Route exact path="/">
-          <div className="App">
-            <MainPage />
-          </div>
-        </Route>
-        <Route path="*">
-          <div className="App">
-            <MainPage />
-          </div>
-        </Route>
-      </Switch>
+          </Route>
+          <Route exact path="/">
+            <MainPage
+              loggedInCustomerId={loggedInCustomerId}
+              customerLogin={customerLogin}
+            />
+          </Route>
+          <Route path="*">
+            <MainPage
+              loggedInCustomerId={loggedInCustomerId}
+              customerLogin={customerLogin}
+            />
+          </Route>
+        </Switch>
+      </div>
     </BrowserRouter>
   );
 };
