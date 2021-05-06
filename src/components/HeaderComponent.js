@@ -39,16 +39,17 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const HeaderComponent = () => {
+const HeaderComponent = ({ loggedInCustomerId, customerLogin }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [open, setOpen] = useState(false);
   const [adminRights, setAdminRights] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [customerId, setCustomerId] = useState(null);
+  const [customerId, setCustomerId] = useState(loggedInCustomerId);
 
   // const PORT = (8080 || process.env.PORT)
 
+  // this is not working currently
   const setToken = (userToken) => {
     sessionStorage.setItem("token", JSON.stringify(userToken));
   };
@@ -85,8 +86,9 @@ const HeaderComponent = () => {
         alert("Väärä sähköposti/salasana!");
       } else if (login.status === 200) {
         setToken(login.token);
-
         setCustomerId(login.customer_id);
+        // passing customerId to app.js here
+        customerLogin(login.customer_id);
         window.location.href = "/mypage/customer";
         handleModalClose();
       }
@@ -97,12 +99,13 @@ const HeaderComponent = () => {
 
   const clickedLogin = () => {
     console.log("clicked login button");
+    console.log(customerId);
     handleModalOpen();
   };
 
   const clickedLogout = () => {
-    console.log("clicked logout");
-    setCustomerId(null);
+    //setCustomerId(null);
+    customerLogin(null);
     window.location.href = "/";
   };
 
@@ -252,7 +255,7 @@ const HeaderComponent = () => {
               //this line caused an error
               //anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
 
-              transformOrigin={{ vertical: -50, horizontal: 20 }}
+              transformOrigin={{ vertical: -50, horizontal: 0 }}
               //aria-label="menu"
               //aria-haspopup="true"
             >
