@@ -1,6 +1,6 @@
 import { TextField, Button, Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import HeaderComponent from "./HeaderComponent";
 import BackendConnection from "./BackendConnection.js";
 import "./styles/TextPage.css";
@@ -10,9 +10,6 @@ const useStyles = makeStyles((theme) => ({
     //margin: theme.spacing(1),
     minWidth: "100%",
     marginBottom: theme.spacing(2),
-  },
-  selectEmpty: {
-    marginTop: theme.spacing(2),
   },
 }));
 
@@ -28,10 +25,8 @@ const Signup = () => {
   const [password, setPassword] = useState("");
 
   const handleClick = () => {
-    //TODO: send modified data to db
-
     if (checkValues()) {
-      console.log("post new customer and go to customerfront");
+      console.log("post new customer and go to front page");
       BackendConnection.postNewCustomer({
         first_name: firstName,
         last_name: lastName,

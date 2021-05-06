@@ -45,10 +45,11 @@ const HeaderComponent = () => {
   const [adminRights, setAdminRights] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [customerId, setCustomerId] = useState()
+  const [customerId, setCustomerId] = useState(null);
 
   // const PORT = (8080 || process.env.PORT)
 
+  // this is not working currently
   const setToken = (userToken) => {
     sessionStorage.setItem("token", JSON.stringify(userToken));
   };
@@ -85,7 +86,7 @@ const HeaderComponent = () => {
         alert("Väärä sähköposti/salasana!");
       } else if (login.status === 200) {
         setToken(login.token);
-        setCustomerId(login.customer_id)
+        setCustomerId(login.customer_id);
         window.location.href = "/mypage/customer";
         handleModalClose();
       }
@@ -96,7 +97,13 @@ const HeaderComponent = () => {
 
   const clickedLogin = () => {
     console.log("clicked login button");
+    console.log(customerId);
     handleModalOpen();
+  };
+
+  const clickedLogout = () => {
+    //setCustomerId(null);
+    window.location.href = "/";
   };
 
   const handleEmailChange = (event) => {
@@ -119,6 +126,97 @@ const HeaderComponent = () => {
 
   const classes = useStyles();
 
+  const loginOrLogoutButton = () => {
+    if (customerId === null) {
+      return (
+        <Grid item xs={6} sm={3}>
+          <Button
+            className={classes.button}
+            size="large"
+            variant="outlined"
+            color="inherit"
+            fullWidth
+            onClick={clickedLogin}
+          >
+            Login
+          </Button>
+          <Dialog
+            open={open}
+            maxWidth="sm"
+            onClose={handleModalClose}
+            aria-labelledby="form-dialog-title"
+          >
+            <DialogTitle id="form-dialog-title">
+              Sisäänkirjautuminen:
+            </DialogTitle>
+            <DialogContent>
+              <DialogContentText>
+                Kirjaudu omille sivuillesi kirjoittamalla sähköpostiosoite ja
+                salasana.
+              </DialogContentText>
+              <TextField
+                required
+                autoFocus
+                variant="outlined"
+                margin="normal"
+                id="email"
+                label="Sähköpostiosoite"
+                type="email"
+                value={email}
+                onChange={handleEmailChange}
+                fullWidth
+              />
+              <TextField
+                required
+                autoFocus
+                variant="outlined"
+                margin="normal"
+                id="password"
+                label="Salasana"
+                type="password"
+                value={password}
+                onChange={handlePasswordChange}
+                fullWidth
+              />
+              <div>
+                <Link to="/signup" onClick={handleModalClose}>
+                  Luo uusi käyttäjätili
+                </Link>
+              </div>
+            </DialogContent>
+            <DialogActions>
+              <Button
+                variant="outlined"
+                onClick={handleModalClose}
+                color="primary"
+              >
+                Peruuta
+              </Button>
+              <Button variant="outlined" onClick={handleLogin} color="primary">
+                Kirjaudu sisään
+              </Button>
+            </DialogActions>
+          </Dialog>
+        </Grid>
+      );
+    } else {
+      return (
+        <Grid item xs={6} sm={3}>
+          <Button
+            className={classes.button}
+            size="large"
+            variant="outlined"
+            color="inherit"
+            fullWidth
+            onClick={clickedLogout}
+          >
+            Logout
+          </Button>
+        </Grid>
+      );
+    }
+  };
+
   return (
     <AppBar position="static">
       <Toolbar>
@@ -133,79 +231,7 @@ const HeaderComponent = () => {
               </div>
             </Link>
           </Grid>
-          <Grid item xs={6} sm={3}>
-            <Button
-              className={classes.button}
-              size="large"
-              variant="outlined"
-              color="inherit"
-              fullWidth
-              onClick={clickedLogin}
-            >
-              Login
-            </Button>
-            <Dialog
-              open={open}
-              maxWidth="sm"
-              onClose={handleModalClose}
-              aria-labelledby="form-dialog-title"
-            >
-              <DialogTitle id="form-dialog-title">
-                Sisäänkirjautuminen:
-              </DialogTitle>
-              <DialogContent>
-                <DialogContentText>
-                  Kirjaudu omille sivuillesi kirjoittamalla sähköpostiosoite ja
-                  salasana.
-                </DialogContentText>
-                <TextField
-                  required
-                  autoFocus
-                  variant="outlined"
-                  margin="normal"
-                  id="email"
-                  label="Sähköpostiosoite"
-                  type="email"
-                  value={email}
-                  onChange={handleEmailChange}
-                  fullWidth
-                />
-                <TextField
-                  required
-                  autoFocus
-                  variant="outlined"
-                  margin="normal"
-                  id="password"
-                  label="Salasana"
-                  type="password"
-                  value={password}
-                  onChange={handlePasswordChange}
-                  fullWidth
-                />
-                <div>
-                  <Link to="/signup" onClick={handleModalClose}>
-                    Luo uusi käyttäjätili
-                  </Link>
-                </div>
-              </DialogContent>
-              <DialogActions>
-                <Button
-                  variant="outlined"
-                  onClick={handleModalClose}
-                  color="primary"
-                >
-                  Peruuta
-                </Button>
-                <Button
-                  variant="outlined"
-                  onClick={handleLogin}
-                  color="primary"
-                >
-                  Kirjaudu sisään
-                </Button>
-              </DialogActions>
-            </Dialog>
-          </Grid>
+          {loginOrLogoutButton()}
           <Grid item xs={6} sm={3}>
             <Button
               className={classes.button}
@@ -226,7 +252,7 @@ const HeaderComponent = () => {
               //this line caused an error
               //anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
 
-              transformOrigin={{ vertical: -50, horizontal: 20 }}
+              transformOrigin={{ vertical: -50, horizontal: 0 }}
               //aria-label="menu"
               //aria-haspopup="true"
             >

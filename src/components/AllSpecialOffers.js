@@ -28,6 +28,7 @@ const AllSpecialOffers = () => {
     return (
       <SpecialOffer
         key={offer.product_id}
+        id={offer.product_id}
         title={offer.product_name}
         //TODO: get real duration from db
         duration={4}

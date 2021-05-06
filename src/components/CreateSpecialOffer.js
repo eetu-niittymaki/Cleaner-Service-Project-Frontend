@@ -35,17 +35,17 @@ const CreateSpecialOffer = ({ companyId }) => {
       work_hours: duration,
       product_is_available: 1,
     };
-    console.log(JSON.stringify(offer));
+    //console.log(JSON.stringify(offer));
     if (checkValues()) {
       console.log("create new special offer and go to companyfront");
       BackendConnection.postSpecialOffer({
-        supplier_id: companyId,
-        product_name: title,
-        product_description: description,
-        product_price: price,
-        ends_at: "2021-05-20",
-        work_hours: duration,
-        product_is_available: 1,
+        supplier_name: "Siivouspojat Oy",
+        product_name: "Testitarjous",
+        product_description: "Astetta parempi imurointi",
+        product_price: 100,
+        ends_at: null,
+        work_hours: 5.5,
+        is_available: true,
       });
       window.location.href = "/mypage/company";
     } else {
