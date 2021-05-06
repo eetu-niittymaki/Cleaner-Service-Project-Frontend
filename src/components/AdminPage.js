@@ -70,9 +70,10 @@ ustomer_id,
   customer_postCode,
   customer_phone,
   customer_email, */
-  const modifyCustomer = () => {
+  const modifyCustomer = async (id) => {
     //await BackendConnection.modifyCustomer(id).then
     //setSelectedPage([]);
+    console.log(id)
     setSelectedPage(customersTxt);
   };
   const modifyCompany = () => {
@@ -122,7 +123,7 @@ ustomer_id,
             <ul key={data.customer_id}>
               <AdminModifyCustomerData
                 cData={data}
-                cSave={() => modifyCustomer()}
+                cSave={() => modifyCustomer(data.customer_id)}
                 cDelete={() => deleteCustomer(data.customer_id)}
               />
             </ul>

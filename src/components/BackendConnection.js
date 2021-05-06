@@ -233,7 +233,7 @@ const postNewOfferRequest = async ({
   //console.log(result.data);
   return result.data;
 };
-const modifyCustomer = async ({
+const modifyCustomer = async (
   customer_id,
   customer_firstName,
   customer_lastName,
@@ -242,8 +242,9 @@ const modifyCustomer = async ({
   customer_postCode,
   customer_phone,
   customer_email,
-}) => {
-  const result = await axios.put(`${baseUrl}customers`, { //${customer_id}
+) => {
+  console.log(customer_id , customer_firstName,customer_lastName)
+  const result = await axios.put(`${baseUrl}customers/`, { //${customer_id}
     customer_id: customer_id,
     first_name: customer_firstName,
     last_name: customer_lastName,
@@ -253,6 +254,7 @@ const modifyCustomer = async ({
     phone: customer_phone,
     email: customer_email,
   })
+  console.log(result.data)
   return result.data
 }
   
