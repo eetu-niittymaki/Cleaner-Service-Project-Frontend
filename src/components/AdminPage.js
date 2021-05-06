@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./styles/TextPage.css";
 import { makeStyles } from "@material-ui/core/styles";
-import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
-import axios from "axios";
 import BackendConnection from "./BackendConnection";
 import AdminModifyCompanyData from "./AdminModifyCompanyData";
 import AdminModifyCustomerData from "./AdminModifyCustomerData";
@@ -61,58 +59,33 @@ const AdminPage = () => {
       console.log(err);
     }
   };
-  /*
-ustomer_id,
-  customer_firstName,
-  customer_lastName,
-  customer_streetAddress,
-  customer_city,
-  customer_postCode,
-  customer_phone,
-  customer_email, */
-  const modifyCustomer = async (id) => {
-    //await BackendConnection.modifyCustomer(id).then
-    //setSelectedPage([]);
-    console.log(id)
-    setSelectedPage(customersTxt);
-  };
-  const modifyCompany = () => {
-    //await BackendConnection.modifyCompany(id).then
-    //setSelectedPage([]);
-    setSelectedPage(companiesTxt);
-  };
-  const modifyOffer = () => {
-    //await BackendConnection.modifyOffer(id).then
-    //setSelectedPage([]);
-    setSelectedPage(offersTxt);
-  };
+
+  const updateCustomers = async () => {
+    await BackendConnection.getAllCustomers();
+  }
+  const updateCompanies = async () => {
+    await BackendConnection.getAllCompanies();
+  }
+  const updateOffers = async () => {
+    await BackendConnection.getAllSpecialOffers();
+  }
 
   const deleteCustomer = async (id) => {
-    await BackendConnection.deleteCustomer(id).then;
-    setSelectedPage([]);
-    setSelectedPage(customersTxt);
+    await BackendConnection.deleteCustomer(id);//.then;
+    //setSelectedPage([]);
+    //setSelectedPage(customersTxt);
   };
   const deleteCompany = async (id) => {
-    await BackendConnection.deleteSupplier(id).then;
-    setSelectedPage([]);
-    setSelectedPage(companiesTxt);
+    await BackendConnection.deleteSupplier(id);//.then;
+    //setSelectedPage([]);
+    //setSelectedPage(companiesTxt);
+  };
+  const deleteOffer = async (id) => {
+    await BackendConnection.deleteOffer(id);//.then;
+    //setSelectedPage([]);
+    //setSelectedPage(offersTxt);
   };
 
-  const deleteOffer = async (id) => {
-    await BackendConnection.deleteOffer(id).then;
-    setSelectedPage([]);
-    setSelectedPage(offersTxt);
-  };
-  /*
-  customer_id,
-  customer_firstName,
-  customer_lastName,
-  customer_streetAddress,
-  customer_city,
-  customer_postCode,
-  customer_phone,
-  customer_email,
-*/
   const getContent = (selectedP) => {
     if (selectedP == customersTxt) {
       return (
@@ -122,9 +95,9 @@ ustomer_id,
           {customers.map((data) => (
             <ul key={data.customer_id}>
               <AdminModifyCustomerData
-                cData={data}
-                cSave={() => modifyCustomer(data.customer_id)}
-                cDelete={() => deleteCustomer(data.customer_id)}
+                cData = {data}
+                update = {() => updateCustomers()}
+                cDelete = {() => deleteCustomer(data.customer_id)}
               />
             </ul>
           ))}
@@ -138,9 +111,9 @@ ustomer_id,
           {companies.map((data) => (
             <ul key={data.supplier_id}>
               <AdminModifyCompanyData
-                cData={data}
-                cSave={() => modifyCompany(data.supplier_id)}
-                cDelete={() => deleteCompany(data.supplier_id)}
+                cData = {data}
+                update = {() => updateCompanies()}
+                cDelete = {() => deleteCompany(data.supplier_id)}
               />
             </ul>
           ))}
@@ -155,9 +128,9 @@ ustomer_id,
           {offers.map((data) => (
             <ul key={data.product_id}>
               <AdminModifyOfferData
-                oData={data}
-                oSave={() => modifyOffer(data.product_id)}
-                oDelete={() => deleteOffer(data.product_id)}
+                oData = {data}
+                update = {() => updateOffers()}
+                oDelete = {() => deleteOffer(data.product_id)}
               />
             </ul>
           ))}
@@ -171,6 +144,7 @@ ustomer_id,
       );
     }
     // works as a pageswitcher -> reload data (useEffect)
+      // or maybe it doesnt, idk, everythings a mess
     else {
       return (
         <div>

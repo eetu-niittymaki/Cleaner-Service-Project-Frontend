@@ -233,6 +233,7 @@ const postNewOfferRequest = async ({
   //console.log(result.data);
   return result.data;
 };
+
 const modifyCustomer = async (
   customer_id,
   customer_firstName,
@@ -243,8 +244,7 @@ const modifyCustomer = async (
   customer_phone,
   customer_email,
 ) => {
-  console.log(customer_id , customer_firstName,customer_lastName)
-  const result = await axios.put(`${baseUrl}customers/`, { //${customer_id}
+  const result = await axios.put(`${baseUrl}customers/`, {
     customer_id: customer_id,
     first_name: customer_firstName,
     last_name: customer_lastName,
@@ -254,24 +254,49 @@ const modifyCustomer = async (
     phone: customer_phone,
     email: customer_email,
   })
-  console.log(result.data)
   return result.data
 }
-  
-  /*
-  console.log("modifyCustomer" + id)
-  await axios.put(`${baseUrl}customers/${id}`)
+//"supplier_id":13,"
+//"name":"Paska firma"
+//"supplier_description":": )"
+//"street_address":"Kikkakuja 16"
+//"city":"Åbo"
+//"postcode":"241343"
+//"phone":"41234324"
+//"email":"dsdfsd@dsfsd.fds"}]
+const modifySupplier = async (
+  supplier_id,
+  name,
+  supplier_description,
+  street_address,
+  city,
+  postcode,
+  phone,
+  email
+) => {
+  const result = await axios.put(`${baseUrl}suppliers/`, {
+    supplier_id: supplier_id,
+    name: name,
+    street_address: street_address,
+    city: city,
+    postcode: postcode,
+    phone: phone,
+    email: email,
+  })
+  return result.data
 }
-*/
 
-const modifySupplier = async (id) => {
-  console.log("modifySupplier" + id)
+//not implemented in backend yet
+const modifyOffer = async (
+
+) => {
+  const result = await axios.put(`${baseUrl}offers`, { //offers url?
+
+  })
+  return result.data
 }
-const modifyOffer = async (id) => {
-  console.log("modifyOffer" + id)
-}
+
 const deleteCustomer = async (id) => {
-  //const result = 
   await axios.delete(`${baseUrl}customers/${id}`)
   .then(function (response) {
     try {
@@ -284,13 +309,9 @@ const deleteCustomer = async (id) => {
   .catch(function (error) {
     console.log(error);
   });
-  
-//console.log(result.data);
-//return result.data;
 }
 
 const deleteSupplier = async (id) => {
-  //const result = 
   await axios.delete(`${baseUrl}suppliers/${id}`)
   .then(function (response) {
     try {
@@ -303,13 +324,9 @@ const deleteSupplier = async (id) => {
   .catch(function (error) {
     console.log(error);
   });
-  
-//console.log(result.data);
-//return result.data;
 }
 
 const deleteOffer = async (id) => {
-  //const result = 
   await axios.delete(`${baseUrl}products/${id}`)
   .then(function (response) {
     try {
@@ -322,9 +339,6 @@ const deleteOffer = async (id) => {
   .catch(function (error) {
     console.log(error);
   });
-  
-//console.log(result.data);
-//return result.data;
 }
 
 const obj = {

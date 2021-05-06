@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const AdminModifyCustomerData = ({cData, cSave, cDelete}) => {
+const AdminModifyCustomerData = ({cData, update, cDelete}) => {
   const [customer, setCustomer] = useState(null);
   const styles = useStyles();
   const [firstName, setFirstName] = useState("");
@@ -70,8 +70,9 @@ const AdminModifyCustomerData = ({cData, cSave, cDelete}) => {
         city,
         postcode,
         phone,
-        email
-    )} else {
+        email);
+        update();
+      } else {
       alert("Please fill all values")
     }
   }

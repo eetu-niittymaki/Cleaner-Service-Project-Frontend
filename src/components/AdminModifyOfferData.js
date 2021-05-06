@@ -34,7 +34,7 @@ supplier_id: null
 work_hours: 0
 */
 
-const AdminModifyOfferData = ({ oData, oSave, oDelete }) => {
+const AdminModifyOfferData = ({ oData, update, oDelete }) => {
   const [offer, setOffer] = useState(null);
   const styles = useStyles();
   const [title, setTitle] = useState("");
@@ -115,7 +115,7 @@ const AdminModifyOfferData = ({ oData, oSave, oDelete }) => {
                 size="large"
                 color="primary"
                 fullWidth
-                onClick={() => oSave()}
+                onClick={() => update()}
               >
                 Tallenna
               </Button>

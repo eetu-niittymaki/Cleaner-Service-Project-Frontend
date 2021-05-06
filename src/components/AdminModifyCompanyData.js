@@ -2,6 +2,7 @@ import { TextField, Button, Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import React, { useState, useEffect } from "react";
 import "./styles/TextPage.css";
+import BackendConnection from "./BackendConnection.js";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -14,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const AdminModifyCompanyData = ({ cData, cSave, cDelete }) => {
+const AdminModifyCompanyData = ({ cData, update, cDelete }) => {
 
   const [company, setCompany] = useState(null);
 
@@ -59,6 +60,23 @@ const AdminModifyCompanyData = ({ cData, cSave, cDelete }) => {
       email !== ""
     );
   };
+
+  const modify = () => {
+    console.log("modify")
+    if (checkValues()) {
+      BackendConnection.modifySupplier(
+        cData.supplier_id,
+        name,
+        address,
+        city,
+        postcode,
+        phone,
+        email);
+        update();
+    } else {
+      alert("Please fill all values")
+    }
+  }
 
   if (company === null) {
     return (
@@ -156,7 +174,7 @@ const AdminModifyCompanyData = ({ cData, cSave, cDelete }) => {
                   size="large"
                   color="primary"
                   fullWidth
-                  onClick={() => cSave()}
+                  onClick={() => modify()}
                 >
                   Tallenna
                 </Button>
