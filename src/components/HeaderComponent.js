@@ -83,7 +83,6 @@ const HeaderComponent = () => {
         alert('Väärä sähköposti/salasana');
       } else if (login.status === 200) {
         localStorage.setItem('token', login.data.token, 'customerId', login.data.customerId)
-        console.log(login.data.token)
         setLoggedIn(true)
         window.location.href = "/mypage/customer";
         handleModalClose();
