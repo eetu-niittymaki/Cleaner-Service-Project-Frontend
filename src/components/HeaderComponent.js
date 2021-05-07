@@ -45,14 +45,11 @@ const HeaderComponent = () => {
   const [adminRights, setAdminRights] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [customerId, setCustomerId] = useState(null);
+  const [loggedIn, setLoggedIn] = useState(false)
 
   // const PORT = (8080 || process.env.PORT)
 
   // this is not working currently
-  const setToken = (userToken) => {
-    sessionStorage.setItem("token", JSON.stringify(userToken));
-  };
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -75,34 +72,36 @@ const HeaderComponent = () => {
   const handleLogin = async () => {
     if (email && password) {
       const login = await axios.post(
-        //`http://localhost:8080/api/auth/signin`,
-        `https://clean-buddy.herokuapp.com/api/auth/signin`,
+        `http://localhost:8080/api/auth/signin`,
+        //`https://clean-buddy.herokuapp.com/api/auth/signin`,
         {
           email: email,
-          password: password,
+          password: password
         }
-      );
-      if (login.status === 204) {
-        alert("Väärä sähköposti/salasana!");
+      )
+      if (login.status === 204 || login.status === 206) {
+        alert('Väärä sähköposti/salasana');
       } else if (login.status === 200) {
-        setToken(login.token);
-        setCustomerId(login.customer_id);
+        localStorage.setItem('token', login.data.token, 'customerId', login.data.customerId)
+        console.log(login.data.token)
+        setLoggedIn(true)
         window.location.href = "/mypage/customer";
         handleModalClose();
       }
     } else {
-      alert("Give email and password");
+      alert('Anna sähköposti ja salasana')
     }
   };
 
   const clickedLogin = () => {
     console.log("clicked login button");
-    console.log(customerId);
     handleModalOpen();
   };
 
   const clickedLogout = () => {
-    //setCustomerId(null);
+    setLoggedIn(false);
+    localStorage.removeItem("token")
+    localStorage.removeItem("customerId")
     window.location.href = "/";
   };
 
@@ -124,10 +123,18 @@ const HeaderComponent = () => {
     checkIfAdmin();
   }, []);
 
+  // Checks local storage for user token
+  useEffect(() => {
+    const loggedIn = localStorage.getItem('token')
+    if (loggedIn) {
+      setLoggedIn(true)
+    }
+  }, [])
+ 
   const classes = useStyles();
 
   const loginOrLogoutButton = () => {
-    if (customerId === null) {
+    if (loggedIn === false) {
       return (
         <Grid item xs={6} sm={3}>
           <Button
