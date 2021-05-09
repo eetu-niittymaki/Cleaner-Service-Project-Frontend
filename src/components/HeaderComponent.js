@@ -45,6 +45,8 @@ const HeaderComponent = () => {
   const [adminRights, setAdminRights] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [customerLoggedIn, setCustomerLoggedIn] = useState(false)
+  const [supplierLoggedIn, setSupplierLoggedIn] = useState(false)
   const [loggedIn, setLoggedIn] = useState(false)
 
   // const PORT = (8080 || process.env.PORT)
@@ -69,7 +71,7 @@ const HeaderComponent = () => {
     setOpen(false);
   };
 
-  const handleLogin = async () => {
+  const handleCustomerLogin = async () => {
     if (email && password) {
       const login = await axios.post(
         `http://localhost:8080/api/auth/signin`,
@@ -81,11 +83,38 @@ const HeaderComponent = () => {
       )
       if (login.status === 204 || login.status === 206) {
         alert('Väärä sähköposti/salasana');
+      } else if (login.status === 200 && login.data.admin === true) {
+        localStorage.setItem('admin', true)
+        window.location.href = "/admin";
+        handleModalClose();
+      } else if (login.status === 200 && login.data.admin === false) {
+        localStorage.setItem('token', login.data.token)
+        localStorage.setItem('user', login.data.userId)
+        window.location.href = "/mypage/customer";
+        handleModalClose();
+      }
+    } else {
+      alert('Anna sähköposti ja salasana')
+    }
+  };
+
+  const handleCompanyLogin = async () => {
+    if (email && password) {
+      const login = await axios.post(
+        `http://localhost:8080/api/auth/supplier`,
+        //`https://clean-buddy.herokuapp.com/api/auth/supplier`,
+        {
+          email: email,
+          password: password
+        }
+      )
+      if (login.status === 204 || login.status === 206) {
+        alert('Väärä sähköposti/salasana');
       } else if (login.status === 200) {
         localStorage.setItem('token', login.data.token)
-        localStorage.setItem('user', login.data.customerId)
-        setLoggedIn(true)
-        window.location.href = "/mypage/customer";
+        localStorage.setItem('company', login.data.supplierId)
+        setSupplierLoggedIn(true)
+        window.location.href = "/mypage/company";
         handleModalClose();
       }
     } else {
@@ -100,8 +129,11 @@ const HeaderComponent = () => {
 
   const clickedLogout = () => {
     setLoggedIn(false);
+    setAdminRights(false)
     localStorage.removeItem("token")
-    localStorage.removeItem("customerId")
+    localStorage.removeItem("user")
+    localStorage.removeItem("company")
+    localStorage.removeItem("admin")
     window.location.href = "/";
   };
 
@@ -117,17 +149,29 @@ const HeaderComponent = () => {
   const checkIfAdmin = () => {
     //TODO
     //check from backend if current user has admin rights
-    setAdminRights(true);
+    const getAdmin = localStorage.getItem("admin")
+    if (getAdmin) {
+      setAdminRights(true);
+      setLoggedIn(true)
+    }
   };
   useEffect(() => {
     checkIfAdmin();
   }, []);
 
-  // Checks local storage for user token
+  // Checks local storage for tokens
   useEffect(() => {
     const loggedIn = localStorage.getItem('token')
     if (loggedIn) {
       setLoggedIn(true)
+    }
+    const customerLoggedIn = localStorage.getItem('user')
+    if (customerLoggedIn) {
+      setCustomerLoggedIn(true)
+    }
+    const companyLoggedIn = localStorage.getItem('company')
+    if (companyLoggedIn) {
+      setSupplierLoggedIn(true)
     }
   }, [])
  
@@ -199,7 +243,7 @@ const HeaderComponent = () => {
               >
                 Peruuta
               </Button>
-              <Button variant="outlined" onClick={handleLogin} color="primary">
+              <Button variant="outlined" onClick={handleCustomerLogin} color="primary">
                 Kirjaudu sisään
               </Button>
             </DialogActions>
@@ -282,14 +326,16 @@ const HeaderComponent = () => {
               {adminRights ? (
                 <MenuItem onClick={() => handleClose("/admin")}>Admin</MenuItem>
               ) : null}
-              {loggedIn ? (
+              {customerLoggedIn ? (
               <MenuItem onClick={() => handleClose("/mypage/customer/")}>
                 Customer myPages
               </MenuItem>
               ) : null}
+              {supplierLoggedIn ? (
               <MenuItem onClick={() => handleClose("/mypage/company/")}>
                 Company myPages
               </MenuItem>
+              ) : null}
             </Menu>
           </Grid>
         </Grid>

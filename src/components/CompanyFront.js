@@ -39,14 +39,14 @@ const CompanyFront = ({ companyId }) => {
     const loadCompanyData = async () => {
       const temp = await Connection.getAllCompanies();
       if (temp.length > 0) {
-        temp.filter((comp) => comp.supplier_id === companyId);
-        setCompany(temp[0]);
+        const index = temp.findIndex((comp) => comp.supplier_id === companyId);
+        setCompany(temp[index]);
       }
     };
     loadCompanyData();
   }, [companyId]);
 
-  if (company === null) {
+  if (company === null || company === undefined) {
     return (
       <div>
         <h2>Loading data</h2>

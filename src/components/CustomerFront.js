@@ -39,7 +39,7 @@ const CustomerFront = ({ customerId }) => {
       const temp = await Connection.getAllCustomers();
       if (temp.length > 0) {
         console.log(customerId)
-        const index = await temp.findIndex((cust) => cust.customer_id === customerId);
+        const index = temp.findIndex((cust) => cust.customer_id === customerId);
         setCustomer(temp[index])
       }
     };

@@ -94,6 +94,13 @@ const App = () => {
     }
   }, [loggedInCustomerId])
 
+  useEffect(() => {
+    const getCompany = localStorage.getItem('company')
+    if (getCompany) {
+      setLoggedInCompanyId(Number(getCompany))
+    }
+  }, [loggedInCompanyId])
+
   return (
     <BrowserRouter>
       <div className="App">
