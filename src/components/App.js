@@ -33,8 +33,8 @@ const App = () => {
   //   email: "example@email.com",
   //   description: "Tehdään loistavaa jälkeä",
   //};
-  const [loggedInCompanyId, setLoggedInCompanyId] = useState(1);
-  const [loggedInCustomerId, setLoggedInCustomerId] = useState(1);
+  const [loggedInCompanyId, setLoggedInCompanyId] = useState(null);
+  const [loggedInCustomerId, setLoggedInCustomerId] = useState(null);
   //const [loggedInCompany, setLoggedInCompany] = useState(exampleCompanyData);
 
   // useEffect(() => {
@@ -78,11 +78,21 @@ const App = () => {
     return <HeaderComponent setToken={setToken} />;
   }
   */
+  
 
+  /*
   const customerLogin = (id) => {
     console.log("changin customerId in app.js to " + id);
     setLoggedInCustomerId(id);
   };
+  */
+
+  useEffect(() => {
+    const getCustomer = localStorage.getItem('user')
+    if (getCustomer) {
+      setLoggedInCustomerId(Number(getCustomer))
+    }
+  }, [loggedInCustomerId])
 
   return (
     <BrowserRouter>

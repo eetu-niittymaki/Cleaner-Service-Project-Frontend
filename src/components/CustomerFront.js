@@ -38,14 +38,15 @@ const CustomerFront = ({ customerId }) => {
     const loadCustomerData = async () => {
       const temp = await Connection.getAllCustomers();
       if (temp.length > 0) {
-        temp.filter((cust) => cust.customer_id === customerId);
-        setCustomer(temp[0]);
+        console.log(customerId)
+        const index = await temp.findIndex((cust) => cust.customer_id === customerId);
+        setCustomer(temp[index])
       }
     };
     loadCustomerData();
   }, [customerId]);
 
-  if (customer === null) {
+  if (customer === null || customer === undefined) {
     return (
       <div>
         <h2>Loading data</h2>

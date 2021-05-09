@@ -72,8 +72,8 @@ const HeaderComponent = () => {
   const handleLogin = async () => {
     if (email && password) {
       const login = await axios.post(
-        `http://localhost:8080/api/auth/signin`,
-        //`https://clean-buddy.herokuapp.com/api/auth/signin`,
+        //http://localhost:8080/api/auth/signin`,
+        `https://clean-buddy.herokuapp.com/api/auth/signin`,
         {
           email: email,
           password: password
@@ -82,7 +82,8 @@ const HeaderComponent = () => {
       if (login.status === 204 || login.status === 206) {
         alert('Väärä sähköposti/salasana');
       } else if (login.status === 200) {
-        localStorage.setItem('token', login.data.token, 'customerId', login.data.customerId)
+        localStorage.setItem('token', login.data.token)
+        localStorage.setItem('user', login.data.customerId)
         setLoggedIn(true)
         window.location.href = "/mypage/customer";
         handleModalClose();
