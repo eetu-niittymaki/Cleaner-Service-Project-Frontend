@@ -72,8 +72,8 @@ const HeaderComponent = () => {
   const handleLogin = async () => {
     if (email && password) {
       const login = await axios.post(
-        //http://localhost:8080/api/auth/signin`,
-        `https://clean-buddy.herokuapp.com/api/auth/signin`,
+        `http://localhost:8080/api/auth/signin`,
+        //`https://clean-buddy.herokuapp.com/api/auth/signin`,
         {
           email: email,
           password: password
@@ -282,9 +282,11 @@ const HeaderComponent = () => {
               {adminRights ? (
                 <MenuItem onClick={() => handleClose("/admin")}>Admin</MenuItem>
               ) : null}
+              {loggedIn ? (
               <MenuItem onClick={() => handleClose("/mypage/customer/")}>
                 Customer myPages
               </MenuItem>
+              ) : null}
               <MenuItem onClick={() => handleClose("/mypage/company/")}>
                 Company myPages
               </MenuItem>
