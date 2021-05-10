@@ -15,7 +15,6 @@ import MySpecialOffers from "./MySpecialOffers";
 import CompanyOfferRequests from "./CompanyOfferRequests";
 import HeaderComponent from "./HeaderComponent";
 import ModifyCompanyData from "./ModifyCompanyData";
-import BackendConnection from "./BackendConnection";
 import ModifyCustomerData from "./ModifyCustomerData";
 import CustomerOfferRequests from "./CustomerOfferRequests";
 import Signup from "./Signup";

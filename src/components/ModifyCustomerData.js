@@ -7,12 +7,8 @@ import { PurpleButton } from "./CustomButtons";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
-    //margin: theme.spacing(1),
     minWidth: "100%",
     marginBottom: theme.spacing(2),
-  },
-  selectEmpty: {
-    marginTop: theme.spacing(2),
   },
 }));
 

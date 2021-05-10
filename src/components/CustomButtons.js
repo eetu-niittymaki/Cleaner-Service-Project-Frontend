@@ -39,3 +39,25 @@ export const PurpleButton = withStyles({
     // },
   },
 })(Button);
+
+export const OrderButton = withStyles({
+  root: {
+    borderWidth: 2,
+    borderColor: "#A6038D",
+    color: "#A6038D",
+    "&:hover": {
+      backgroundColor: "#A6038D",
+      borderColor: "rgb(100, 3, 82)",
+      borderWidth: 2,
+      color: "white",
+    },
+    // "&:active": {
+    //   boxShadow: "none",
+    //   backgroundColor: "#0062cc",
+    //   borderColor: "#005cbf",
+    // },
+    // "&:focus": {
+    //   boxShadow: "0 0 0 0.2rem rgba(0,123,255,.5)",
+    // },
+  },
+})(Button);
