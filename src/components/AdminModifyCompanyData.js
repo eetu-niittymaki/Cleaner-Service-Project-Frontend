@@ -36,6 +36,7 @@ const AdminModifyCompanyData = ({ cData, update, cDelete }) => {
     setCity(comp.city);
     setEmail(comp.email);
     setDescription(comp.supplier_description);
+    console.log(comp.supplier_description)
   };
 
   useEffect(() => {
@@ -65,6 +66,7 @@ const AdminModifyCompanyData = ({ cData, update, cDelete }) => {
       await BackendConnection.modifySupplier(
         cData.supplier_id,
         name,
+        description,
         address,
         city,
         postcode,
@@ -101,6 +103,7 @@ const AdminModifyCompanyData = ({ cData, update, cDelete }) => {
               variant="outlined"
               onChange={(event) => setName(event.target.value)}
             />
+
             <TextField
               className={styles.formControl}
               required
@@ -151,7 +154,7 @@ const AdminModifyCompanyData = ({ cData, update, cDelete }) => {
               variant="outlined"
               onChange={(event) => setEmail(event.target.value)}
             />
-            {/* <TextField
+            <TextField
               className={styles.formControl}
               required
               id="modify-description"
@@ -160,10 +163,10 @@ const AdminModifyCompanyData = ({ cData, update, cDelete }) => {
               multiline
               rows={4}
               rowsMax={7}
-              placeholder="Yrityksen kuvaus"
+              //placeholder="Yrityksen kuvaus"
               variant="outlined"
               onChange={(event) => setDescription(event.target.value)}
-            /> */}
+            />
           </form>
           <Grid className={styles.info} container spacing={1} p={2} m={2}>
             <Grid item xs={6} ml={2}>

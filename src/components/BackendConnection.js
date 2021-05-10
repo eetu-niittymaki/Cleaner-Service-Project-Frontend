@@ -277,6 +277,7 @@ const modifySupplier = async (
   const result = await axios.put(`${baseUrl}suppliers/`, {
     supplier_id: supplier_id,
     name: name,
+    supplier_description: supplier_description,
     street_address: street_address,
     city: city,
     postcode: postcode,

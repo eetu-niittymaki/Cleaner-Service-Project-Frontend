@@ -53,7 +53,7 @@ const ModifyCustomerData = ({ customerId }) => {
     loadCompanyData();
   }, [customerId]);
 
-  const handleClick = () => {
+  const handleClick = async () => {
     //TODO: send modified data to db
 
     if (checkValues()) {
@@ -63,6 +63,16 @@ const ModifyCustomerData = ({ customerId }) => {
         product_description: description,
         product_price: 100,
       });*/
+      await BackendConnection.modifyCustomer(
+        customerId,
+        firstName,
+        lastName,
+        address,
+        city,
+        postcode,
+        phone,
+        email
+      )
       window.location.href = "/mypage/customer";
     } else {
       alert("Jokin kenttä on jätetty tyhjäksi, tarkista tiedot.");

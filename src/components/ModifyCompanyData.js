@@ -65,7 +65,7 @@ const ModifyCompanyData = ({ companyId }) => {
     loadCompanyData();
   }, [companyId]);
 
-  const handleClick = () => {
+  const handleClick = async () => {
     //TODO: send modified data to db
 
     if (checkValues()) {
@@ -74,7 +74,20 @@ const ModifyCompanyData = ({ companyId }) => {
         product_name: title,
         product_description: description,
         product_price: 100,
-      });*/
+      });
+      
+      
+      add description*/
+      await BackendConnection.modifySupplier(
+        companyId,
+        name,
+        description,
+        address,
+        city,
+        postcode,
+        phone,
+        email
+      );
       window.location.href = "/mypage/company";
     } else {
       alert("Jokin kenttä on jätetty tyhjäksi, tarkista tiedot.");
@@ -168,7 +181,7 @@ const ModifyCompanyData = ({ companyId }) => {
               variant="outlined"
               onChange={(event) => setEmail(event.target.value)}
             />
-            {/* <TextField
+            <TextField
               className={styles.formControl}
               required
               id="modify-description"
@@ -180,7 +193,7 @@ const ModifyCompanyData = ({ companyId }) => {
               placeholder="Yrityksen kuvaus"
               variant="outlined"
               onChange={(event) => setDescription(event.target.value)}
-            /> */}
+            />
           </form>
           <Grid className={styles.info} container spacing={1} p={2} m={2}>
             <Grid item xs={6} ml={2}>
