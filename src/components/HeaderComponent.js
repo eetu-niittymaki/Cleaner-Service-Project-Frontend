@@ -46,6 +46,12 @@ const useStyles = makeStyles((theme) => ({
     textDecoration: "none",
     color: "white",
   },
+  notchedOutline: {
+    borderColor: "yellow !important",
+  },
+  floatingLabelFocusStyle: {
+    color: "gray !important",
+  },
 }));
 
 const HeaderComponent = () => {
@@ -205,16 +211,22 @@ const HeaderComponent = () => {
             aria-labelledby="form-dialog-title"
           >
             <DialogTitle id="form-dialog-title">
-              Sisäänkirjautuminen:
+              Kirjaudu omille sivuille:
             </DialogTitle>
             <DialogContent>
-              <DialogContentText>
+              {/* <DialogContentText>
                 Kirjaudu omille sivuillesi kirjoittamalla sähköpostiosoite ja
                 salasana.
-              </DialogContentText>
+              </DialogContentText> */}
               <TextField
                 required
                 autoFocus
+                InputProps={{
+                  classes: { notchedOutline: classes.notchedOutline },
+                }}
+                InputLabelProps={{
+                  className: classes.floatingLabelFocusStyle,
+                }}
                 variant="outlined"
                 margin="normal"
                 id="email"
@@ -227,6 +239,12 @@ const HeaderComponent = () => {
               <TextField
                 required
                 autoFocus
+                InputProps={{
+                  classes: { notchedOutline: classes.notchedOutline },
+                }}
+                InputLabelProps={{
+                  className: classes.floatingLabelFocusStyle,
+                }}
                 variant="outlined"
                 margin="normal"
                 id="password"
@@ -237,7 +255,11 @@ const HeaderComponent = () => {
                 fullWidth
               />
               <div>
-                <Link to="/signup" onClick={handleModalClose}>
+                <Link
+                  to="/signup"
+                  style={{ color: "#black" }}
+                  onClick={handleModalClose}
+                >
                   Luo uusi käyttäjätili
                 </Link>
               </div>
