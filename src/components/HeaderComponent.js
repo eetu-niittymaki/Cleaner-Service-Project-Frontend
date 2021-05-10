@@ -23,16 +23,16 @@ import logo from "./img/cleanbuddy_logo.png";
 const useStyles = makeStyles((theme) => ({
   root: {
     background: "#E66CC4",
+    textAlign: "center",
   },
-  title: {
-    marginTop: 30,
-    marginBottom: 30,
-    //marginLeft: 20,
+  logoBlock: {
     display: "block",
-    textAlign: "left",
+    [theme.breakpoints.down("sm")]: { marginTop: 10 },
+    [theme.breakpoints.up("sm")]: { marginTop: 30, marginBottom: 30 },
   },
   button: {
-    margin: 10,
+    [theme.breakpoints.down("sm")]: { marginBottom: 10 },
+    [theme.breakpoints.up("sm")]: { marginTop: 10 },
   },
   login: {
     //margin: 50,
@@ -145,7 +145,7 @@ const HeaderComponent = () => {
   const loginOrLogoutButton = () => {
     if (loggedIn === false) {
       return (
-        <Grid item xs={6} sm={3}>
+        <Grid item>
           <Button
             className={classes.button}
             size="large"
@@ -217,7 +217,7 @@ const HeaderComponent = () => {
       );
     } else {
       return (
-        <Grid item xs={6} sm={3}>
+        <Grid item>
           <Button
             className={classes.button}
             size="large"
@@ -238,8 +238,8 @@ const HeaderComponent = () => {
       <Toolbar>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={6}>
-            <Link style={{ textDecoration: "none", color: "white" }} to="/">
-              <div className={classes.title}>
+            <Link className={classes.frontLink} to="/">
+              <div className={classes.logoBlock}>
                 <img src={logo} alt="CleanBuddy logo" />
                 {/* <Typography variant="h3">CleanBuddy</Typography> */}
                 <Typography variant="h6">
@@ -248,7 +248,9 @@ const HeaderComponent = () => {
               </div>
             </Link>
           </Grid>
-          {loginOrLogoutButton()}
+          <Grid item xs={6} sm={3}>
+            {loginOrLogoutButton()}
+          </Grid>
           <Grid item xs={6} sm={3}>
             <Button
               className={classes.button}
