@@ -7,7 +7,6 @@ import {
   Select,
   OutlinedInput,
   InputAdornment,
-  Button,
   FormGroup,
   FormLabel,
   FormControlLabel,
@@ -16,22 +15,12 @@ import {
 import { makeStyles } from "@material-ui/core/styles";
 import BackendConnection from "./BackendConnection";
 import "./styles/TextPage.css";
+import { PurpleButton } from "./CustomButtons";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
     minWidth: "100%",
     marginBottom: theme.spacing(2),
-  },
-  button: {
-    borderWidth: 2,
-    borderColor: "#A6038D",
-    color: "#A6038D",
-    "&:hover": {
-      backgroundColor: "#A6038D",
-      borderColor: "rgb(100, 3, 82)",
-      borderWidth: 2,
-      color: "white",
-    },
   },
 }));
 
@@ -355,7 +344,7 @@ const OfferRequest = () => {
         </div>
       </div>
       <div className="bottomButtons">
-        <Button
+        <PurpleButton
           className={styles.button}
           variant="outlined"
           size="large"
@@ -363,7 +352,7 @@ const OfferRequest = () => {
           onClick={sendOfferRequest}
         >
           Lähetä
-        </Button>
+        </PurpleButton>
       </div>
     </div>
   );
