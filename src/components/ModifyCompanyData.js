@@ -1,8 +1,9 @@
-import { TextField, Button, Grid } from "@material-ui/core";
+import { TextField, Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import React, { useState, useEffect } from "react";
 import BackendConnection from "./BackendConnection.js";
 import "./styles/TextPage.css";
+import { PurpleButton } from "./CustomButtons";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -181,7 +182,7 @@ const ModifyCompanyData = ({ companyId }) => {
           </form>
           <Grid className={styles.info} container spacing={1} p={2} m={2}>
             <Grid item xs={6} ml={2}>
-              <Button
+              <PurpleButton
                 variant="outlined"
                 size="large"
                 color="primary"
@@ -189,10 +190,10 @@ const ModifyCompanyData = ({ companyId }) => {
                 onClick={() => (window.location.href = "/mypage/company")}
               >
                 Takaisin
-              </Button>
+              </PurpleButton>
             </Grid>
             <Grid item xs={6}>
-              <Button
+              <PurpleButton
                 variant="outlined"
                 size="large"
                 color="primary"
@@ -200,7 +201,7 @@ const ModifyCompanyData = ({ companyId }) => {
                 onClick={handleClick}
               >
                 Tallenna muutokset
-              </Button>
+              </PurpleButton>
             </Grid>
           </Grid>
         </div>
