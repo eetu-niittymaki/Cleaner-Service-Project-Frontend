@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import "./styles/TextPage.css";
 import Connection from "./BackendConnection";
 import { Grid, Box, Button } from "@material-ui/core";
+import { PurpleButton } from "./CustomButtons";
 
 const useStyles = makeStyles((theme) => ({
   info: {
@@ -59,7 +60,7 @@ const CompanyFront = ({ companyId }) => {
         <Box m={1} p={2}>
           <Grid className={styles.info} container spacing={1} p={2} mb={2}>
             <Grid item xs={12} sm={6}>
-              <Button
+              <PurpleButton
                 variant="outlined"
                 size="large"
                 color="primary"
@@ -69,10 +70,10 @@ const CompanyFront = ({ companyId }) => {
                 }
               >
                 Luo pikatarjous
-              </Button>
+              </PurpleButton>
             </Grid>
             <Grid item xs={12} sm={6}>
-              <Button
+              <PurpleButton
                 variant="outlined"
                 size="large"
                 color="primary"
@@ -82,10 +83,10 @@ const CompanyFront = ({ companyId }) => {
                 }
               >
                 Katso tarjouspyynnöt
-              </Button>
+              </PurpleButton>
             </Grid>
             <Grid item xs={12} sm={6}>
-              <Button
+              <PurpleButton
                 variant="outlined"
                 size="large"
                 color="primary"
@@ -95,7 +96,7 @@ const CompanyFront = ({ companyId }) => {
                 }
               >
                 Omat pikatarjoukset
-              </Button>
+              </PurpleButton>
             </Grid>
           </Grid>
         </Box>
@@ -153,7 +154,7 @@ const CompanyFront = ({ companyId }) => {
             </Grid>
           </Grid>
           <div className={styles.info}>
-            <Button
+            <PurpleButton
               variant="outlined"
               size="large"
               color="primary"
@@ -162,7 +163,7 @@ const CompanyFront = ({ companyId }) => {
               }
             >
               Muokkaa tietoja
-            </Button>
+            </PurpleButton>
           </div>
         </Box>
         {/* <Box border={1} m={2} p={3}>
