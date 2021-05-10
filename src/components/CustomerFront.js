@@ -1,6 +1,6 @@
 import { makeStyles } from "@material-ui/core/styles";
 import Connection from "./BackendConnection";
-import { Grid, Box, Button } from "@material-ui/core";
+import { Grid, Box } from "@material-ui/core";
 import React, { useState, useEffect } from "react";
 import "./styles/TextPage.css";
 import { PurpleButton } from "./CustomButtons";
