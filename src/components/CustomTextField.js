@@ -5,7 +5,8 @@ export const CustomTextField = withStyles({
   root: {
     // This changes the label colour
     "& label.Mui-focused": {
-      color: "#A6038D",
+      //color: "#A6038D",
+      color: "black",
     },
     // "& .MuiInput-underline:after": {
     //   borderBottomColor: "green",

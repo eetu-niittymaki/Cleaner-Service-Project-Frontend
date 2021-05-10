@@ -16,6 +16,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import BackendConnection from "./BackendConnection";
 import "./styles/TextPage.css";
 import { PurpleButton } from "./CustomButtons";
+import { CustomTextField } from "./CustomTextField";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -136,7 +137,7 @@ const OfferRequest = () => {
   }, [companyData]);
 
   // TODO: show error when none of the companies are checked
-  const error = [companyData].filter((v) => v.isChecked === true).length < 1;
+  const error = [companyData].filter((v) => v.isChecked === true).length > 0;
 
   const showCompaniesList = () => {
     const ui = companyData.map((comp) => {
@@ -253,7 +254,7 @@ const OfferRequest = () => {
                 Valitse vähintään yksi palveluntarjoaja
               </FormHelperText> */}
             </FormControl>
-            <TextField
+            <CustomTextField
               className={styles.formControl}
               id="standard-required"
               label="Lisätietoa"
@@ -269,7 +270,7 @@ const OfferRequest = () => {
           <form style={{ textAlign: "left" }}>
             <h3>Asiakkaan tiedot:</h3>
             <div>
-              <TextField
+              <CustomTextField
                 className={styles.formControl}
                 required
                 id="standard-required"
@@ -278,7 +279,7 @@ const OfferRequest = () => {
                 variant="outlined"
                 onChange={(event) => setFirstName(event.target.value)}
               />
-              <TextField
+              <CustomTextField
                 className={styles.formControl}
                 required
                 id="standard-required"
@@ -289,7 +290,7 @@ const OfferRequest = () => {
               />
             </div>
             <div>
-              <TextField
+              <CustomTextField
                 className={styles.formControl}
                 required
                 id="standard-required"
@@ -300,7 +301,7 @@ const OfferRequest = () => {
               />
             </div>
             <div>
-              <TextField
+              <CustomTextField
                 className={styles.formControl}
                 required
                 id="standard-required"
@@ -309,7 +310,7 @@ const OfferRequest = () => {
                 variant="outlined"
                 onChange={(event) => setCity(event.target.value)}
               />
-              <TextField
+              <CustomTextField
                 className={styles.formControl}
                 required
                 id="standard-required"
@@ -320,7 +321,7 @@ const OfferRequest = () => {
               />
             </div>
             <div>
-              <TextField
+              <CustomTextField
                 className={styles.formControl}
                 id="standard-required"
                 label="Puhelinnumero"
@@ -330,7 +331,7 @@ const OfferRequest = () => {
               />
             </div>
             <div>
-              <TextField
+              <CustomTextField
                 className={styles.formControl}
                 required
                 id="standard-required"
