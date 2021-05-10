@@ -7,7 +7,7 @@ import InfoPage from "./InfoPage";
 import CustomerFront from "./CustomerFront";
 import CompanyFront from "./CompanyFront";
 import OrderForm from "./OrderForm";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import PrivacyPolicy from "./PrivacyPolicy.js";
 import OfferRequest from "./OfferRequest";
 import CreateSpecialOffer from "./CreateSpecialOffer";
@@ -163,9 +163,9 @@ const App = () => {
             <Route exact path="/">
               <MainPage />
             </Route>
-            <Route path="*">
+            <Redirect to="/">
               <MainPage />
-            </Route>
+            </Redirect>
           </Switch>
         </div>
       </BrowserRouter>
