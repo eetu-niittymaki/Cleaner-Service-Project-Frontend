@@ -1,13 +1,14 @@
-import { Button, Grid, Box } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import React, { useState, useEffect } from "react";
 import BackendConnection from "./BackendConnection";
 import "./styles/TextPage.css";
 import CompOffReqBox from "./CompOffReqBox";
+import { PurpleButton } from "./CustomButtons";
 
 const useStyles = makeStyles((theme) => ({
   backButton: {
     textAlign: "center",
+    marginBottom: 30,
   },
 }));
 
@@ -48,14 +49,15 @@ const CompanyOfferRequests = ({ supplierName }) => {
       <div>
         <h1>Tässä saapuneet tarjouspyynnöt:</h1>
         {showOfferList()}
-        <Button
+        <PurpleButton
+          className={styles.backButton}
           variant="outlined"
           size="large"
           color="primary"
           onClick={() => (window.location.href = "/mypage/company")}
         >
           Takaisin
-        </Button>
+        </PurpleButton>
       </div>
     );
   }

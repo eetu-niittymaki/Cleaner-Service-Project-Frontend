@@ -55,9 +55,11 @@ const ModifyCompanyData = ({ companyId }) => {
     const loadCompanyData = async () => {
       const temp = await BackendConnection.getAllCompanies();
       if (temp.length > 0) {
-        temp.filter((comp) => comp.supplier_id === companyId);
-        setCompany(temp[0]);
-        fillValues(temp[0]);
+        const value = temp.filter((comp) => comp.supplier_id === companyId);
+        if (value.length > 0) {
+          setCompany(value[0]);
+          fillValues(value[0]);
+        }
       }
     };
     loadCompanyData();
@@ -79,7 +81,7 @@ const ModifyCompanyData = ({ companyId }) => {
     }
   };
 
-  // Checking that title and description have content and price is positive
+  // Checking that title and description have content
   const checkValues = () => {
     return (
       name !== "" &&

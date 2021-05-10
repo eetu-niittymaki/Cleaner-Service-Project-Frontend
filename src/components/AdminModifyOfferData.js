@@ -3,6 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import React, { useState, useEffect } from "react";
 import "./styles/TextPage.css";
 import BackendConnection from "./BackendConnection.js";
+import { PurpleButton } from "./CustomButtons";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -41,7 +42,7 @@ const AdminModifyOfferData = ({ oData, update, oDelete, company }) => {
 
   const [title, setTitle] = useState("");
   const [companyName, setCompanyName] = useState("");
-  const [duration, setDuration] = useState(0)
+  const [duration, setDuration] = useState(0);
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState(100);
 
@@ -55,10 +56,8 @@ const AdminModifyOfferData = ({ oData, update, oDelete, company }) => {
 
   useEffect(() => {
     const loadCompanyData = async () => {
-      
-        setOffer(oData);
-        fillValues(oData);
-      
+      setOffer(oData);
+      fillValues(oData);
     };
     loadCompanyData();
   }, []);
@@ -69,7 +68,7 @@ const AdminModifyOfferData = ({ oData, update, oDelete, company }) => {
   };
 
   const modify = async () => {
-    console.log("modify")
+    console.log("modify");
     if (checkValues()) {
       await BackendConnection.modifyOffer(
         oData.product_id,
@@ -82,98 +81,98 @@ const AdminModifyOfferData = ({ oData, update, oDelete, company }) => {
       );
       update();
     } else {
-      alert("Please fill all values")
+      alert("Please fill all values");
     }
-  }
+  };
 
   if (offer === null) {
     return (
       <div>
         <h2>Loading data</h2>
       </div>
-    )
+    );
   } else {
     return (
-        <div>
-          <div className="TextContainer">
-            <form
-              style={{ textAlign: "left", marginBottom: 30 }}
-              autoComplete="false"
-            >
-              <h3>{companyName}</h3>
-              <TextField
-                className={styles.formControl}
-                required
-                id="special-offer-title"
-                label="Otsikko"
-                placeholder="Otsikko"
-                value={title}
+      <div>
+        <div className="TextContainer">
+          <form
+            style={{ textAlign: "left", marginBottom: 30 }}
+            autoComplete="false"
+          >
+            <h3>{companyName}</h3>
+            <TextField
+              className={styles.formControl}
+              required
+              id="special-offer-title"
+              label="Otsikko"
+              placeholder="Otsikko"
+              value={title}
+              variant="outlined"
+              onChange={(event) => setTitle(event.target.value)}
+            />
+            <TextField
+              className={styles.formControl}
+              required
+              id="special-offer-price"
+              label="Hinta"
+              placeholder="Hinta"
+              value={price}
+              variant="outlined"
+              onChange={(event) => setPrice(event.target.value)}
+            />
+            <TextField
+              className={styles.formControl}
+              required
+              id="description"
+              label="Kuvaus"
+              fullWidth
+              multiline
+              rows={4}
+              rowsMax={7}
+              placeholder="Anna tarkempi kuvaus siivouksen yksityiskohdista."
+              value={description}
+              variant="outlined"
+              onChange={(event) => setDescription(event.target.value)}
+            />
+            <TextField
+              className={styles.formControl}
+              required
+              id="special-offer-title"
+              label="Kesto / h"
+              placeholder="Palvelun kesto tunneissa"
+              value={duration}
+              variant="outlined"
+              onChange={(event) => setDuration(event.target.value)}
+            />
+          </form>
+          <Grid className={styles.info} container spacing={1} p={2} m={2}>
+            <Grid item xs={6} ml={2}>
+              <PurpleButton
                 variant="outlined"
-                onChange={(event) => setTitle(event.target.value)}
-              />
-              <TextField
-                className={styles.formControl}
-                required
-                id="special-offer-price"
-                label="Hinta"
-                placeholder="Hinta"
-                value={price}
-                variant="outlined"
-                onChange={(event) => setPrice(event.target.value)}
-              />
-              <TextField
-                className={styles.formControl}
-                required
-                id="description"
-                label="Kuvaus"
+                size="large"
+                color="primary"
                 fullWidth
-                multiline
-                rows={4}
-                rowsMax={7}
-                placeholder="Anna tarkempi kuvaus siivouksen yksityiskohdista."
-                value={description}
-                variant="outlined"
-                onChange={(event) => setDescription(event.target.value)}
-              />
-              <TextField
-                className={styles.formControl}
-                required
-                id="special-offer-title"
-                label="Kesto / h"
-                placeholder="Palvelun kesto tunneissa"
-                value={duration}
-                variant="outlined"
-                onChange={(event) => setDuration(event.target.value)}
-              />
-            </form>
-            <Grid className={styles.info} container spacing={1} p={2} m={2}>
-              <Grid item xs={6} ml={2}>
-                <Button
-                  variant="outlined"
-                  size="large"
-                  color="primary"
-                  fullWidth
-                  onClick={() => modify()}
-                >
-                  Tallenna
-                </Button>
-              </Grid>
-              <Grid item xs={6}>
-                <Button
-                  variant="outlined"
-                  size="large"
-                  color="primary"
-                  fullWidth
-                  onClick={() => oDelete()}
-                >
-                  Poista
-                </Button>
-              </Grid>
+                onClick={() => modify()}
+              >
+                Tallenna
+              </PurpleButton>
             </Grid>
-          </div>
+            <Grid item xs={6}>
+              <PurpleButton
+                variant="outlined"
+                size="large"
+                color="primary"
+                fullWidth
+                onClick={() => oDelete()}
+              >
+                Poista
+              </PurpleButton>
+            </Grid>
+          </Grid>
         </div>
+      </div>
     );
   }
-}
+};
 
 export default AdminModifyOfferData;

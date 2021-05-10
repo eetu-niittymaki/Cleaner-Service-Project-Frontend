@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Button from "@material-ui/core/Button";
 import BackendConnection from "./BackendConnection";
 import CompanySpecialOffer from "./CompanySpecialOffer";
+import { PurpleButton } from "./CustomButtons";
 
 const MySpecialOffers = ({ companyId }) => {
   const [specialOffers, setSpecialOffers] = useState([]);
@@ -33,14 +34,14 @@ const MySpecialOffers = ({ companyId }) => {
     return (
       <div>
         <h3>Et ole luonut vielä pikatarjouksia.</h3>
-        <Button
+        <PurpleButton
           variant="outlined"
           size="large"
           color="primary"
           onClick={() => (window.location.href = "/mypage/company")}
         >
           Takaisin
-        </Button>
+        </PurpleButton>
       </div>
     );
   } else {
@@ -48,14 +49,14 @@ const MySpecialOffers = ({ companyId }) => {
       <div>
         <h3>Omat pikatarjoukset:</h3>
         {showSpecialOfferList()}
-        <Button
+        <PurpleButton
           variant="outlined"
           size="large"
           color="primary"
           onClick={() => (window.location.href = "/mypage/company")}
         >
           Takaisin
-        </Button>
+        </PurpleButton>
       </div>
     );
   }

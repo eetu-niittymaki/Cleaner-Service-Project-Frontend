@@ -19,7 +19,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import logo from "./img/cleanbuddy_logo.png";
-import { HeaderButton } from "./CustomButtons";
+import { HeaderButton, PurpleButton } from "./CustomButtons";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -46,6 +46,12 @@ const useStyles = makeStyles((theme) => ({
     textDecoration: "none",
     color: "white",
   },
+  notchedOutline: {
+    borderColor: "yellow !important",
+  },
+  floatingLabelFocusStyle: {
+    color: "gray !important",
+  },
 }));
 
 const HeaderComponent = () => {
@@ -57,10 +63,6 @@ const HeaderComponent = () => {
   const [customerLoggedIn, setCustomerLoggedIn] = useState(false);
   const [supplierLoggedIn, setSupplierLoggedIn] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
-
-  // const PORT = (8080 || process.env.PORT)
-
-  // this is not working currently
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -107,6 +109,7 @@ const HeaderComponent = () => {
     }
   };
 
+  /* moved this to CompanyLogin component -Hanna
   const handleCompanyLogin = async () => {
     if (email && password) {
       const login = await axios.post(
@@ -130,9 +133,10 @@ const HeaderComponent = () => {
       alert("Anna sähköposti ja salasana");
     }
   };
+  */
 
   const clickedLogin = () => {
-    console.log("clicked login button");
+    //console.log("clicked login button");
     handleModalOpen();
   };
 
@@ -207,16 +211,22 @@ const HeaderComponent = () => {
             aria-labelledby="form-dialog-title"
           >
             <DialogTitle id="form-dialog-title">
-              Sisäänkirjautuminen:
+              Kirjaudu omille sivuille:
             </DialogTitle>
             <DialogContent>
-              <DialogContentText>
+              {/* <DialogContentText>
                 Kirjaudu omille sivuillesi kirjoittamalla sähköpostiosoite ja
                 salasana.
-              </DialogContentText>
+              </DialogContentText> */}
               <TextField
                 required
                 autoFocus
+                InputProps={{
+                  classes: { notchedOutline: classes.notchedOutline },
+                }}
+                InputLabelProps={{
+                  className: classes.floatingLabelFocusStyle,
+                }}
                 variant="outlined"
                 margin="normal"
                 id="email"
@@ -229,6 +239,12 @@ const HeaderComponent = () => {
               <TextField
                 required
                 autoFocus
+                InputProps={{
+                  classes: { notchedOutline: classes.notchedOutline },
+                }}
+                InputLabelProps={{
+                  className: classes.floatingLabelFocusStyle,
+                }}
                 variant="outlined"
                 margin="normal"
                 id="password"
@@ -239,26 +255,30 @@ const HeaderComponent = () => {
                 fullWidth
               />
               <div>
-                <Link to="/signup" onClick={handleModalClose}>
+                <Link
+                  to="/signup"
+                  style={{ color: "#black" }}
+                  onClick={handleModalClose}
+                >
                   Luo uusi käyttäjätili
                 </Link>
               </div>
             </DialogContent>
             <DialogActions>
-              <Button
+              <PurpleButton
                 variant="outlined"
                 onClick={handleModalClose}
                 color="primary"
               >
                 Peruuta
-              </Button>
-              <Button
+              </PurpleButton>
+              <PurpleButton
                 variant="outlined"
                 onClick={handleCustomerLogin}
                 color="primary"
               >
                 Kirjaudu sisään
-              </Button>
+              </PurpleButton>
             </DialogActions>
           </Dialog>
         </Grid>
@@ -348,12 +368,17 @@ const HeaderComponent = () => {
               ) : null}
               {customerLoggedIn ? (
                 <MenuItem onClick={() => handleClose("/mypage/customer/")}>
-                  Customer myPages
+                  Asiakkaan omat sivut
                 </MenuItem>
               ) : null}
               {supplierLoggedIn ? (
                 <MenuItem onClick={() => handleClose("/mypage/company/")}>
-                  Company myPages
+                  Yrityksen omat sivut
+                </MenuItem>
+              ) : null}
+              {!adminRights && !customerLoggedIn && !supplierLoggedIn ? (
+                <MenuItem onClick={() => handleClose("/company/login")}>
+                  Yrityskirjautuminen
                 </MenuItem>
               ) : null}
             </Menu>

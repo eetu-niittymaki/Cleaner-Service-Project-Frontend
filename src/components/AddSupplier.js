@@ -3,15 +3,13 @@ import { makeStyles } from "@material-ui/core/styles";
 import React, { useState, useEffect } from "react";
 import BackendConnection from "./BackendConnection.js";
 import "./styles/TextPage.css";
+import { PurpleButton } from "./CustomButtons";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
     //margin: theme.spacing(1),
     minWidth: "100%",
     marginBottom: theme.spacing(2),
-  },
-  selectEmpty: {
-    marginTop: theme.spacing(2),
   },
 }));
 
@@ -185,7 +183,7 @@ const AddSupplier = () => {
         </form>
         <Grid className={styles.info} container spacing={1} p={2} m={2}>
           <Grid item xs={6} ml={2}>
-            <Button
+            <PurpleButton
               variant="outlined"
               size="large"
               color="primary"
@@ -194,10 +192,10 @@ const AddSupplier = () => {
               onClick={() => (window.location.href = "/admin")}
             >
               Takaisin
-            </Button>
+            </PurpleButton>
           </Grid>
           <Grid item xs={6}>
-            <Button
+            <PurpleButton
               variant="outlined"
               size="large"
               color="primary"
@@ -205,7 +203,7 @@ const AddSupplier = () => {
               onClick={handleClick}
             >
               Lisää yritys
-            </Button>
+            </PurpleButton>
           </Grid>
         </Grid>
       </div>

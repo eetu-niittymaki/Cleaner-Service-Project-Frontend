@@ -1,8 +1,9 @@
-import { TextField, Button, Grid } from "@material-ui/core";
+import { TextField, Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import React, { useState, useEffect } from "react";
 import "./styles/TextPage.css";
 import BackendConnection from "./BackendConnection.js";
+import { PurpleButton } from "./CustomButtons";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -16,7 +17,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const AdminModifyCompanyData = ({ cData, update, cDelete }) => {
-
   const [company, setCompany] = useState(null);
 
   const styles = useStyles();
@@ -40,10 +40,8 @@ const AdminModifyCompanyData = ({ cData, update, cDelete }) => {
 
   useEffect(() => {
     const loadCompanyData = async () => {
-      
-        setCompany(cData);
-        fillValues(cData);
-      
+      setCompany(cData);
+      fillValues(cData);
     };
     loadCompanyData();
   }, []);
@@ -62,7 +60,7 @@ const AdminModifyCompanyData = ({ cData, update, cDelete }) => {
   };
 
   const modify = async () => {
-    console.log("modify")
+    console.log("modify");
     if (checkValues()) {
       await BackendConnection.modifySupplier(
         cData.supplier_id,
@@ -71,12 +69,13 @@ const AdminModifyCompanyData = ({ cData, update, cDelete }) => {
         city,
         postcode,
         phone,
-        email);
+        email
+      );
       update();
     } else {
-      alert("Please fill all values")
+      alert("Please fill all values");
     }
-  }
+  };
 
   if (company === null) {
     return (
@@ -86,74 +85,73 @@ const AdminModifyCompanyData = ({ cData, update, cDelete }) => {
     );
   } else {
     return (
-      
-        <div>
-          <div className="TextContainer">
-            <form
-              style={{ textAlign: "left", marginBottom: 30 }}
-              autoComplete="false"
-            >
-              <TextField
-                className={styles.formControl}
-                required
-                id="modify-name"
-                label="Yrityksen nimi"
-                //placeholder="Yrityksen nimi"
-                value={name}
-                variant="outlined"
-                onChange={(event) => setName(event.target.value)}
-              />
-              <TextField
-                className={styles.formControl}
-                required
-                id="modify-phone"
-                label="Puhelinnumero"
-                //placeholder="Puhelinnumero"
-                value={phone}
-                variant="outlined"
-                onChange={(event) => setPhone(event.target.value)}
-              />
-              <TextField
-                className={styles.formControl}
-                required
-                id="modify-address"
-                label="Osoite"
-                //placeholder="Osoite"
-                value={address}
-                variant="outlined"
-                onChange={(event) => setAddress(event.target.value)}
-              />
-              <TextField
-                className={styles.formControl}
-                required
-                id="modify-postcode"
-                label="Postinumero"
-                //placeholder="Postinumero"
-                value={postcode}
-                variant="outlined"
-                onChange={(event) => setPostcode(event.target.value)}
-              />
-              <TextField
-                className={styles.formControl}
-                required
-                id="modify-city"
-                label="Postitoimipaikka"
-                //placeholder="Postitoimipaikka"
-                value={city}
-                variant="outlined"
-                onChange={(event) => setCity(event.target.value)}
-              />
-              <TextField
-                className={styles.formControl}
-                required
-                id="modify-email"
-                label="Sähköpostiosoite"
-                //placeholder="Sähköpostiosoite"
-                value={email}
-                variant="outlined"
-                onChange={(event) => setEmail(event.target.value)}
-              />
-              {/* <TextField
+      <div>
+        <div className="TextContainer">
+          <form
+            style={{ textAlign: "left", marginBottom: 30 }}
+            autoComplete="false"
+          >
+            <TextField
+              className={styles.formControl}
+              required
+              id="modify-name"
+              label="Yrityksen nimi"
+              //placeholder="Yrityksen nimi"
+              value={name}
+              variant="outlined"
+              onChange={(event) => setName(event.target.value)}
+            />
+            <TextField
+              className={styles.formControl}
+              required
+              id="modify-phone"
+              label="Puhelinnumero"
+              //placeholder="Puhelinnumero"
+              value={phone}
+              variant="outlined"
+              onChange={(event) => setPhone(event.target.value)}
+            />
+            <TextField
+              className={styles.formControl}
+              required
+              id="modify-address"
+              label="Osoite"
+              //placeholder="Osoite"
+              value={address}
+              variant="outlined"
+              onChange={(event) => setAddress(event.target.value)}
+            />
+            <TextField
+              className={styles.formControl}
+              required
+              id="modify-postcode"
+              label="Postinumero"
+              //placeholder="Postinumero"
+              value={postcode}
+              variant="outlined"
+              onChange={(event) => setPostcode(event.target.value)}
+            />
+            <TextField
+              className={styles.formControl}
+              required
+              id="modify-city"
+              label="Postitoimipaikka"
+              //placeholder="Postitoimipaikka"
+              value={city}
+              variant="outlined"
+              onChange={(event) => setCity(event.target.value)}
+            />
+            <TextField
+              className={styles.formControl}
+              required
+              id="modify-email"
+              label="Sähköpostiosoite"
+              //placeholder="Sähköpostiosoite"
+              value={email}
+              variant="outlined"
+              onChange={(event) => setEmail(event.target.value)}
+            />
+            {/* <TextField
               className={styles.formControl}
               required
               id="modify-description"
@@ -166,33 +164,33 @@ const AdminModifyCompanyData = ({ cData, update, cDelete }) => {
               variant="outlined"
               onChange={(event) => setDescription(event.target.value)}
             /> */}
-            </form>
-            <Grid className={styles.info} container spacing={1} p={2} m={2}>
-              <Grid item xs={6} ml={2}>
-                <Button
-                  variant="outlined"
-                  size="large"
-                  color="primary"
-                  fullWidth
-                  onClick={() => modify()}
-                >
-                  Tallenna
-                </Button>
-              </Grid>
-              <Grid item xs={6}>
-                <Button
-                  variant="outlined"
-                  size="large"
-                  color="primary"
-                  fullWidth
-                  onClick={()=>cDelete()}
-                >
-                  Poista
-                </Button>
-              </Grid>
+          </form>
+          <Grid className={styles.info} container spacing={1} p={2} m={2}>
+            <Grid item xs={6} ml={2}>
+              <PurpleButton
+                variant="outlined"
+                size="large"
+                color="primary"
+                fullWidth
+                onClick={() => modify()}
+              >
+                Tallenna
+              </PurpleButton>
             </Grid>
-          </div>
+            <Grid item xs={6}>
+              <PurpleButton
+                variant="outlined"
+                size="large"
+                color="primary"
+                fullWidth
+                onClick={() => cDelete()}
+              >
+                Poista
+              </PurpleButton>
+            </Grid>
+          </Grid>
         </div>
+      </div>
     );
   }
 };
