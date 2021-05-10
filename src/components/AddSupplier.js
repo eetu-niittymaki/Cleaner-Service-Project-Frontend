@@ -1,6 +1,6 @@
-import { TextField, Button, Grid } from "@material-ui/core";
+import { TextField, Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import BackendConnection from "./BackendConnection.js";
 import "./styles/TextPage.css";
 import { PurpleButton } from "./CustomButtons";
@@ -37,8 +37,6 @@ const AddSupplier = () => {
   const [description, setDescription] = useState("");
 
   const handleClick = () => {
-    //TODO: send data to db
-    // (name, supplierDescription, streetAddress, city, postcode, phone, email, password)
     if (checkValues()) {
       console.log("post values and go to adminpage");
       console.log(`Sending this data with axios post
@@ -52,9 +50,7 @@ const AddSupplier = () => {
         ${password}`);
       BackendConnection.postNewSupplier({
         name: name,
-        //supplierDescription: description,
         supplier_description: description,
-        //streetAddress: address,
         street_address: address,
         city: city,
         postcode: postcode,
@@ -188,7 +184,6 @@ const AddSupplier = () => {
               size="large"
               color="primary"
               fullWidth
-              // TODO: go somewhere or something
               onClick={() => (window.location.href = "/admin")}
             >
               Takaisin
