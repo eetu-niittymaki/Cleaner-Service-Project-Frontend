@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import BackendConnection from "./BackendConnection";
 import "./styles/TextPage.css";
 import CompOffReqBox from "./CompOffReqBox";
+import { PurpleButton } from "./CustomButtons";
 
 const useStyles = makeStyles((theme) => ({
   backButton: {
@@ -59,14 +60,14 @@ const CustomerOfferRequests = ({ customerEmail }) => {
       <div>
         <h1>Tässä saapuneet tarjouspyynnöt:</h1>
         {showOfferList()}
-        <Button
+        <PurpleButton
           variant="outlined"
           size="large"
           color="primary"
           onClick={() => (window.location.href = "/mypage/customer")}
         >
           Takaisin
-        </Button>
+        </PurpleButton>
       </div>
     );
   }
