@@ -9,6 +9,8 @@ import React, { useState, useEffect } from "react";
 import "./styles/TextPage.css";
 import SpecialOfferDataBox from "./SpecialOfferDataBox";
 import BackendConnection from "./BackendConnection";
+import { CustomTextField } from "./CustomTextField";
+import { PurpleButton } from "./CustomButtons";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -41,18 +43,18 @@ const OrderForm = () => {
   const getButton = () => {
     if (acceptTerms) {
       return (
-        <Button
+        <PurpleButton
           variant="outlined"
           size="large"
           color="primary"
           onClick={() => (window.location.href = "/")}
         >
           Vahvista tilaus
-        </Button>
+        </PurpleButton>
       );
     } else {
       return (
-        <Button
+        <PurpleButton
           variant="outlined"
           size="large"
           color="primary"
@@ -60,7 +62,7 @@ const OrderForm = () => {
           //onClick={() => (window.location.href = "/")}
         >
           Vahvista tilaus
-        </Button>
+        </PurpleButton>
       );
     }
   };
@@ -87,7 +89,7 @@ const OrderForm = () => {
             <form style={{ textAlign: "left" }}>
               <h3>Asiakkaan tiedot:</h3>
               <div>
-                <TextField
+                <CustomTextField
                   className={styles.formControl}
                   required
                   id="orderform_firstname"
@@ -95,7 +97,7 @@ const OrderForm = () => {
                   placeholder="Etunimi"
                   variant="outlined"
                 />
-                <TextField
+                <CustomTextField
                   className={styles.formControl}
                   required
                   id="orderform_lastname"
@@ -105,7 +107,7 @@ const OrderForm = () => {
                 />
               </div>
               <div>
-                <TextField
+                <CustomTextField
                   className={styles.formControl}
                   required
                   id="orderfrom_address"
@@ -115,7 +117,7 @@ const OrderForm = () => {
                 />
               </div>
               <div>
-                <TextField
+                <CustomTextField
                   className={styles.formControl}
                   required
                   id="orderform_postcode"
@@ -123,7 +125,7 @@ const OrderForm = () => {
                   placeholder="Postinumero"
                   variant="outlined"
                 />
-                <TextField
+                <CustomTextField
                   className={styles.formControl}
                   required
                   id="orderform_city"
@@ -133,7 +135,7 @@ const OrderForm = () => {
                 />
               </div>
               <div>
-                <TextField
+                <CustomTextField
                   className={styles.formControl}
                   id="orderform_phone"
                   label="Puhelinnumero"
@@ -142,7 +144,7 @@ const OrderForm = () => {
                 />
               </div>
               <div>
-                <TextField
+                <CustomTextField
                   className={styles.formControl}
                   required
                   id="orderform_email"
@@ -152,7 +154,7 @@ const OrderForm = () => {
                   variant="outlined"
                 />
               </div>
-              <TextField
+              <CustomTextField
                 className={styles.formControl}
                 id="orderform_optionalinfo"
                 label="Lisätietoa"
