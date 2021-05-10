@@ -58,10 +58,6 @@ const HeaderComponent = () => {
   const [supplierLoggedIn, setSupplierLoggedIn] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
 
-  // const PORT = (8080 || process.env.PORT)
-
-  // this is not working currently
-
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
     console.log("Clicked menu button");
@@ -107,6 +103,7 @@ const HeaderComponent = () => {
     }
   };
 
+  /* moved this to CompanyLogin component -Hanna
   const handleCompanyLogin = async () => {
     if (email && password) {
       const login = await axios.post(
@@ -130,6 +127,7 @@ const HeaderComponent = () => {
       alert("Anna sähköposti ja salasana");
     }
   };
+  */
 
   const clickedLogin = () => {
     console.log("clicked login button");
@@ -348,14 +346,18 @@ const HeaderComponent = () => {
               ) : null}
               {customerLoggedIn ? (
                 <MenuItem onClick={() => handleClose("/mypage/customer/")}>
-                  Customer myPages
+                  Asiakkaan omat sivut
                 </MenuItem>
               ) : null}
               {supplierLoggedIn ? (
                 <MenuItem onClick={() => handleClose("/mypage/company/")}>
-                  Company myPages
+                  Yrityksen omat sivut
                 </MenuItem>
-              ) : null}
+              ) : (
+                <MenuItem onClick={() => handleClose("/company/login")}>
+                  Yrityskirjautuminen
+                </MenuItem>
+              )}
             </Menu>
           </Grid>
         </Grid>
