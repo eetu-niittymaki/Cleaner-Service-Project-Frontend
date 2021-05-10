@@ -20,6 +20,7 @@ import ModifyCustomerData from "./ModifyCustomerData";
 import CustomerOfferRequests from "./CustomerOfferRequests";
 import Signup from "./Signup";
 import AddSupplier from "./AddSupplier";
+import CompanyLogin from "./CompanyLogin";
 
 const App = () => {
   // const exampleCompanyData = {
@@ -78,7 +79,6 @@ const App = () => {
     return <HeaderComponent setToken={setToken} />;
   }
   */
-  
 
   /*
   const customerLogin = (id) => {
@@ -88,18 +88,18 @@ const App = () => {
   */
 
   useEffect(() => {
-    const getCustomer = localStorage.getItem('user')
+    const getCustomer = localStorage.getItem("user");
     if (getCustomer) {
-      setLoggedInCustomerId(Number(getCustomer))
+      setLoggedInCustomerId(Number(getCustomer));
     }
-  }, [loggedInCustomerId])
+  }, [loggedInCustomerId]);
 
   useEffect(() => {
-    const getCompany = localStorage.getItem('company')
+    const getCompany = localStorage.getItem("company");
     if (getCompany) {
-      setLoggedInCompanyId(Number(getCompany))
+      setLoggedInCompanyId(Number(getCompany));
     }
-  }, [loggedInCompanyId])
+  }, [loggedInCompanyId]);
 
   return (
     <div className="AppBackground">
@@ -120,7 +120,6 @@ const App = () => {
             </Route>
             <Route path="/orderform/:id">
               <OrderForm />
-              {/* <OrderForm specialOfferId={1} /> */}
             </Route>
             <Route exact path="/privacy">
               <PrivacyPolicy />
@@ -136,6 +135,9 @@ const App = () => {
             </Route>
             <Route exact path="/mypage/customer">
               <CustomerFront customerId={loggedInCustomerId} />
+            </Route>
+            <Route exact path="/company/login">
+              <CompanyLogin />
             </Route>
             <Route exact path="/mypage/company/createspecialoffer">
               <CreateSpecialOffer companyId={loggedInCompanyId} />
