@@ -2,6 +2,7 @@ import { TextField, Button, Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import React, { useState, useEffect } from "react";
 import "./styles/TextPage.css";
+import { PurpleButton } from "./CustomButtons";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -48,15 +49,12 @@ const AdminModifyOfferData = ({ oData, update, oDelete }) => {
     setDescription(comp.product_description);
     setPrice(comp.product_price);
     //setDuration(comp.postcode);
-    
   };
 
   useEffect(() => {
     const loadCompanyData = async () => {
-      
-        setOffer(oData);
-        fillValues(oData);
-      
+      setOffer(oData);
+      fillValues(oData);
     };
     loadCompanyData();
   }, []);
@@ -67,74 +65,74 @@ const AdminModifyOfferData = ({ oData, update, oDelete }) => {
   };
 
   return (
-      <div>
-        <div className="TextContainer">
-          <form
-            style={{ textAlign: "left", marginBottom: 30 }}
-            autoComplete="false"
-          >
-            <TextField
-              className={styles.formControl}
-              required
-              id="special-offer-title"
-              label="Otsikko"
-              placeholder="Otsikko"
-              value={title}
+    <div>
+      <div className="TextContainer">
+        <form
+          style={{ textAlign: "left", marginBottom: 30 }}
+          autoComplete="false"
+        >
+          <TextField
+            className={styles.formControl}
+            required
+            id="special-offer-title"
+            label="Otsikko"
+            placeholder="Otsikko"
+            value={title}
+            variant="outlined"
+            onChange={(event) => setTitle(event.target.value)}
+          />
+          <TextField
+            className={styles.formControl}
+            required
+            id="special-offer-price"
+            label="Hinta"
+            placeholder="Hinta"
+            value={price}
+            variant="outlined"
+            onChange={(event) => setPrice(event.target.value)}
+          />
+          <TextField
+            className={styles.formControl}
+            required
+            id="description"
+            label="Kuvaus"
+            fullWidth
+            multiline
+            rows={4}
+            rowsMax={7}
+            placeholder="Anna tarkempi kuvaus siivouksen yksityiskohdista."
+            value={description}
+            variant="outlined"
+            onChange={(event) => setDescription(event.target.value)}
+          />
+        </form>
+        <Grid className={styles.info} container spacing={1} p={2} m={2}>
+          <Grid item xs={6} ml={2}>
+            <PurpleButton
               variant="outlined"
-              onChange={(event) => setTitle(event.target.value)}
-            />
-            <TextField
-              className={styles.formControl}
-              required
-              id="special-offer-price"
-              label="Hinta"
-              placeholder="Hinta"
-              value={price}
-              variant="outlined"
-              onChange={(event) => setPrice(event.target.value)}
-            />
-            <TextField
-              className={styles.formControl}
-              required
-              id="description"
-              label="Kuvaus"
+              size="large"
+              color="primary"
               fullWidth
-              multiline
-              rows={4}
-              rowsMax={7}
-              placeholder="Anna tarkempi kuvaus siivouksen yksityiskohdista."
-              value={description}
-              variant="outlined"
-              onChange={(event) => setDescription(event.target.value)}
-            />
-          </form>
-          <Grid className={styles.info} container spacing={1} p={2} m={2}>
-            <Grid item xs={6} ml={2}>
-              <Button
-                variant="outlined"
-                size="large"
-                color="primary"
-                fullWidth
-                onClick={() => update()}
-              >
-                Tallenna
-              </Button>
-            </Grid>
-            <Grid item xs={6}>
-              <Button
-                variant="outlined"
-                size="large"
-                color="primary"
-                fullWidth
-                onClick={() => oDelete()}
-              >
-                Poista
-              </Button>
-            </Grid>
+              onClick={() => update()}
+            >
+              Tallenna
+            </PurpleButton>
           </Grid>
-        </div>
+          <Grid item xs={6}>
+            <PurpleButton
+              variant="outlined"
+              size="large"
+              color="primary"
+              fullWidth
+              onClick={() => oDelete()}
+            >
+              Poista
+            </PurpleButton>
+          </Grid>
+        </Grid>
       </div>
+    </div>
   );
-}
+};
 
 export default AdminModifyOfferData;
