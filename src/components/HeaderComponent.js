@@ -18,17 +18,26 @@ import {
 import MenuIcon from "@material-ui/icons/Menu";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import logo from "./img/cleanbuddy_logo.png";
+import { HeaderButton } from "./CustomButtons";
 
 const useStyles = makeStyles((theme) => ({
-  title: {
-    marginTop: 30,
-    marginBottom: 30,
-    //marginLeft: 20,
+  root: {
+    background: "#E66CC4",
+    textAlign: "center",
+  },
+  logoBlock: {
     display: "block",
-    textAlign: "left",
+    [theme.breakpoints.down("sm")]: { marginTop: 10 },
+    [theme.breakpoints.up("sm")]: { marginTop: 30, marginBottom: 30 },
+  },
+  logoImage: {
+    height: "100%",
+    maxHeight: 250,
   },
   button: {
-    margin: 10,
+    [theme.breakpoints.down("sm")]: { marginBottom: 10 },
+    [theme.breakpoints.up("sm")]: { marginTop: 10 },
   },
   login: {
     //margin: 50,
@@ -180,8 +189,8 @@ const HeaderComponent = () => {
   const loginOrLogoutButton = () => {
     if (loggedIn === false) {
       return (
-        <Grid item xs={6} sm={3}>
-          <Button
+        <Grid item>
+          <HeaderButton
             className={classes.button}
             size="large"
             variant="outlined"
@@ -190,7 +199,7 @@ const HeaderComponent = () => {
             onClick={clickedLogin}
           >
             Login
-          </Button>
+          </HeaderButton>
           <Dialog
             open={open}
             maxWidth="sm"
@@ -256,8 +265,8 @@ const HeaderComponent = () => {
       );
     } else {
       return (
-        <Grid item xs={6} sm={3}>
-          <Button
+        <Grid item>
+          <HeaderButton
             className={classes.button}
             size="large"
             variant="outlined"
@@ -266,29 +275,36 @@ const HeaderComponent = () => {
             onClick={clickedLogout}
           >
             Logout
-          </Button>
+          </HeaderButton>
         </Grid>
       );
     }
   };
 
   return (
-    <AppBar position="static">
+    <AppBar position="static" className={classes.root}>
       <Toolbar>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={6}>
-            <Link style={{ textDecoration: "none", color: "white" }} to="/">
-              <div className={classes.title}>
-                <Typography variant="h3">CleanBuddy</Typography>
+            <Link className={classes.frontLink} to="/">
+              <div className={classes.logoBlock}>
+                <img
+                  src={logo}
+                  alt="CleanBuddy logo"
+                  className={classes.logoImage}
+                />
+                {/* <Typography variant="h3">CleanBuddy</Typography> */}
                 <Typography variant="h6">
                   Siivouspalvelut helposti netistä
                 </Typography>
               </div>
             </Link>
           </Grid>
-          {loginOrLogoutButton()}
           <Grid item xs={6} sm={3}>
-            <Button
+            {loginOrLogoutButton()}
+          </Grid>
+          <Grid item xs={6} sm={3}>
+            <HeaderButton
               className={classes.button}
               size="large"
               variant="outlined"
@@ -298,7 +314,7 @@ const HeaderComponent = () => {
               fullWidth
             >
               Menu
-            </Button>
+            </HeaderButton>
             <Menu
               id="simple-menu"
               anchorEl={anchorEl}

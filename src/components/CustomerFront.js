@@ -3,6 +3,7 @@ import Connection from "./BackendConnection";
 import { Grid, Box, Button } from "@material-ui/core";
 import React, { useState, useEffect } from "react";
 import "./styles/TextPage.css";
+import { PurpleButton } from "./CustomButtons";
 
 const useStyles = makeStyles((theme) => ({
   info: {
@@ -38,9 +39,15 @@ const CustomerFront = ({ customerId }) => {
     const loadCustomerData = async () => {
       const temp = await Connection.getAllCustomers();
       if (temp.length > 0) {
-        console.log(customerId)
+        console.log(customerId);
         const index = temp.findIndex((cust) => cust.customer_id === customerId);
-        setCustomer(temp[index])
+        setCustomer(temp[index]);
+        /*
+        // TODO: save filtered result to a new variable and then setCustomer
+        // now this uses the first customer that exists in the db
+        temp.filter((cust) => cust.customer_id === customerId);
+        setCustomer(temp[0]);
+        */
       }
     };
     loadCustomerData();
@@ -59,7 +66,7 @@ const CustomerFront = ({ customerId }) => {
         <Box m={1} p={2}>
           <Grid className={styles.info} container spacing={1} p={2} mb={2}>
             <Grid item xs={12} sm={6}>
-              <Button
+              <PurpleButton
                 variant="outlined"
                 size="large"
                 color="primary"
@@ -67,10 +74,10 @@ const CustomerFront = ({ customerId }) => {
                 //onClick={() => (window.location.href = "/")}
               >
                 Ostohistoria
-              </Button>
+              </PurpleButton>
             </Grid>
             <Grid item xs={12} sm={6}>
-              <Button
+              <PurpleButton
                 variant="outlined"
                 size="large"
                 color="primary"
@@ -80,7 +87,7 @@ const CustomerFront = ({ customerId }) => {
                 }
               >
                 Katso tarjouspyynnöt
-              </Button>
+              </PurpleButton>
             </Grid>
           </Grid>
         </Box>
@@ -131,7 +138,7 @@ const CustomerFront = ({ customerId }) => {
             </Grid>
           </Grid>
           <div className={styles.info}>
-            <Button
+            <PurpleButton
               variant="outlined"
               size="large"
               color="primary"
@@ -140,7 +147,7 @@ const CustomerFront = ({ customerId }) => {
               }
             >
               Muokkaa tietoja
-            </Button>
+            </PurpleButton>
           </div>
         </Box>
         {/* <Box border={1} m={2} p={3}>

@@ -102,70 +102,72 @@ const App = () => {
   }, [loggedInCompanyId])
 
   return (
-    <BrowserRouter>
-      <div className="App">
-        <HeaderComponent />
-        {/* A <Switch> looks through its children <Route>s and
+    <div className="AppBackground">
+      <BrowserRouter>
+        <div className="App">
+          <HeaderComponent />
+          {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
-        <Switch>
-          <Route exact path="/info">
-            <InfoPage />
-          </Route>
-          <Route exact path="/companies">
-            <CompaniesPage />
-          </Route>
-          <Route exact path="/offerRequest">
-            <OfferRequest />
-          </Route>
-          <Route path="/orderform/:id">
-            <OrderForm />
-            {/* <OrderForm specialOfferId={1} /> */}
-          </Route>
-          <Route exact path="/privacy">
-            <PrivacyPolicy />
-          </Route>
-          <Route exact path="/signup">
-            <Signup />
-          </Route>
-          <Route exact path="/mypage/customer/modifydata">
-            <ModifyCustomerData customerId={loggedInCustomerId} />
-          </Route>
-          <Route exact path="/mypage/customer/myofferrequests">
-            <CustomerOfferRequests />
-          </Route>
-          <Route exact path="/mypage/customer">
-            <CustomerFront customerId={loggedInCustomerId} />
-          </Route>
-          <Route exact path="/mypage/company/createspecialoffer">
-            <CreateSpecialOffer companyId={loggedInCompanyId} />
-          </Route>
-          <Route exact path="/mypage/company/myspecialoffers">
-            <MySpecialOffers />
-          </Route>
-          <Route exact path="/mypage/company/myofferrequests">
-            <CompanyOfferRequests />
-          </Route>
-          <Route exact path="/mypage/company/modifydata">
-            <ModifyCompanyData companyId={loggedInCompanyId} />
-          </Route>
-          <Route exact path="/mypage/company">
-            <CompanyFront companyId={loggedInCompanyId} />
-          </Route>
-          <Route exact path="/admin/addsupplier">
-            <AddSupplier />
-          </Route>
-          <Route exact path="/admin">
-            <AdminPage />
-          </Route>
-          <Route exact path="/">
-            <MainPage />
-          </Route>
-          <Route path="*">
-            <MainPage />
-          </Route>
-        </Switch>
-      </div>
-    </BrowserRouter>
+          <Switch>
+            <Route exact path="/info">
+              <InfoPage />
+            </Route>
+            <Route exact path="/companies">
+              <CompaniesPage />
+            </Route>
+            <Route exact path="/offerRequest">
+              <OfferRequest />
+            </Route>
+            <Route path="/orderform/:id">
+              <OrderForm />
+              {/* <OrderForm specialOfferId={1} /> */}
+            </Route>
+            <Route exact path="/privacy">
+              <PrivacyPolicy />
+            </Route>
+            <Route exact path="/signup">
+              <Signup />
+            </Route>
+            <Route exact path="/mypage/customer/modifydata">
+              <ModifyCustomerData customerId={loggedInCustomerId} />
+            </Route>
+            <Route exact path="/mypage/customer/myofferrequests">
+              <CustomerOfferRequests />
+            </Route>
+            <Route exact path="/mypage/customer">
+              <CustomerFront customerId={loggedInCustomerId} />
+            </Route>
+            <Route exact path="/mypage/company/createspecialoffer">
+              <CreateSpecialOffer companyId={loggedInCompanyId} />
+            </Route>
+            <Route exact path="/mypage/company/myspecialoffers">
+              <MySpecialOffers />
+            </Route>
+            <Route exact path="/mypage/company/myofferrequests">
+              <CompanyOfferRequests />
+            </Route>
+            <Route exact path="/mypage/company/modifydata">
+              <ModifyCompanyData companyId={loggedInCompanyId} />
+            </Route>
+            <Route exact path="/mypage/company">
+              <CompanyFront companyId={loggedInCompanyId} />
+            </Route>
+            <Route exact path="/admin/addsupplier">
+              <AddSupplier />
+            </Route>
+            <Route exact path="/admin">
+              <AdminPage />
+            </Route>
+            <Route exact path="/">
+              <MainPage />
+            </Route>
+            <Route path="*">
+              <MainPage />
+            </Route>
+          </Switch>
+        </div>
+      </BrowserRouter>
+    </div>
   );
 };
 

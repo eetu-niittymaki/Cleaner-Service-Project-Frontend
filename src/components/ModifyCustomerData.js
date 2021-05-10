@@ -3,6 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import React, { useState, useEffect } from "react";
 import BackendConnection from "./BackendConnection.js";
 import "./styles/TextPage.css";
+import { PurpleButton } from "./CustomButtons";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -42,6 +43,8 @@ const ModifyCustomerData = ({ customerId }) => {
     const loadCompanyData = async () => {
       const temp = await BackendConnection.getAllCustomers();
       if (temp.length > 0) {
+        // TODO: save filtered result to variable, now this
+        // uses the first customer in the db
         temp.filter((cust) => cust.customer_id === customerId);
         setCustomer(temp[0]);
         fillValues(temp[0]);
@@ -159,7 +162,7 @@ const ModifyCustomerData = ({ customerId }) => {
           </form>
           <Grid className={styles.info} container spacing={1} p={2} m={2}>
             <Grid item xs={6} ml={2}>
-              <Button
+              <PurpleButton
                 variant="outlined"
                 size="large"
                 color="primary"
@@ -167,10 +170,10 @@ const ModifyCustomerData = ({ customerId }) => {
                 onClick={() => (window.location.href = "/mypage/customer")}
               >
                 Takaisin
-              </Button>
+              </PurpleButton>
             </Grid>
             <Grid item xs={6}>
-              <Button
+              <PurpleButton
                 variant="outlined"
                 size="large"
                 color="primary"
@@ -178,7 +181,7 @@ const ModifyCustomerData = ({ customerId }) => {
                 onClick={handleClick}
               >
                 Tallenna muutokset
-              </Button>
+              </PurpleButton>
             </Grid>
           </Grid>
         </div>
