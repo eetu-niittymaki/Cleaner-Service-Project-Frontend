@@ -30,7 +30,15 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down("sm")]: { marginTop: 10 },
     [theme.breakpoints.up("sm")]: { marginTop: 30, marginBottom: 30 },
   },
+  logoImage: {
+    height: "100%",
+    maxHeight: 250,
+  },
   button: {
+    backgroundColor: "#A6038D",
+    "&:hover": {
+      backgroundColor: "#7D076C",
+    },
     [theme.breakpoints.down("sm")]: { marginBottom: 10 },
     [theme.breakpoints.up("sm")]: { marginTop: 10 },
   },
@@ -240,7 +248,11 @@ const HeaderComponent = () => {
           <Grid item xs={12} sm={6}>
             <Link className={classes.frontLink} to="/">
               <div className={classes.logoBlock}>
-                <img src={logo} alt="CleanBuddy logo" />
+                <img
+                  src={logo}
+                  alt="CleanBuddy logo"
+                  className={classes.logoImage}
+                />
                 {/* <Typography variant="h3">CleanBuddy</Typography> */}
                 <Typography variant="h6">
                   Siivouspalvelut helposti netistä
