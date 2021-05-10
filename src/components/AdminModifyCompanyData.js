@@ -61,10 +61,10 @@ const AdminModifyCompanyData = ({ cData, update, cDelete }) => {
     );
   };
 
-  const modify = () => {
+  const modify = async () => {
     console.log("modify")
     if (checkValues()) {
-      BackendConnection.modifySupplier(
+      await BackendConnection.modifySupplier(
         cData.supplier_id,
         name,
         address,
@@ -72,7 +72,7 @@ const AdminModifyCompanyData = ({ cData, update, cDelete }) => {
         postcode,
         phone,
         email);
-        update();
+      update();
     } else {
       alert("Please fill all values")
     }

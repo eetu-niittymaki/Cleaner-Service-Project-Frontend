@@ -39,6 +39,7 @@ const AdminPage = () => {
       //TODO
       //check from backend if current user has admin rights
       const getAdmin = localStorage.getItem("admin")
+      console.log(getAdmin)
       if (getAdmin) {
         setAdminRights(true);
       }
@@ -131,6 +132,7 @@ const AdminPage = () => {
             <ul key={data.product_id}>
               <AdminModifyOfferData
                 oData = {data}
+                company = {companies.filter(co => co.supplier_id == data.supplier_id)}
                 update = {() => updateOffers()}
                 oDelete = {() => deleteOffer(data.product_id)}
               />

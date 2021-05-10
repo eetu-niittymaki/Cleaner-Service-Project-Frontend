@@ -59,18 +59,18 @@ const AdminModifyCustomerData = ({cData, update, cDelete}) => {
     );
   };
 
-  const modify = () => {
+  const modify = async () => {
     console.log("modify")
       if (checkValues()){
-      BackendConnection.modifyCustomer(
-        cData.customer_id,
-        firstName,
-        lastName,
-        address,
-        city,
-        postcode,
-        phone,
-        email);
+        await BackendConnection.modifyCustomer(
+          cData.customer_id,
+          firstName,
+          lastName,
+          address,
+          city,
+          postcode,
+          phone,
+          email);
         update();
       } else {
       alert("Please fill all values")
