@@ -1,4 +1,4 @@
-import { TextField, Button, Grid } from "@material-ui/core";
+import { TextField, Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import React, { useState, useEffect } from "react";
 import BackendConnection from "./BackendConnection.js";
@@ -39,7 +39,7 @@ const ModifyCustomerData = ({ customerId }) => {
   };
 
   useEffect(() => {
-    // Load all companies from database and search with given props companyId
+    // Load all customers from database and search with given props customerId
     const loadCompanyData = async () => {
       const temp = await BackendConnection.getAllCustomers();
       if (temp.length > 0) {
