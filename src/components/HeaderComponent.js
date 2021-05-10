@@ -18,8 +18,12 @@ import {
 import MenuIcon from "@material-ui/icons/Menu";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import logo from "./img/cleanbuddy_logo.png";
 
 const useStyles = makeStyles((theme) => ({
+  root: {
+    background: "#E66CC4",
+  },
   title: {
     marginTop: 30,
     marginBottom: 30,
@@ -45,7 +49,7 @@ const HeaderComponent = () => {
   const [adminRights, setAdminRights] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [loggedIn, setLoggedIn] = useState(false)
+  const [loggedIn, setLoggedIn] = useState(false);
 
   // const PORT = (8080 || process.env.PORT)
 
@@ -76,20 +80,25 @@ const HeaderComponent = () => {
         //`https://clean-buddy.herokuapp.com/api/auth/signin`,
         {
           email: email,
-          password: password
+          password: password,
         }
-      )
+      );
       if (login.status === 204 || login.status === 206) {
-        alert('Väärä sähköposti/salasana');
+        alert("Väärä sähköposti/salasana");
       } else if (login.status === 200) {
-        localStorage.setItem('token', login.data.token, 'customerId', login.data.customerId)
-        console.log(login.data.token)
-        setLoggedIn(true)
+        localStorage.setItem(
+          "token",
+          login.data.token,
+          "customerId",
+          login.data.customerId
+        );
+        console.log(login.data.token);
+        setLoggedIn(true);
         window.location.href = "/mypage/customer";
         handleModalClose();
       }
     } else {
-      alert('Anna sähköposti ja salasana')
+      alert("Anna sähköposti ja salasana");
     }
   };
 
@@ -100,8 +109,8 @@ const HeaderComponent = () => {
 
   const clickedLogout = () => {
     setLoggedIn(false);
-    localStorage.removeItem("token")
-    localStorage.removeItem("customerId")
+    localStorage.removeItem("token");
+    localStorage.removeItem("customerId");
     window.location.href = "/";
   };
 
@@ -125,12 +134,12 @@ const HeaderComponent = () => {
 
   // Checks local storage for user token
   useEffect(() => {
-    const loggedIn = localStorage.getItem('token')
+    const loggedIn = localStorage.getItem("token");
     if (loggedIn) {
-      setLoggedIn(true)
+      setLoggedIn(true);
     }
-  }, [])
- 
+  }, []);
+
   const classes = useStyles();
 
   const loginOrLogoutButton = () => {
@@ -225,13 +234,14 @@ const HeaderComponent = () => {
   };
 
   return (
-    <AppBar position="static">
+    <AppBar position="static" className={classes.root}>
       <Toolbar>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={6}>
             <Link style={{ textDecoration: "none", color: "white" }} to="/">
               <div className={classes.title}>
-                <Typography variant="h3">CleanBuddy</Typography>
+                <img src={logo} alt="CleanBuddy logo" />
+                {/* <Typography variant="h3">CleanBuddy</Typography> */}
                 <Typography variant="h6">
                   Siivouspalvelut helposti netistä
                 </Typography>
