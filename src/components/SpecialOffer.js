@@ -6,7 +6,7 @@ import { PurpleButton } from "./CustomButtons";
 
 const useStyles = makeStyles((theme) => ({
   container: {
-    backgroundColor: "#FFDEF1",
+    backgroundColor: "#fffcf4",
     padding: 10,
     borderRadius: 5,
   },
