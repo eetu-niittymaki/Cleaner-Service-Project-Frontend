@@ -39,8 +39,7 @@ const AdminPage = () => {
       //TODO
       //check from backend if current user has admin rights
       const getAdmin = localStorage.getItem("admin")
-      console.log(getAdmin)
-      if (getAdmin) {
+      if (getAdmin === "32533aefcf779e6c378d37c1cdc6e5abcc7f0fe35f59ce8b43bc308c2f1263ce08f35103c28d3d0370de1edb370b6c3013c3329fb8c6ea8c504c9fabbf52731f") {
         setAdminRights(true);
       }
     };
@@ -90,7 +89,7 @@ const AdminPage = () => {
   };
 
   const getContent = (selectedP) => {
-    if (selectedP == customersTxt) {
+    if (selectedP === customersTxt) {
       return (
         <div>
           <h1>Muokkaa asiakastietoja:</h1>
@@ -106,7 +105,7 @@ const AdminPage = () => {
           ))}
         </div>
       );
-    } else if (selectedPage == companiesTxt) {
+    } else if (selectedPage === companiesTxt) {
       return (
         <div>
           <h1>Muokkaa yritystietoja:</h1>
@@ -122,7 +121,7 @@ const AdminPage = () => {
           ))}
         </div>
       );
-    } else if (selectedPage == offersTxt) {
+    } else if (selectedPage === offersTxt) {
       //product_id
       return (
         <div>
@@ -132,7 +131,7 @@ const AdminPage = () => {
             <ul key={data.product_id}>
               <AdminModifyOfferData
                 oData = {data}
-                company = {companies.filter(co => co.supplier_id == data.supplier_id)}
+                company = {companies.filter(co => co.supplier_id === data.supplier_id)}
                 update = {() => updateOffers()}
                 oDelete = {() => deleteOffer(data.product_id)}
               />
@@ -140,7 +139,7 @@ const AdminPage = () => {
           ))}
         </div>
       );
-    } else if (selectedPage == supplierTxt) {
+    } else if (selectedPage === supplierTxt) {
       return (
         <div>
           <AddSupplier />
@@ -167,7 +166,7 @@ const AdminPage = () => {
             <Button
               variant="contained"
               size="large"
-              color={selectedPage == supplierTxt ? "primary" : "default"}
+              color={selectedPage === supplierTxt ? "primary" : "default"}
               onClick={() => setSelectedPage(supplierTxt)}
             >
               {supplierTxt}
@@ -175,7 +174,7 @@ const AdminPage = () => {
             <Button
               variant="contained"
               size="large"
-              color={selectedPage == customersTxt ? "primary" : "default"}
+              color={selectedPage === customersTxt ? "primary" : "default"}
               onClick={() => setSelectedPage(customersTxt)}
             >
               {customersTxt}
@@ -183,7 +182,7 @@ const AdminPage = () => {
             <Button
               variant="contained"
               size="large"
-              color={selectedPage == companiesTxt ? "primary" : "default"}
+              color={selectedPage === companiesTxt ? "primary" : "default"}
               onClick={() => setSelectedPage(companiesTxt)}
             >
               {companiesTxt}
@@ -191,7 +190,7 @@ const AdminPage = () => {
             <Button
               variant="contained"
               size="large"
-              color={selectedPage == offersTxt ? "primary" : "default"}
+              color={selectedPage === offersTxt ? "primary" : "default"}
               onClick={() => setSelectedPage(offersTxt)}
             >
               {offersTxt}

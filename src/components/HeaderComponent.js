@@ -93,7 +93,7 @@ const HeaderComponent = () => {
       if (login.status === 204 || login.status === 206) {
         alert("Väärä sähköposti/salasana");
       } else if (login.status === 200 && login.data.admin === true) {
-        localStorage.setItem("admin", true);
+        localStorage.setItem("admin", "32533aefcf779e6c378d37c1cdc6e5abcc7f0fe35f59ce8b43bc308c2f1263ce08f35103c28d3d0370de1edb370b6c3013c3329fb8c6ea8c504c9fabbf52731f");
         window.location.href = "/admin";
         handleModalClose();
       } else if (login.status === 200 && login.data.admin === false) {
@@ -110,8 +110,8 @@ const HeaderComponent = () => {
   const handleCompanyLogin = async () => {
     if (email && password) {
       const login = await axios.post(
-        //`http://localhost:8080/api/auth/supplier`,
-        `https://clean-buddy.herokuapp.com/api/auth/supplier`,
+        `http://localhost:8080/api/auth/supplier`,
+        //`https://clean-buddy.herokuapp.com/api/auth/supplier`,
         {
           email: email,
           password: password,
@@ -159,7 +159,7 @@ const HeaderComponent = () => {
     //TODO
     //check from backend if current user has admin rights
     const getAdmin = localStorage.getItem("admin");
-    if (getAdmin) {
+    if (getAdmin === "32533aefcf779e6c378d37c1cdc6e5abcc7f0fe35f59ce8b43bc308c2f1263ce08f35103c28d3d0370de1edb370b6c3013c3329fb8c6ea8c504c9fabbf52731f") {
       setAdminRights(true);
       setLoggedIn(true);
     }
