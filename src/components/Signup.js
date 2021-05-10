@@ -1,9 +1,9 @@
 import { TextField, Button, Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import React, { useState } from "react";
-import HeaderComponent from "./HeaderComponent";
 import BackendConnection from "./BackendConnection.js";
 import "./styles/TextPage.css";
+import { PurpleButton } from "./CustomButtons";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -141,7 +141,7 @@ const Signup = () => {
         </form>
         <Grid className={styles.info} container spacing={1} p={2} m={2}>
           <Grid item xs={6} ml={2}>
-            <Button
+            <PurpleButton
               variant="outlined"
               size="large"
               color="primary"
@@ -149,10 +149,10 @@ const Signup = () => {
               onClick={() => (window.location.href = "/")}
             >
               Takaisin
-            </Button>
+            </PurpleButton>
           </Grid>
           <Grid item xs={6}>
-            <Button
+            <PurpleButton
               variant="outlined"
               size="large"
               color="primary"
@@ -160,7 +160,7 @@ const Signup = () => {
               onClick={handleClick}
             >
               Luo käyttäjätili
-            </Button>
+            </PurpleButton>
           </Grid>
         </Grid>
       </div>
