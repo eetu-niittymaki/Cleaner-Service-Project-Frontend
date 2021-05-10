@@ -192,6 +192,7 @@ const ModifyCompanyData = ({ companyId }) => {
               rowsMax={7}
               placeholder="Yrityksen kuvaus"
               variant="outlined"
+              value={description}
               onChange={(event) => setDescription(event.target.value)}
             />
           </form>

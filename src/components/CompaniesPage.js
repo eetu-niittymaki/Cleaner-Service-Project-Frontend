@@ -37,13 +37,13 @@ const CompaniesPage = (props) => {
           console.log(
             "Got empty list from backend, using example data instead"
           );
-          setCompanies(exampleData);
+          //setCompanies(exampleData);
         } else {
           setCompanies(companiesListed);
         }
       } catch (err) {
         console.log("Error situation, using example data now.");
-        setCompanies(exampleData);
+        //setCompanies(exampleData);
         alert("Problem with loading supplier data from database");
       }
     };
