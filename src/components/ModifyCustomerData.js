@@ -43,11 +43,11 @@ const ModifyCustomerData = ({ customerId }) => {
     const loadCompanyData = async () => {
       const temp = await BackendConnection.getAllCustomers();
       if (temp.length > 0) {
-        // TODO: save filtered result to variable, now this
-        // uses the first customer in the db
-        temp.filter((cust) => cust.customer_id === customerId);
-        setCustomer(temp[0]);
-        fillValues(temp[0]);
+        const value = temp.filter((cust) => cust.customer_id === customerId);
+        if (value.length > 0) {
+          setCustomer(value[0]);
+          fillValues(value[0]);
+        }
       }
     };
     loadCompanyData();
