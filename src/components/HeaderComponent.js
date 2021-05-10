@@ -20,6 +20,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import logo from "./img/cleanbuddy_logo.png";
 import { HeaderButton, PurpleButton } from "./CustomButtons";
+import { CustomTextField } from "./CustomTextField";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -46,12 +47,12 @@ const useStyles = makeStyles((theme) => ({
     textDecoration: "none",
     color: "white",
   },
-  notchedOutline: {
-    borderColor: "yellow !important",
-  },
-  floatingLabelFocusStyle: {
-    color: "gray !important",
-  },
+  // notchedOutline: {
+  //   borderColor: "yellow !important",
+  // },
+  // floatingLabelFocusStyle: {
+  //   color: "gray !important",
+  // },
 }));
 
 const HeaderComponent = () => {
@@ -218,12 +219,12 @@ const HeaderComponent = () => {
                 Kirjaudu omille sivuillesi kirjoittamalla sähköpostiosoite ja
                 salasana.
               </DialogContentText> */}
-              <TextField
+              <CustomTextField
                 required
                 autoFocus
-                InputProps={{
-                  classes: { notchedOutline: classes.notchedOutline },
-                }}
+                // InputProps={{
+                //   classes: { notchedOutline: classes.notchedOutline },
+                // }}
                 InputLabelProps={{
                   className: classes.floatingLabelFocusStyle,
                 }}
@@ -236,12 +237,9 @@ const HeaderComponent = () => {
                 onChange={handleEmailChange}
                 fullWidth
               />
-              <TextField
+              <CustomTextField
                 required
                 autoFocus
-                InputProps={{
-                  classes: { notchedOutline: classes.notchedOutline },
-                }}
                 InputLabelProps={{
                   className: classes.floatingLabelFocusStyle,
                 }}
