@@ -22,6 +22,17 @@ const useStyles = makeStyles((theme) => ({
     minWidth: "100%",
     marginBottom: theme.spacing(2),
   },
+  button: {
+    borderWidth: 2,
+    borderColor: "#A6038D",
+    color: "#A6038D",
+    "&:hover": {
+      backgroundColor: "#A6038D",
+      borderColor: "rgb(100, 3, 82)",
+      borderWidth: 2,
+      color: "white",
+    },
+  },
 }));
 
 const OfferRequest = () => {
@@ -345,6 +356,7 @@ const OfferRequest = () => {
       </div>
       <div className="bottomButtons">
         <Button
+          className={styles.button}
           variant="outlined"
           size="large"
           color="primary"
