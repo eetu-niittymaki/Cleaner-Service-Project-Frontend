@@ -137,7 +137,7 @@ const AdminPage = () => {
               <AdminModifyOfferData
                 oData={data}
                 company={companies.filter(
-                  (co) => co.supplier_id == data.supplier_id
+                  (co) => co.supplier_id === data.supplier_id
                 )}
                 update={() => updateOffers()}
                 oDelete={() => deleteOffer(data.product_id)}
