@@ -19,6 +19,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import logo from "./img/cleanbuddy_logo.png";
+import { HeaderButton } from "./CustomButtons";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -35,10 +36,6 @@ const useStyles = makeStyles((theme) => ({
     maxHeight: 250,
   },
   button: {
-    backgroundColor: "#A6038D",
-    "&:hover": {
-      backgroundColor: "#7D076C",
-    },
     [theme.breakpoints.down("sm")]: { marginBottom: 10 },
     [theme.breakpoints.up("sm")]: { marginTop: 10 },
   },
@@ -154,7 +151,7 @@ const HeaderComponent = () => {
     if (loggedIn === false) {
       return (
         <Grid item>
-          <Button
+          <HeaderButton
             className={classes.button}
             size="large"
             variant="outlined"
@@ -163,7 +160,7 @@ const HeaderComponent = () => {
             onClick={clickedLogin}
           >
             Login
-          </Button>
+          </HeaderButton>
           <Dialog
             open={open}
             maxWidth="sm"
@@ -226,7 +223,7 @@ const HeaderComponent = () => {
     } else {
       return (
         <Grid item>
-          <Button
+          <HeaderButton
             className={classes.button}
             size="large"
             variant="outlined"
@@ -235,7 +232,7 @@ const HeaderComponent = () => {
             onClick={clickedLogout}
           >
             Logout
-          </Button>
+          </HeaderButton>
         </Grid>
       );
     }
@@ -264,7 +261,7 @@ const HeaderComponent = () => {
             {loginOrLogoutButton()}
           </Grid>
           <Grid item xs={6} sm={3}>
-            <Button
+            <HeaderButton
               className={classes.button}
               size="large"
               variant="outlined"
@@ -274,7 +271,7 @@ const HeaderComponent = () => {
               fullWidth
             >
               Menu
-            </Button>
+            </HeaderButton>
             <Menu
               id="simple-menu"
               anchorEl={anchorEl}
