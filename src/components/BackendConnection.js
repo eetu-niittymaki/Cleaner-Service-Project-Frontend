@@ -288,10 +288,22 @@ const modifySupplier = async (
 
 //not implemented in backend yet
 const modifyOffer = async (
-
+  offer_id,
+  name,
+  description,
+  price,
+  endsAt,
+  workHours,
+  isAvailable
 ) => {
   const result = await axios.put(`${baseUrl}offers`, { //offers url?
-
+    product_id: offer_id,
+    product_name: name,
+    product_description: description,
+    product_price: price,
+    ends_at: endsAt,
+    work_hours: workHours,
+    is_available: isAvailable,
   })
   return result.data
 }

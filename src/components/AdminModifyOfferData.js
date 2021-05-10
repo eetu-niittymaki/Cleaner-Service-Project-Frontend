@@ -2,6 +2,7 @@ import { TextField, Button, Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import React, { useState, useEffect } from "react";
 import "./styles/TextPage.css";
+import BackendConnection from "./BackendConnection.js";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -70,8 +71,16 @@ const AdminModifyOfferData = ({ oData, update, oDelete, company }) => {
   const modify = async () => {
     console.log("modify")
     if (checkValues()) {
-      
-      update()
+      await BackendConnection.modifyOffer(
+        oData.product_id,
+        title,
+        description,
+        price,
+        oData.ends_at,
+        duration,
+        oData.product_is_available
+      );
+      update();
     } else {
       alert("Please fill all values")
     }
@@ -126,18 +135,6 @@ const AdminModifyOfferData = ({ oData, update, oDelete, company }) => {
                 variant="outlined"
                 onChange={(event) => setDescription(event.target.value)}
               />
-              {/*
-              <TextField
-                className={styles.formControl}
-                required
-                id="special-offer-company"
-                label="Yritys"
-                placeholder="Yrityksen nimi"
-                value={companyName}
-                variant="outlined"
-                onChange={(event) => setCompanyName(event.target.value)}
-              />
-              */}
               <TextField
                 className={styles.formControl}
                 required
@@ -156,7 +153,7 @@ const AdminModifyOfferData = ({ oData, update, oDelete, company }) => {
                   size="large"
                   color="primary"
                   fullWidth
-                  onClick={() => update()}
+                  onClick={() => modify()}
                 >
                   Tallenna
                 </Button>
