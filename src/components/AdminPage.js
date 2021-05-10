@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./styles/TextPage.css";
 import { makeStyles } from "@material-ui/core/styles";
-import Button from "@material-ui/core/Button";
 import BackendConnection from "./BackendConnection";
 import AdminModifyCompanyData from "./AdminModifyCompanyData";
 import AdminModifyCustomerData from "./AdminModifyCustomerData";
@@ -14,6 +13,13 @@ const useStyles = makeStyles((theme) => ({
     //margin: theme.spacing(1),
     minWidth: "100%",
     marginBottom: theme.spacing(2),
+  },
+  activeButton: {
+    backgroundColor: "#7D076C",
+    color: "white",
+  },
+  defaultButton: {
+    backgroundColor: "default",
   },
 }));
 
@@ -161,33 +167,53 @@ const AdminPage = () => {
           <div>
             <br />
             <PurpleButton
+              className={
+                selectedPage === supplierTxt
+                  ? styles.activeButton
+                  : styles.defaultButton
+              }
               variant="contained"
               size="large"
-              color={selectedPage === supplierTxt ? "primary" : "default"}
+              //color={selectedPage === supplierTxt ? "primary" : "default"}
               onClick={() => setSelectedPage(supplierTxt)}
             >
               {supplierTxt}
             </PurpleButton>
             <PurpleButton
+              className={
+                selectedPage === customersTxt
+                  ? styles.activeButton
+                  : styles.defaultButton
+              }
               variant="contained"
               size="large"
-              color={selectedPage === customersTxt ? "primary" : "default"}
+              //color={selectedPage === customersTxt ? "primary" : "default"}
               onClick={() => setSelectedPage(customersTxt)}
             >
               {customersTxt}
             </PurpleButton>
             <PurpleButton
+              className={
+                selectedPage === companiesTxt
+                  ? styles.activeButton
+                  : styles.defaultButton
+              }
               variant="contained"
               size="large"
-              color={selectedPage === companiesTxt ? "primary" : "default"}
+              //color={selectedPage === companiesTxt ? "primary" : "default"}
               onClick={() => setSelectedPage(companiesTxt)}
             >
               {companiesTxt}
             </PurpleButton>
             <PurpleButton
+              className={
+                selectedPage === offersTxt
+                  ? styles.activeButton
+                  : styles.defaultButton
+              }
               variant="contained"
               size="large"
-              color={selectedPage === offersTxt ? "primary" : "default"}
+              //color={selectedPage === offersTxt ? "primary" : "default"}
               onClick={() => setSelectedPage(offersTxt)}
             >
               {offersTxt}
