@@ -296,7 +296,7 @@ const modifyOffer = async (
   workHours,
   isAvailable
 ) => {
-  const result = await axios.put(`${baseUrl}offers`, { //offers url?
+  const result = await axios.put(`${baseUrl}products/`, { //offers url?
     product_id: offer_id,
     product_name: name,
     product_description: description,
