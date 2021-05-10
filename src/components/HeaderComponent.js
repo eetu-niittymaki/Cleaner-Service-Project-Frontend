@@ -19,7 +19,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import logo from "./img/cleanbuddy_logo.png";
-import { HeaderButton } from "./CustomButtons";
+import { HeaderButton, PurpleButton } from "./CustomButtons";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -130,7 +130,7 @@ const HeaderComponent = () => {
   */
 
   const clickedLogin = () => {
-    console.log("clicked login button");
+    //console.log("clicked login button");
     handleModalOpen();
   };
 
@@ -243,20 +243,20 @@ const HeaderComponent = () => {
               </div>
             </DialogContent>
             <DialogActions>
-              <Button
+              <PurpleButton
                 variant="outlined"
                 onClick={handleModalClose}
                 color="primary"
               >
                 Peruuta
-              </Button>
-              <Button
+              </PurpleButton>
+              <PurpleButton
                 variant="outlined"
                 onClick={handleCustomerLogin}
                 color="primary"
               >
                 Kirjaudu sisään
-              </Button>
+              </PurpleButton>
             </DialogActions>
           </Dialog>
         </Grid>
@@ -353,11 +353,12 @@ const HeaderComponent = () => {
                 <MenuItem onClick={() => handleClose("/mypage/company/")}>
                   Yrityksen omat sivut
                 </MenuItem>
-              ) : (
+              ) : null}
+              {!adminRights && !customerLoggedIn && !supplierLoggedIn ? (
                 <MenuItem onClick={() => handleClose("/company/login")}>
                   Yrityskirjautuminen
                 </MenuItem>
-              )}
+              ) : null}
             </Menu>
           </Grid>
         </Grid>
