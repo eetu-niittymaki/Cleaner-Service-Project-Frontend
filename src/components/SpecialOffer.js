@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: 5,
   },
   leftColumn: {
-    backgroundColor: "#F8F9F6",
+    backgroundColor: "rgb(253, 236, 198)",
     borderRadius: 5,
     textAlign: "left",
     color: "black",
