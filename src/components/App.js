@@ -68,7 +68,7 @@ const App = () => {
             <Route exact path="/mypage/customer/modifydata">
               <ModifyCustomerData customerId={loggedInCustomerId} />
             </Route>
-            <Route exact path="/mypage/customer/myofferrequests">
+            <Route path="/mypage/customer/myofferrequests/:customerEmail">
               <CustomerOfferRequests />
             </Route>
             <Route exact path="/mypage/customer">
