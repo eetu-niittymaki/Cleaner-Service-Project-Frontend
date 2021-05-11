@@ -1,6 +1,7 @@
-import { Button, Grid, Box } from "@material-ui/core";
+import { Grid, Box } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import React, { useState, useEffect } from "react";
+import React from "react";
+import { PurpleButton } from "./CustomButtons";
 
 const useStyles = makeStyles((theme) => ({
   backButton: {
@@ -44,13 +45,13 @@ const CompanySpecialOffer = ({ specialOffer }) => {
             Siivoustunnit:
           </Grid>
           <Grid className={styles.rightColumn} item xs={7}>
-            {specialOffer.work_hours}
+            {specialOffer.work_hours} tuntia
           </Grid>
           <Grid className={styles.leftColumn} item xs={5}>
             Kokonaishinta:
           </Grid>
           <Grid className={styles.rightColumn} item xs={7}>
-            {specialOffer.product_price}
+            {specialOffer.product_price} euroa
           </Grid>
           <Grid className={styles.leftColumn} item xs={5}>
             Luotu:
@@ -72,16 +73,18 @@ const CompanySpecialOffer = ({ specialOffer }) => {
           </Grid>
         </Grid>
         <div className={styles.backButton}>
-          <Button
+          {/*TODO in the future: add possibility to modify specialoffer data */}
+          <PurpleButton
             variant="outlined"
             size="large"
+            disabled
             color="primary"
             //   onClick={() =>
             //     (window.location.href = "/mypage/company/myspecialoffers")
             //   }
           >
             Muokkaa
-          </Button>
+          </PurpleButton>
         </div>
       </Box>
     );
