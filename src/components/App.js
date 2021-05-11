@@ -142,7 +142,7 @@ const App = () => {
               <CreateSpecialOffer companyId={loggedInCompanyId} />
             </Route>
             <Route exact path="/mypage/company/myspecialoffers">
-              <MySpecialOffers />
+              <MySpecialOffers companyId={loggedInCompanyId} />
             </Route>
             <Route exact path="/mypage/company/myofferrequests">
               <CompanyOfferRequests />
