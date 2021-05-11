@@ -1,17 +1,19 @@
 import React from "react";
-import { Box, Grid, Button } from "@material-ui/core";
+import { Box, Grid } from "@material-ui/core";
 import "./styles/SpecialOffer.css";
 import { makeStyles } from "@material-ui/core/styles";
-import { PurpleButton } from "./CustomButtons";
+import { OrderButton } from "./CustomButtons";
+import bgImage from "./img/offerbg2.png";
 
 const useStyles = makeStyles((theme) => ({
   container: {
-    backgroundColor: "#fffcf4",
-    padding: 10,
+    //backgroundColor: "#fffcf4",
+    backgroundImage: "linear-gradient(45deg, rgb(253, 236, 198), #fffcf4)",
+    //padding: 10,
     borderRadius: 5,
   },
   leftColumn: {
-    backgroundColor: "rgb(253, 236, 198)",
+    //backgroundColor: "rgb(253, 236, 198)",
     borderRadius: 5,
     textAlign: "left",
     color: "black",
@@ -21,12 +23,21 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     color: "#A6038D",
+    //color: "white",
   },
-  // button: {
-  //   "&:hover": {
-  //     background: "#f00",
-  //   },
-  // },
+  price: {
+    [theme.breakpoints.down("sm")]: { paddingRight: 20 },
+    [theme.breakpoints.up("sm")]: { paddingTop: 0, paddingRight: 30 },
+    color: "white",
+  },
+  button: {
+    [theme.breakpoints.down("sm")]: { paddingRight: 10 },
+    [theme.breakpoints.up("sm")]: { paddingRight: 40 },
+    paddingTop: 10,
+    backgroundImage: `url(${bgImage})`,
+    backgroundSize: "cover",
+    height: "100%",
+  },
 }));
 
 const SpecialOffer = ({
@@ -50,22 +61,27 @@ const SpecialOffer = ({
             <p>Yritys: {companyName}</p>
           </div>
         </Grid>
-        <Grid item xs={12} sm={6} className={styles.rightColumn}>
-          <PurpleButton
-            className={styles.button}
-            //color="secondary"
-            size="large"
-            variant="contained"
-            onClick={() => (window.location.href = `/orderform/${id}`)}
-          >
-            Osta diili!
-            {/* <Link to={`/orderform/${id}`}>Osta diili! </Link> */}
-          </PurpleButton>
+        <Grid item xs={6} sm={6} className={styles.rightColumn}>
+          <div className={styles.button}>
+            <h2 className={styles.price}>{price} €</h2>
+            <OrderButton
+              color="#ff0000"
+              size="large"
+              variant="contained"
+              onClick={() => (window.location.href = `/orderform/${id}`)}
+            >
+              Osta diili!
+              {/* <Link to={`/orderform/${id}`}>Osta diili! </Link> */}
+            </OrderButton>
+          </div>
+        </Grid>
+        <Grid item xs={12} sm={12} className={styles.leftColumn}>
           <p>{description}</p>
         </Grid>
 
         {/* <Grid item xs={1} sm={2} /> */}
       </Grid>
+
       {/* <div className="OfferContainer">
         <div className="FlexIt1">
           <h2>{title}</h2>
