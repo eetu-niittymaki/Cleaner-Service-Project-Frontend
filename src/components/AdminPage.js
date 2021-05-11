@@ -36,12 +36,9 @@ const AdminPage = () => {
   const [customers, setCustomers] = useState([]);
   const [companies, setCompanies] = useState([]);
   const [offers, setOffers] = useState([]);
-  //const []
 
   useEffect(() => {
     const checkIfAdmin = async () => {
-      //TODO
-      //check from backend if current user has admin rights
       const getAdmin = localStorage.getItem("admin");
       console.log(getAdmin);
       if (getAdmin) {
@@ -68,29 +65,38 @@ const AdminPage = () => {
   };
 
   const updateCustomers = async () => {
-    await BackendConnection.getAllCustomers();
+    setCustomers(await BackendConnection.getAllCustomers());
+    await setSelectedPage(null);
+    setSelectedPage(customersTxt);
   };
   const updateCompanies = async () => {
-    await BackendConnection.getAllCompanies();
+    setCompanies(await BackendConnection.getAllCompanies());
+    await setSelectedPage(null);
+    setSelectedPage(companiesTxt);
   };
   const updateOffers = async () => {
-    await BackendConnection.getAllSpecialOffers();
+    setOffers(await BackendConnection.getAllSpecialOffers());
+    await setSelectedPage(null);
+    setSelectedPage(offersTxt)
   };
 
   const deleteCustomer = async (id) => {
-    await BackendConnection.deleteCustomer(id); //.then;
-    //setSelectedPage([]);
-    //setSelectedPage(customersTxt);
+    await BackendConnection.deleteCustomer(id);
+    setCustomers(await BackendConnection.getAllCustomers());
+    await setSelectedPage(null);
+    setSelectedPage(customersTxt);
   };
   const deleteCompany = async (id) => {
-    await BackendConnection.deleteSupplier(id); //.then;
-    //setSelectedPage([]);
-    //setSelectedPage(companiesTxt);
+    await BackendConnection.deleteSupplier(id);
+    setCompanies(await BackendConnection.getAllCompanies());
+    await setSelectedPage(null)
+    setSelectedPage(companiesTxt)
   };
   const deleteOffer = async (id) => {
-    await BackendConnection.deleteOffer(id); //.then;
-    //setSelectedPage([]);
-    //setSelectedPage(offersTxt);
+    await BackendConnection.deleteOffer(id);
+    setOffers(await BackendConnection.getAllSpecialOffers());
+    await setSelectedPage(null);
+    setSelectedPage(offersTxt);
   };
 
   const getContent = (selectedP) => {
