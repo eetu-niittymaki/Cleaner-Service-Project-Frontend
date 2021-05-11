@@ -1,9 +1,10 @@
-import { TextField, Grid } from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import React, { useState, useEffect } from "react";
 import BackendConnection from "./BackendConnection.js";
 import "./styles/TextPage.css";
 import { PurpleButton } from "./CustomButtons";
+import { CustomTextField } from "./CustomTextField";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -18,11 +19,10 @@ const CreateSpecialOffer = ({ companyId }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState(0);
-  //TODO: Change duration to real duration
   const [duration, setDuration] = useState(0);
 
   useEffect(() => {
-    // Load all companies from database and search with given props companyId
+    // Load all companies from database and get companyName
     const loadCompanyData = async () => {
       const temp = await BackendConnection.getAllCompanies();
       if (temp.length > 0) {
@@ -37,17 +37,6 @@ const CreateSpecialOffer = ({ companyId }) => {
   }, [companyId]);
 
   const handleClick = () => {
-    //TODO: send special order data and create new special offer
-    const offer = {
-      supplier_id: companyId,
-      product_name: title,
-      product_description: description,
-      product_price: price,
-      ends_at: "2021-05-20",
-      work_hours: duration,
-      product_is_available: 1,
-    };
-    //console.log(JSON.stringify(offer));
     if (checkValues()) {
       console.log("create new special offer and go to companyfront");
       BackendConnection.postSpecialOffer({
@@ -85,7 +74,7 @@ const CreateSpecialOffer = ({ companyId }) => {
           style={{ textAlign: "left", marginBottom: 30 }}
           autoComplete="false"
         >
-          <TextField
+          <CustomTextField
             className={styles.formControl}
             required
             id="special-offer-title"
@@ -94,7 +83,7 @@ const CreateSpecialOffer = ({ companyId }) => {
             variant="outlined"
             onChange={(event) => setTitle(event.target.value)}
           />
-          <TextField
+          <CustomTextField
             className={styles.formControl}
             required
             id="special-offer-time"
@@ -105,7 +94,7 @@ const CreateSpecialOffer = ({ companyId }) => {
               setDuration(parseFloat(event.target.value).toFixed(2))
             }
           />
-          <TextField
+          <CustomTextField
             className={styles.formControl}
             required
             id="special-offer-price"
@@ -116,7 +105,7 @@ const CreateSpecialOffer = ({ companyId }) => {
               setPrice(parseFloat(event.target.value).toFixed(2))
             }
           />
-          <TextField
+          <CustomTextField
             className={styles.formControl}
             required
             id="description"
