@@ -29,7 +29,7 @@ const MySpecialOffers = ({ companyId }) => {
 
   useEffect(() => {
     loadSpecialOffers();
-  }, []);
+  }, [companyId]);
 
   const showSpecialOfferList = () => {
     return specialOffers.map((spec) => {
