@@ -1,9 +1,10 @@
-import { TextField, Grid } from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import React, { useState, useEffect } from "react";
 import BackendConnection from "./BackendConnection.js";
 import "./styles/TextPage.css";
 import { PurpleButton } from "./CustomButtons";
+import { CustomTextField } from "./CustomTextField";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -50,15 +51,8 @@ const ModifyCustomerData = ({ customerId }) => {
   }, [customerId]);
 
   const handleClick = async () => {
-    //TODO: send modified data to db
-
     if (checkValues()) {
-      console.log("post modification and go to customerfront");
-      /*BackendConnection.postSpecialOffer({
-        product_name: title,
-        product_description: description,
-        product_price: 100,
-      });*/
+      //console.log("post modification and go to customerfront");
       await BackendConnection.modifyCustomer(
         customerId,
         firstName,
@@ -68,14 +62,14 @@ const ModifyCustomerData = ({ customerId }) => {
         postcode,
         phone,
         email
-      )
+      );
       window.location.href = "/mypage/customer";
     } else {
       alert("Jokin kenttä on jätetty tyhjäksi, tarkista tiedot.");
     }
   };
 
-  // Checking that title and description have content and price is positive
+  // Checking that values have content
   const checkValues = () => {
     return (
       firstName !== "" &&
@@ -102,7 +96,7 @@ const ModifyCustomerData = ({ customerId }) => {
             style={{ textAlign: "left", marginBottom: 30 }}
             autoComplete="false"
           >
-            <TextField
+            <CustomTextField
               className={styles.formControl}
               required
               id="modify-firstname"
@@ -111,7 +105,7 @@ const ModifyCustomerData = ({ customerId }) => {
               variant="outlined"
               onChange={(event) => setFirstName(event.target.value)}
             />
-            <TextField
+            <CustomTextField
               className={styles.formControl}
               required
               id="modify-lastname"
@@ -120,7 +114,7 @@ const ModifyCustomerData = ({ customerId }) => {
               variant="outlined"
               onChange={(event) => setLastName(event.target.value)}
             />
-            <TextField
+            <CustomTextField
               className={styles.formControl}
               required
               id="modify-phone"
@@ -129,7 +123,7 @@ const ModifyCustomerData = ({ customerId }) => {
               variant="outlined"
               onChange={(event) => setPhone(event.target.value)}
             />
-            <TextField
+            <CustomTextField
               className={styles.formControl}
               required
               id="modify-address"
@@ -138,7 +132,7 @@ const ModifyCustomerData = ({ customerId }) => {
               variant="outlined"
               onChange={(event) => setAddress(event.target.value)}
             />
-            <TextField
+            <CustomTextField
               className={styles.formControl}
               required
               id="modify-postcode"
@@ -147,7 +141,7 @@ const ModifyCustomerData = ({ customerId }) => {
               variant="outlined"
               onChange={(event) => setPostcode(event.target.value)}
             />
-            <TextField
+            <CustomTextField
               className={styles.formControl}
               required
               id="modify-city"
@@ -156,7 +150,7 @@ const ModifyCustomerData = ({ customerId }) => {
               variant="outlined"
               onChange={(event) => setCity(event.target.value)}
             />
-            <TextField
+            <CustomTextField
               className={styles.formControl}
               required
               id="modify-email"
