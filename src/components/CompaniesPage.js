@@ -6,6 +6,7 @@ const CompaniesPage = (props) => {
   const [companies, setCompanies] = useState([]);
 
   useEffect(() => {
+    /*
     const exampleData = [
       {
         id: 1,
@@ -30,6 +31,7 @@ const CompaniesPage = (props) => {
         supplier_description: "Siivotaan kun ehditään",
       },
     ];
+    */
     const loadCompanyList = async () => {
       try {
         const companiesListed = await BackendConnection.getAllCompanies();
