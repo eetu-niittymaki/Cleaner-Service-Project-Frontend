@@ -66,10 +66,12 @@ const CustomerFront = ({ customerId }) => {
         <Box m={1} p={2}>
           <Grid className={styles.info} container spacing={1} p={2} mb={2}>
             <Grid item xs={12} sm={6}>
+              {/* TODO in the future: Add details of orders */}
               <PurpleButton
                 variant="outlined"
                 size="large"
                 color="primary"
+                disabled
                 fullWidth
                 //onClick={() => (window.location.href = "/")}
               >
@@ -83,7 +85,7 @@ const CustomerFront = ({ customerId }) => {
                 color="primary"
                 fullWidth
                 onClick={() =>
-                  (window.location.href = "/mypage/customer/myofferrequests")
+                  (window.location.href = `/mypage/customer/myofferrequests/${customer.email}`)
                 }
               >
                 Katso tarjouspyynnöt
@@ -150,9 +152,6 @@ const CustomerFront = ({ customerId }) => {
             </PurpleButton>
           </div>
         </Box>
-        {/* <Box border={1} m={2} p={3}>
-          <div>Data from database is now: {JSON.stringify(customer)}</div>
-        </Box> */}
       </div>
     );
   }
