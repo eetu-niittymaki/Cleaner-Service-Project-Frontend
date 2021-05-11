@@ -1,9 +1,10 @@
-import { TextField, Button, Grid } from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import React, { useState } from "react";
 import BackendConnection from "./BackendConnection.js";
 import "./styles/TextPage.css";
 import { PurpleButton } from "./CustomButtons";
+import { CustomTextField } from "./CustomTextField";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -65,7 +66,7 @@ const Signup = () => {
           style={{ textAlign: "left", marginBottom: 30 }}
           autoComplete="false"
         >
-          <TextField
+          <CustomTextField
             className={styles.formControl}
             required
             id="modify-firstname"
@@ -74,7 +75,7 @@ const Signup = () => {
             variant="outlined"
             onChange={(event) => setFirstName(event.target.value)}
           />
-          <TextField
+          <CustomTextField
             className={styles.formControl}
             required
             id="modify-lastname"
@@ -83,7 +84,7 @@ const Signup = () => {
             variant="outlined"
             onChange={(event) => setLastName(event.target.value)}
           />
-          <TextField
+          <CustomTextField
             className={styles.formControl}
             required
             id="modify-phone"
@@ -92,7 +93,7 @@ const Signup = () => {
             variant="outlined"
             onChange={(event) => setPhone(event.target.value)}
           />
-          <TextField
+          <CustomTextField
             className={styles.formControl}
             required
             id="modify-address"
@@ -101,7 +102,7 @@ const Signup = () => {
             variant="outlined"
             onChange={(event) => setAddress(event.target.value)}
           />
-          <TextField
+          <CustomTextField
             className={styles.formControl}
             required
             id="modify-postcode"
@@ -110,7 +111,7 @@ const Signup = () => {
             variant="outlined"
             onChange={(event) => setPostcode(event.target.value)}
           />
-          <TextField
+          <CustomTextField
             className={styles.formControl}
             required
             id="modify-city"
@@ -119,7 +120,7 @@ const Signup = () => {
             variant="outlined"
             onChange={(event) => setCity(event.target.value)}
           />
-          <TextField
+          <CustomTextField
             className={styles.formControl}
             required
             id="modify-email"
@@ -128,7 +129,7 @@ const Signup = () => {
             variant="outlined"
             onChange={(event) => setEmail(event.target.value)}
           />
-          <TextField
+          <CustomTextField
             className={styles.formControl}
             required
             id="modify-password"
