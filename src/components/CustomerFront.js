@@ -39,15 +39,9 @@ const CustomerFront = ({ customerId }) => {
     const loadCustomerData = async () => {
       const temp = await Connection.getAllCustomers();
       if (temp.length > 0) {
-        console.log(customerId);
+        //console.log(customerId);
         const index = temp.findIndex((cust) => cust.customer_id === customerId);
         setCustomer(temp[index]);
-        /*
-        // TODO: save filtered result to a new variable and then setCustomer
-        // now this uses the first customer that exists in the db
-        temp.filter((cust) => cust.customer_id === customerId);
-        setCustomer(temp[0]);
-        */
       }
     };
     loadCustomerData();
