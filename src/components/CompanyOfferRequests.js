@@ -4,6 +4,7 @@ import BackendConnection from "./BackendConnection";
 import "./styles/TextPage.css";
 import CompOffReqBox from "./CompOffReqBox";
 import { PurpleButton } from "./CustomButtons";
+import { useParams } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   backButton: {
@@ -12,16 +13,29 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const CompanyOfferRequests = ({ supplierName }) => {
+const CompanyOfferRequests = () => {
   const styles = useStyles();
+  const params = useParams();
   const [offerRequests, setOfferRequests] = useState([]);
+  //const [companyName, setCompanyName] = useState("");
 
-  const compName = "Siivouspojat";
+  //const compName = "Siivouspojat";
 
   const loadOfferRequests = async () => {
     console.log("loading offer request now once");
     let offerReqs = await BackendConnection.getOfferRequestsBySupplier(
-      compName
+      params.companyName
+    );
+    if (offerReqs.length > 0) {
+      // Reverse result array because we want to show newest offer requests first
+      offerReqs = offerReqs.reverse();
+      setOfferRequests(offerReqs);
+    }
+  };
+
+  const fetchOfferRequests = async (supplierName) => {
+    let offerReqs = await BackendConnection.getOfferRequestsBySupplier(
+      supplierName
     );
     if (offerReqs.length > 0) {
       // Reverse result array because we want to show newest offer requests first
@@ -43,7 +57,20 @@ const CompanyOfferRequests = ({ supplierName }) => {
   };
 
   if (offerRequests.length === 0) {
-    return <div>No offer requests yet.</div>;
+    return (
+      <div>
+        <h2>Sinulle ei ole vielä saapunut tarjouspyyntöjä.</h2>
+        <PurpleButton
+          className={styles.backButton}
+          variant="outlined"
+          size="large"
+          color="primary"
+          onClick={() => (window.location.href = "/mypage/company")}
+        >
+          Takaisin
+        </PurpleButton>
+      </div>
+    );
   } else {
     return (
       <div>
