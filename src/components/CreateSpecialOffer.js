@@ -14,11 +14,27 @@ const useStyles = makeStyles((theme) => ({
 
 const CreateSpecialOffer = ({ companyId }) => {
   const styles = useStyles();
+  const [companyName, setCompanyName] = useState("");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState(0);
   //TODO: Change duration to real duration
   const [duration, setDuration] = useState(0);
+
+  useEffect(() => {
+    // Load all companies from database and search with given props companyId
+    const loadCompanyData = async () => {
+      const temp = await BackendConnection.getAllCompanies();
+      if (temp.length > 0) {
+        const value = temp.filter((comp) => comp.supplier_id === companyId);
+        if (value.length > 0) {
+          setCompanyName(value[0].name);
+          console.log(companyName);
+        }
+      }
+    };
+    loadCompanyData();
+  }, [companyId]);
 
   const handleClick = () => {
     //TODO: send special order data and create new special offer
@@ -35,13 +51,20 @@ const CreateSpecialOffer = ({ companyId }) => {
     if (checkValues()) {
       console.log("create new special offer and go to companyfront");
       BackendConnection.postSpecialOffer({
-        supplier_name: "Siivouspojat Oy",
-        product_name: "Testitarjous",
-        product_description: "Astetta parempi imurointi",
-        product_price: 100,
+        supplier_name: companyName,
+        product_name: title,
+        product_description: description,
+        product_price: price,
         ends_at: null,
-        work_hours: 5.5,
+        work_hours: duration,
         is_available: true,
+        // supplier_name: "Siivouspojat Oy",
+        // product_name: "Testitarjous",
+        // product_description: "Astetta parempi imurointi",
+        // product_price: 100,
+        // ends_at: null,
+        // work_hours: 5.5,
+        // is_available: true,
       });
       window.location.href = "/mypage/company";
     } else {
