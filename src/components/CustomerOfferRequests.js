@@ -1,31 +1,35 @@
-import { Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import React, { useState, useEffect } from "react";
 import BackendConnection from "./BackendConnection";
 import "./styles/TextPage.css";
 import CompOffReqBox from "./CompOffReqBox";
 import { PurpleButton } from "./CustomButtons";
+import { useParams } from "react-router";
 
 const useStyles = makeStyles((theme) => ({
-  backButton: {
-    textAlign: "center",
+  button: {
+    marginTop: 10,
+    marginBottom: 30,
   },
 }));
 
-const CustomerOfferRequests = ({ customerEmail }) => {
+const CustomerOfferRequests = () => {
   const styles = useStyles();
+  const params = useParams();
   const [offerRequests, setOfferRequests] = useState([]);
 
-  const email = "Siivouspojat";
-
-  // TODO: change this to search offers by customer email
   const loadOfferRequests = async () => {
     console.log("loading offer request now once");
-    let offerReqs = await BackendConnection.getOfferRequestsBySupplier(email);
+    let offerReqs = await BackendConnection.getOfferRequestsBySupplier("");
     if (offerReqs.length > 0) {
+      let results = offerReqs.filter(
+        (req) => req.email === params.customerEmail
+      );
       // Reverse result array because we want to show newest offer requests first
-      offerReqs = offerReqs.reverse();
-      setOfferRequests(offerReqs);
+      results = results.reverse();
+      if (results.length > 0) {
+        setOfferRequests(results);
+      }
     }
   };
 
@@ -45,22 +49,24 @@ const CustomerOfferRequests = ({ customerEmail }) => {
     return (
       <div>
         <h3>Ei tarjouspyyntöjä vielä.</h3>
-        <Button
+        <PurpleButton
+          className={styles.button}
           variant="outlined"
           size="large"
           color="primary"
           onClick={() => (window.location.href = "/mypage/customer")}
         >
           Takaisin
-        </Button>
+        </PurpleButton>
       </div>
     );
   } else {
     return (
       <div>
-        <h1>Tässä saapuneet tarjouspyynnöt:</h1>
+        <h1>Tässä lähetetyt tarjouspyynnöt:</h1>
         {showOfferList()}
         <PurpleButton
+          className={styles.button}
           variant="outlined"
           size="large"
           color="primary"
