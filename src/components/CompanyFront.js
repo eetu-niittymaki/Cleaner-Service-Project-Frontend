@@ -152,6 +152,13 @@ const CompanyFront = ({ companyId }) => {
             <Grid className={styles.rightColumn} item xs={7} sm={6}>
               {company.email}
             </Grid>
+            <Grid className={styles.leftColumn} item xs={4} sm={5}>
+              Kuvaus:
+            </Grid>
+            <Grid item xs={1} />
+            <Grid className={styles.rightColumn} item xs={7} sm={6}>
+              {company.supplier_description}
+            </Grid>
           </Grid>
           <div className={styles.info}>
             <PurpleButton
