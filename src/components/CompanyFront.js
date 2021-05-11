@@ -79,7 +79,7 @@ const CompanyFront = ({ companyId }) => {
                 color="primary"
                 fullWidth
                 onClick={() =>
-                  (window.location.href = "/mypage/company/myofferrequests")
+                  (window.location.href = `/mypage/company/myofferrequests/${company.name}`)
                 }
               >
                 Katso tarjouspyynnöt
@@ -173,9 +173,6 @@ const CompanyFront = ({ companyId }) => {
             </PurpleButton>
           </div>
         </Box>
-        {/* <Box border={1} m={2} p={3}>
-          <div>Data from database is now: {JSON.stringify(company)}</div>
-        </Box> */}
       </div>
     );
   }
