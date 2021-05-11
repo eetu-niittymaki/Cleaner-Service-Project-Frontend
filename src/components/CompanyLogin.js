@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { TextField, Grid } from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 import { PurpleButton } from "./CustomButtons";
 import { makeStyles } from "@material-ui/core/styles";
 import axios from "axios";
+import { CustomTextField } from "./CustomTextField";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -52,7 +53,7 @@ const CompanyLogin = () => {
         <Grid item xs={10} sm={8}>
           <h3>Kirjaudu yrityksen omille omille sivuille</h3>
 
-          <TextField
+          <CustomTextField
             required
             variant="outlined"
             margin="normal"
@@ -63,7 +64,7 @@ const CompanyLogin = () => {
             onChange={(event) => setEmail(event.target.value)}
             fullWidth
           />
-          <TextField
+          <CustomTextField
             required
             variant="outlined"
             margin="normal"
