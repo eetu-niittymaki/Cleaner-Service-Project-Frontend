@@ -22,69 +22,8 @@ import AddSupplier from "./AddSupplier";
 import CompanyLogin from "./CompanyLogin";
 
 const App = () => {
-  // const exampleCompanyData = {
-  //   id: 1,
-  //   name: "Yrityksen nimi",
-  //   contactPerson: "Yhteyshenkilö",
-  //   phone: "040 5544671",
-  //   street_address: "Katuosoite 3",
-  //   postcode: "36100",
-  //   city: "Tampere",
-  //   email: "example@email.com",
-  //   description: "Tehdään loistavaa jälkeä",
-  //};
   const [loggedInCompanyId, setLoggedInCompanyId] = useState(null);
   const [loggedInCustomerId, setLoggedInCustomerId] = useState(null);
-  //const [loggedInCompany, setLoggedInCompany] = useState(exampleCompanyData);
-
-  // useEffect(() => {
-  //   const exampleCompanyData = {
-  //     id: 1,
-  //     name: "Yrityksen nimi",
-  //     contactPerson: "Yhteyshenkilö",
-  //     phone: "040 5544671",
-  //     street_address: "Katuosoite 3",
-  //     postcode: "36100",
-  //     city: "Tampere",
-  //     email: "example@email.com",
-  //     description: "Tehdään loistavaa jälkeä",
-  //   };
-  //   // Load all companies from database and search with given props companyId
-  //   const loadCompanyData = async () => {
-  //     const temp = await BackendConnection.getAllCompanies();
-  //     if (temp.length > 0) {
-  //       temp.filter((comp) => comp.supplier_id === loggedInCompanyId);
-  //       setLoggedInCompany(temp[0]);
-  //     } else {
-  //       setLoggedInCompany(exampleCompanyData);
-  //     }
-  //   };
-  //   loadCompanyData();
-  // }, [loggedInCompany, loggedInCompanyId]);
-
-  /* SessionStorage is not used now
-  const getToken = () => {
-    const tokenToString = sessionStorage.getItem("token");
-    const userToken = JSON.parse(tokenToString);
-    return userToken?.token; // Note to self, ? is the optional chaining operator, won't throw error if token is undefined.
-  };
-
-  // Set session token from storage if exists.
-  const setToken = (userToken) => {
-    sessionStorage.setItem("token", JSON.stringify(userToken));
-  };
-
-  if (!getToken) {
-    return <HeaderComponent setToken={setToken} />;
-  }
-  */
-
-  /*
-  const customerLogin = (id) => {
-    console.log("changin customerId in app.js to " + id);
-    setLoggedInCustomerId(id);
-  };
-  */
 
   useEffect(() => {
     const getCustomer = localStorage.getItem("user");
@@ -144,7 +83,7 @@ const App = () => {
             <Route exact path="/mypage/company/myspecialoffers">
               <MySpecialOffers companyId={loggedInCompanyId} />
             </Route>
-            <Route exact path="/mypage/company/myofferrequests">
+            <Route path="/mypage/company/myofferrequests/:companyName">
               <CompanyOfferRequests />
             </Route>
             <Route exact path="/mypage/company/modifydata">
