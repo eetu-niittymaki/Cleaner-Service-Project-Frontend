@@ -17,25 +17,11 @@ const CompanyOfferRequests = () => {
   const styles = useStyles();
   const params = useParams();
   const [offerRequests, setOfferRequests] = useState([]);
-  //const [companyName, setCompanyName] = useState("");
-
-  //const compName = "Siivouspojat";
 
   const loadOfferRequests = async () => {
-    console.log("loading offer request now once");
+    //console.log("loading offer request now once");
     let offerReqs = await BackendConnection.getOfferRequestsBySupplier(
       params.companyName
-    );
-    if (offerReqs.length > 0) {
-      // Reverse result array because we want to show newest offer requests first
-      offerReqs = offerReqs.reverse();
-      setOfferRequests(offerReqs);
-    }
-  };
-
-  const fetchOfferRequests = async (supplierName) => {
-    let offerReqs = await BackendConnection.getOfferRequestsBySupplier(
-      supplierName
     );
     if (offerReqs.length > 0) {
       // Reverse result array because we want to show newest offer requests first
