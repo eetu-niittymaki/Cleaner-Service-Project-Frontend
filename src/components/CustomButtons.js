@@ -43,13 +43,14 @@ export const PurpleButton = withStyles({
 export const OrderButton = withStyles({
   root: {
     borderWidth: 2,
-    borderColor: "#A6038D",
+    borderColor: "white",
     color: "#A6038D",
+    backgroundColor: "#DCDCD9",
     "&:hover": {
-      backgroundColor: "#A6038D",
-      borderColor: "rgb(100, 3, 82)",
+      backgroundColor: "#FB7EEC",
+      borderColor: "white",
       borderWidth: 2,
-      color: "white",
+      color: "black",
     },
     // "&:active": {
     //   boxShadow: "none",
