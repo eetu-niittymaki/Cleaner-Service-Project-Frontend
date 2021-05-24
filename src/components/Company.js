@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Box from "@material-ui/core/Box";
 import "./styles/Company.css";
 import { Link } from "react-router-dom";
