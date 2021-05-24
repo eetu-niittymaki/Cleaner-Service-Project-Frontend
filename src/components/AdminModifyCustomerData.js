@@ -1,14 +1,12 @@
-import { TextField, Button, Grid } from "@material-ui/core";
-import { makeStyles, ThemeProvider } from "@material-ui/core/styles";
+import { TextField, Grid } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
 import React, { useState, useEffect } from "react";
-import HeaderComponent from "./HeaderComponent";
 import BackendConnection from "./BackendConnection.js";
 import "./styles/TextPage.css";
 import { PurpleButton } from "./CustomButtons";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
-    //margin: theme.spacing(1),
     minWidth: "100%",
     marginBottom: theme.spacing(2),
   },
@@ -59,7 +57,7 @@ const AdminModifyCustomerData = ({ cData, update, cDelete }) => {
   };
 
   const modify = async () => {
-    console.log("modify");
+    // console.log("modify");
     if (checkValues()) {
       await BackendConnection.modifyCustomer(
         cData.customer_id,
