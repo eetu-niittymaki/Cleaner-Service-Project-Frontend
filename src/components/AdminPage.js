@@ -42,7 +42,7 @@ const AdminPage = () => {
       //TODO
       //check from backend if current user has admin rights
       const getAdmin = localStorage.getItem("admin");
-      console.log(getAdmin);
+      //console.log(getAdmin);
       if (getAdmin) {
         setAdminRights(true);
       }
