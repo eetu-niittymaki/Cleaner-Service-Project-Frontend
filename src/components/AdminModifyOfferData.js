@@ -7,7 +7,6 @@ import { PurpleButton } from "./CustomButtons";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
-    //margin: theme.spacing(1),
     minWidth: "100%",
     marginBottom: theme.spacing(2),
   },
@@ -68,7 +67,7 @@ const AdminModifyOfferData = ({ oData, update, oDelete, company }) => {
   };
 
   const modify = async () => {
-    console.log("modify");
+    // console.log("modify");
     if (checkValues()) {
       await BackendConnection.modifyOffer(
         oData.product_id,
