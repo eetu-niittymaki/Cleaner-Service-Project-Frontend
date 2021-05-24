@@ -3,15 +3,12 @@ import { makeStyles } from "@material-ui/core/styles";
 import {
   AppBar,
   Toolbar,
-  Button,
   Typography,
   Menu,
   MenuItem,
-  TextField,
   Dialog,
   DialogActions,
   DialogContent,
-  DialogContentText,
   DialogTitle,
   Grid,
 } from "@material-ui/core";
@@ -40,19 +37,11 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down("sm")]: { marginBottom: 10 },
     [theme.breakpoints.up("sm")]: { marginTop: 10 },
   },
-  login: {
-    //margin: 50,
-  },
+  login: {},
   frontLink: {
     textDecoration: "none",
     color: "white",
   },
-  // notchedOutline: {
-  //   borderColor: "yellow !important",
-  // },
-  // floatingLabelFocusStyle: {
-  //   color: "gray !important",
-  // },
 }));
 
 const HeaderComponent = () => {
@@ -67,12 +56,10 @@ const HeaderComponent = () => {
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
-    console.log("Clicked menu button");
   };
 
   const handleClose = (nav) => {
     setAnchorEl(null);
-    console.log("nav is" + nav);
     window.location.href = nav;
   };
   const handleModalOpen = () => {
@@ -110,34 +97,7 @@ const HeaderComponent = () => {
     }
   };
 
-  /* moved this to CompanyLogin component -Hanna
-  const handleCompanyLogin = async () => {
-    if (email && password) {
-      const login = await axios.post(
-        //`http://localhost:8080/api/auth/supplier`,
-        `https://clean-buddy.herokuapp.com/api/auth/supplier`,
-        {
-          email: email,
-          password: password,
-        }
-      );
-      if (login.status === 204 || login.status === 206) {
-        alert("Väärä sähköposti/salasana");
-      } else if (login.status === 200) {
-        localStorage.setItem("token", login.data.token);
-        localStorage.setItem("company", login.data.supplierId);
-        setSupplierLoggedIn(true);
-        window.location.href = "/mypage/company";
-        handleModalClose();
-      }
-    } else {
-      alert("Anna sähköposti ja salasana");
-    }
-  };
-  */
-
   const clickedLogin = () => {
-    //console.log("clicked login button");
     handleModalOpen();
   };
 
@@ -222,9 +182,6 @@ const HeaderComponent = () => {
               <CustomTextField
                 required
                 autoFocus
-                // InputProps={{
-                //   classes: { notchedOutline: classes.notchedOutline },
-                // }}
                 InputLabelProps={{
                   className: classes.floatingLabelFocusStyle,
                 }}
@@ -311,7 +268,6 @@ const HeaderComponent = () => {
                   alt="CleanBuddy logo"
                   className={classes.logoImage}
                 />
-                {/* <Typography variant="h3">CleanBuddy</Typography> */}
                 <Typography variant="h6">
                   Siivouspalvelut helposti netistä
                 </Typography>
@@ -342,8 +298,6 @@ const HeaderComponent = () => {
               //anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
 
               transformOrigin={{ vertical: -50, horizontal: 0 }}
-              //aria-label="menu"
-              //aria-haspopup="true"
             >
               <MenuItem onClick={() => handleClose("/info")}>
                 Tietoa palvelusta
