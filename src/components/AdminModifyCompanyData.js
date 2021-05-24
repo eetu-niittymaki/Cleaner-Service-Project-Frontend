@@ -35,7 +35,7 @@ const AdminModifyCompanyData = ({ cData, update, cDelete }) => {
     setCity(comp.city);
     setEmail(comp.email);
     setDescription(comp.supplier_description);
-    console.log(comp.supplier_description);
+    //console.log(comp.supplier_description);
   };
 
   useEffect(() => {
