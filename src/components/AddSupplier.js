@@ -7,25 +7,12 @@ import { PurpleButton } from "./CustomButtons";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
-    //margin: theme.spacing(1),
     minWidth: "100%",
     marginBottom: theme.spacing(2),
   },
 }));
 
 const AddSupplier = () => {
-  // const exampledata = {
-  //   id: 1,
-  //   name: "Siivouspojat Ab",
-  //   contactPerson: "Jussi Mäkinen",
-  //   phone: "040 5544671",
-  //   street_address: "Mäkitie 3",
-  //   postcode: "36100",
-  //   city: "Tampere",
-  //   email: "asiakaspalvelu@siivouspojat.fi",
-  //   supplier_description: "Tehdään loistavaa jälkeä",
-  // };
-
   const styles = useStyles();
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
@@ -38,7 +25,7 @@ const AddSupplier = () => {
 
   const handleClick = () => {
     if (checkValues()) {
-      console.log("post values and go to adminpage");
+      /*console.log("post values and go to adminpage");
       console.log(`Sending this data with axios post
         ${name},
         ${description},
@@ -48,6 +35,7 @@ const AddSupplier = () => {
         ${phone},
         ${email},
         ${password}`);
+      */
       BackendConnection.postNewSupplier({
         name: name,
         supplier_description: description,
@@ -57,20 +45,6 @@ const AddSupplier = () => {
         phone: phone,
         email: email,
         password: password,
-
-        /*
-        //testData
-        name: "test",
-        //supplierDescription: "test",
-        supplier_description: "test",
-        //streetAddress: "test",
-        street_address: "test",
-        city: "test",
-        postcode: 12345,
-        phone: 12345,
-        email: "test@test.fi",
-        password: "test",
-*/
       });
       window.location.href = "/admin";
     } else {
