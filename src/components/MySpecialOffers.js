@@ -16,7 +16,7 @@ const MySpecialOffers = ({ companyId }) => {
   const [specialOffers, setSpecialOffers] = useState([]);
 
   const loadSpecialOffers = async () => {
-    console.log("loading all special offers now once");
+    //console.log("loading all special offers now once");
     let specOffers = await BackendConnection.getAllSpecialOffers();
     if (specOffers.length > 0) {
       let temp = specOffers.filter((spec) => spec.supplier_id === companyId);
