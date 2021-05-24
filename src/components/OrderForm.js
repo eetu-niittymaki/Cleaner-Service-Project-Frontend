@@ -1,4 +1,3 @@
-import FormControl from "@material-ui/core/FormControl";
 import { makeStyles } from "@material-ui/core/styles";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
@@ -28,7 +27,6 @@ const OrderForm = () => {
     const loadSpecialOfferData = async () => {
       const temp = await BackendConnection.getAllSpecialOffers();
       if (temp.length > 0) {
-        console.log(params.id);
         const value = temp.filter(
           (offer) => offer.product_id === parseInt(params.id)
         );
@@ -52,13 +50,7 @@ const OrderForm = () => {
       );
     } else {
       return (
-        <PurpleButton
-          variant="outlined"
-          size="large"
-          color="primary"
-          disabled
-          //onClick={() => (window.location.href = "/")}
-        >
+        <PurpleButton variant="outlined" size="large" color="primary" disabled>
           Vahvista tilaus
         </PurpleButton>
       );
