@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import {
-  TextField,
   FormControl,
   InputLabel,
   MenuItem,
@@ -84,7 +83,7 @@ const OfferRequest = () => {
 
   const sendOfferRequest = () => {
     if (checkValues()) {
-      console.log(`Posting values:
+      /*console.log(`Posting values:
       ${apartmentType}
       ${apartmentArea}
       ${frequency}
@@ -97,6 +96,7 @@ const OfferRequest = () => {
       ${postcode}
       ${city}
       ${email}`);
+      */
       BackendConnection.postNewOfferRequest({
         apartment_type: apartmentType,
         apartment_area: apartmentArea,
@@ -122,11 +122,11 @@ const OfferRequest = () => {
     var tempStr = "";
     companyData.forEach((comp) => {
       if (comp.isChecked === true) {
-        console.log("adding company to supplierlist");
+        //console.log("adding company to supplierlist");
         tempStr += comp.name + " ";
       }
     });
-    console.log(`String is now: ${tempStr}`);
+    //console.log(`String is now: ${tempStr}`);
     setSuppliers(tempStr);
     return tempStr;
   };
@@ -149,8 +149,8 @@ const OfferRequest = () => {
             <Checkbox
               checked={comp.isChecked}
               onChange={(event) => {
-                console.log(event.target.name);
-                console.log(event.target.checked);
+                //console.log(event.target.name);
+                //console.log(event.target.checked);
                 const temp = companyData.map((comp) => {
                   if (comp.name === event.target.name) {
                     comp = {
@@ -193,7 +193,6 @@ const OfferRequest = () => {
                 id="demo-simple-select-outlined"
                 value={apartmentType}
                 onChange={(event) => setApartmentType(event.target.value)}
-                //onChange={handleChange}
                 label="Asuntotyyppi"
               >
                 <MenuItem value="" disabled>
@@ -228,7 +227,6 @@ const OfferRequest = () => {
                 id="demo-simple-select-outlined"
                 value={frequency}
                 onChange={(event) => setFrequency(event.target.value)}
-                //onChange={handleChange}
                 label="Siivoustiheys"
               >
                 <MenuItem value="" disabled>
