@@ -7,7 +7,6 @@ import { PurpleButton } from "./CustomButtons";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
-    //margin: theme.spacing(1),
     minWidth: "100%",
     marginBottom: theme.spacing(2),
   },
@@ -36,7 +35,7 @@ const AdminModifyCompanyData = ({ cData, update, cDelete }) => {
     setCity(comp.city);
     setEmail(comp.email);
     setDescription(comp.supplier_description);
-    console.log(comp.supplier_description)
+    console.log(comp.supplier_description);
   };
 
   useEffect(() => {
@@ -61,7 +60,7 @@ const AdminModifyCompanyData = ({ cData, update, cDelete }) => {
   };
 
   const modify = async () => {
-    console.log("modify");
+    // console.log("modify");
     if (checkValues()) {
       await BackendConnection.modifySupplier(
         cData.supplier_id,
